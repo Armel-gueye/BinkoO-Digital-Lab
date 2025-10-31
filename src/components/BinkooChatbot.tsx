@@ -25,7 +25,7 @@ export const BinkooChatbot: React.FC = () => {
       }, 500);
     }
 
-    setTimeout(hideWelcomeBubbles, 5000);
+    setTimeout(hideWelcomeBubbles, 7000);
 
     function hideWelcomeBubblesOnOpen() {
       if (welcomeBubbles && !welcomeBubbles.classList.contains('hide')) {
@@ -573,7 +573,7 @@ export const BinkooChatbot: React.FC = () => {
           👋🏿 Salut! Comment puis-je aider mon humain préféré ? 😻
         </div>
         <div className="welcome-bubble">
-          Au fait, on peut créer un agent comme moi pour VOTRE site ! 🚀
+          Au fait, nous pouvons créer un agent comme ça pour VOTRE site ! 😮
         </div>
       </div>
 
