@@ -586,7 +586,7 @@ export const BinkooChatbot: React.FC = () => {
 
       {/* Bouton de toggle */}
       <button id="binkoo-chat-toggle" aria-label="Ouvrir le chat">
-        <img src="https://i.postimg.cc/4yssjPHq/IMG-1941-ezgif-com-optijpeg.jpg" alt="Bino" />
+        <img src="https://i.postimg.cc/tCDWSmnV/IMG-1941-modified-min.png" alt="Bino" />
       </button>
 
       {/* Fenêtre de chat */}
@@ -594,7 +594,7 @@ export const BinkooChatbot: React.FC = () => {
         {/* Header */}
         <div id="binkoo-chat-header">
           <div id="binkoo-chat-header-content">
-            <img src="https://i.postimg.cc/4yssjPHq/IMG-1941-ezgif-com-optijpeg.jpg" alt="Bino" />
+            <img src="https://i.postimg.cc/tCDWSmnV/IMG-1941-modified-min.png" alt="Bino" />
             <div>
               <h3>Bino</h3>
               <p>BinkoO Digital Lab</p>
