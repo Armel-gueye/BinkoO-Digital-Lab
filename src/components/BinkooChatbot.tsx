@@ -5,6 +5,7 @@ export const BinkooChatbot: React.FC = () => {
     // ========== CONFIGURATION ==========
     const WEBHOOK_URL = 'https://n8n.srv1090303.hstgr.cloud/webhook/d60df4a0-1428-4d3f-8e76-1ef0fb576c4d/chat';
     let sessionId: string | null = null;
+    let isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     // ========== ÉLÉMENTS DOM ==========
     const toggle = document.getElementById('binkoo-chat-toggle');
@@ -14,6 +15,23 @@ export const BinkooChatbot: React.FC = () => {
     const input = document.getElementById('binkoo-chat-input') as HTMLInputElement;
     const sendBtn = document.getElementById('binkoo-chat-send');
     const typing = document.querySelector('.chat-typing');
+    const welcomeBubbles = document.getElementById('binkoo-welcome-bubbles');
+
+    // ========== GESTION BULLES DE BIENVENUE ==========
+    function hideWelcomeBubbles() {
+      welcomeBubbles?.classList.add('hide');
+      setTimeout(() => {
+        if (welcomeBubbles) welcomeBubbles.style.display = 'none';
+      }, 500);
+    }
+
+    setTimeout(hideWelcomeBubbles, 5000);
+
+    function hideWelcomeBubblesOnOpen() {
+      if (welcomeBubbles && !welcomeBubbles.classList.contains('hide')) {
+        hideWelcomeBubbles();
+      }
+    }
 
     // ========== GESTION SESSION ==========
     function getSessionId() {
@@ -30,8 +48,12 @@ export const BinkooChatbot: React.FC = () => {
     // ========== FONCTIONS UI ==========
     function toggleChat() {
       chatWindow?.classList.toggle('active');
+      
       if (chatWindow?.classList.contains('active')) {
-        input?.focus();
+        hideWelcomeBubblesOnOpen();
+        if (!isMobileOrTablet) {
+          setTimeout(() => input?.focus(), 100);
+        }
       }
     }
 
@@ -71,7 +93,6 @@ export const BinkooChatbot: React.FC = () => {
       const message = input?.value.trim();
       if (!message) return;
 
-      // Afficher message utilisateur
       addMessage(message, true);
       if (input) input.value = '';
       setLoading(true);
@@ -95,7 +116,6 @@ export const BinkooChatbot: React.FC = () => {
 
         const data = await response.json();
         
-        // Afficher réponse du bot
         if (data.output) {
           addMessage(data.output);
         } else if (data.message) {
@@ -108,7 +128,9 @@ export const BinkooChatbot: React.FC = () => {
         addMessage("Une erreur s'est produite. Veuillez réessayer.");
       } finally {
         setLoading(false);
-        input?.focus();
+        if (!isMobileOrTablet) {
+          input?.focus();
+        }
       }
     }
 
@@ -124,8 +146,11 @@ export const BinkooChatbot: React.FC = () => {
       }
     });
 
-    // Charger session précédente au chargement
-    getSessionId();
+    toggle?.addEventListener('click', hideWelcomeBubblesOnOpen);
+
+    window.addEventListener('load', () => {
+      getSessionId();
+    });
 
     // Cleanup
     return () => {
@@ -147,6 +172,75 @@ export const BinkooChatbot: React.FC = () => {
             --chatbot-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             --chatbot-radius: 16px;
             --chatbot-transition: 0.3s ease;
+        }
+
+        /* ========== BULLES DE BIENVENUE ========== */
+        #binkoo-welcome-bubbles {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 9997;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 320px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: bubbleIn 0.5s ease forwards 0.5s;
+        }
+
+        #binkoo-welcome-bubbles.hide {
+            animation: bubbleOut 0.5s ease forwards;
+        }
+
+        @keyframes bubbleIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bubbleOut {
+            to {
+                opacity: 0;
+                transform: translateY(20px);
+                pointer-events: none;
+            }
+        }
+
+        .welcome-bubble {
+            background: var(--chatbot-white);
+            padding: 14px 18px;
+            border-radius: 16px;
+            box-shadow: var(--chatbot-shadow);
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--chatbot-black);
+            border: 1px solid #E5E5E5;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .welcome-bubble:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .welcome-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 24px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid var(--chatbot-white);
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
         }
 
         /* ========== BOUTON DE TOGGLE ========== */
@@ -440,6 +534,17 @@ export const BinkooChatbot: React.FC = () => {
                 right: 16px;
                 max-width: 400px;
             }
+
+            #binkoo-welcome-bubbles {
+                bottom: 88px;
+                right: 20px;
+                max-width: calc(100vw - 100px);
+            }
+
+            .welcome-bubble {
+                font-size: 13px;
+                padding: 12px 16px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -455,9 +560,23 @@ export const BinkooChatbot: React.FC = () => {
                 bottom: 16px;
                 right: 16px;
             }
+
+            #binkoo-welcome-bubbles {
+                display: none;
+            }
         }
       `}} />
       
+      {/* Bulles de bienvenue */}
+      <div id="binkoo-welcome-bubbles">
+        <div className="welcome-bubble">
+          👋🏿 Salut! Comment puis-je aider mon humain préféré ? 😻
+        </div>
+        <div className="welcome-bubble">
+          Au fait, on peut créer un agent comme moi pour VOTRE site ! 🚀
+        </div>
+      </div>
+
       {/* Bouton de toggle */}
       <button id="binkoo-chat-toggle" aria-label="Ouvrir le chat">
         <img src="https://i.postimg.cc/VLRRc9K5/IMG-1941.jpg" alt="Bino" />
