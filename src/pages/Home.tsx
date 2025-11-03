@@ -253,7 +253,7 @@ export default function Home() {
                   </p>
                   </AnimatedParagraph>
                   <ul className="space-y-3 md:space-y-4">
-                    {['Sites vitrine et portfolios professionnels', 'Landing pages haute conversion', 'Applications web progressives (PWA)'].map((item, idx) => (
+                    {['Landing pages et portfolios professionnels', 'Sites web haute conversion', 'Applications web et SAAS'].map((item, idx) => (
                       <AnimatedParagraph key={idx} delay={0.4 + idx * 0.1}>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
