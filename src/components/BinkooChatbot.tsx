@@ -18,14 +18,28 @@ export const BinkooChatbot: React.FC = () => {
     const welcomeBubbles = document.getElementById('binkoo-welcome-bubbles');
 
     // ========== GESTION BULLES DE BIENVENUE ==========
+    // Vérifier si les bulles ont déjà été affichées
+    const welcomeShown = localStorage.getItem('binkoo-welcome-shown');
+    
+    if (welcomeShown === 'true') {
+      // Les bulles ont déjà été affichées, les cacher immédiatement
+      if (welcomeBubbles) {
+        welcomeBubbles.style.display = 'none';
+      }
+    } else {
+      // Première visite : afficher les bulles et marquer comme affichées
+      localStorage.setItem('binkoo-welcome-shown', 'true');
+      
+      // Les bulles s'affichent normalement via l'animation CSS
+      setTimeout(hideWelcomeBubbles, 10000);
+    }
+
     function hideWelcomeBubbles() {
       welcomeBubbles?.classList.add('hide');
       setTimeout(() => {
         if (welcomeBubbles) welcomeBubbles.style.display = 'none';
       }, 500);
     }
-
-    setTimeout(hideWelcomeBubbles, 10000);
 
     function hideWelcomeBubblesOnOpen() {
       if (welcomeBubbles && !welcomeBubbles.classList.contains('hide')) {
@@ -577,7 +591,7 @@ export const BinkooChatbot: React.FC = () => {
       {/* Bulles de bienvenue */}
       <div id="binkoo-welcome-bubbles">
         <div className="welcome-bubble">
-          👋🏿 Salut! Comment va mon humain préféré ? 😻
+          👋🏿 Salut! Comment puis-je aider mon humain préféré ? 😻
         </div>
         <div className="welcome-bubble">
           Au fait, Nous pouvons créer un agent comme ça pour VOTRE site ! 😮
@@ -586,7 +600,7 @@ export const BinkooChatbot: React.FC = () => {
 
       {/* Bouton de toggle */}
       <button id="binkoo-chat-toggle" aria-label="Ouvrir le chat">
-        <img src="https://i.postimg.cc/tCDWSmnV/IMG-1941-modified-min.png" alt="Bino" />
+        <img src="https://i.postimg.cc/VLRRc9K5/IMG-1941.jpg" alt="Bino" />
       </button>
 
       {/* Fenêtre de chat */}
@@ -594,7 +608,7 @@ export const BinkooChatbot: React.FC = () => {
         {/* Header */}
         <div id="binkoo-chat-header">
           <div id="binkoo-chat-header-content">
-            <img src="https://i.postimg.cc/tCDWSmnV/IMG-1941-modified-min.png" alt="Bino" />
+            <img src="https://i.postimg.cc/VLRRc9K5/IMG-1941.jpg" alt="Bino" />
             <div>
               <h3>Bino</h3>
               <p>BinkoO Digital Lab</p>
