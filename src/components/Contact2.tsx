@@ -30,26 +30,19 @@ export const Contact2 = ({
     const formData = new FormData(form);
 
     try {
-      // Using Formspree endpoint - Replace with your actual Formspree form ID
-      // To get your form ID: Sign up at https://formspree.io and create a new form
-      const response = await fetch("https://formspree.io/f/xanygnde", {
+      // Using Web3Forms endpoint - 250 submissions/month limit
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        body: formData
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (data.success) {
         toast.success("Demande envoyée avec succès ! Nous vous recontacterons sous 24h.");
         form.reset();
       } else {
-        const data = await response.json();
-        if (data.errors) {
-          toast.error(data.errors.map((error: any) => error.message).join(", "));
-        } else {
-          toast.error("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
-        }
+        toast.error(data.message || "Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
       }
     } catch (error) {
       console.error("Erreur d'envoi:", error);
@@ -95,6 +88,12 @@ export const Contact2 = ({
             </div>
           </div>
           <form onSubmit={handleSubmit} className="mx-auto flex max-w-screen-md flex-col gap-6 rounded-lg border p-10">
+            {/* Web3Forms Access Key - Required hidden field */}
+            <input type="hidden" name="access_key" value="55a2547a-7b37-417e-8044-1a73722325ea" />
+            
+            {/* Custom subject line for Web3Forms */}
+            <input type="hidden" name="_subject" value="Nouvelle demande de contact - BinkoO Digital Lab" />
+            
             <div className="flex gap-4">
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="firstname">Prénom</Label>
@@ -146,9 +145,6 @@ export const Contact2 = ({
                 required
               />
             </div>
-            {/* Hidden field to specify recipient email for Formspree */}
-            <input type="hidden" name="_replyto" value={email} />
-            <input type="hidden" name="_subject" value="Nouvelle demande de contact - BinkoO Digital Lab" />
             
             <Button className="w-full" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Envoi en cours..." : "Envoyer ma Demande"}
