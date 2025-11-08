@@ -597,10 +597,6 @@ export default function Home() {
             Contactez-nous dès aujourd'hui pour discuter de votre projet et obtenir un devis gratuit.
           </p>
           </AnimatedParagraph>
-          <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-full font-bold text-base md:text-lg hover:bg-white/95 transition-all hover:scale-105 shadow-md">
-            Démarrer Mon Projet
-            <ArrowRight className="w-5 h-5" />
-          </Link>
         </div>
       </motion.section>
       </AnimatedSection>
