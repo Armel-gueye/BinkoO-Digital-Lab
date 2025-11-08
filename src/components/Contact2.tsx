@@ -15,7 +15,7 @@ interface Contact2Props {
 
 export const Contact2 = ({
   title = "Un Projet ? Contactez-nous !",
-  description = "L'automatisation est notre passion. Nous sommes prêts à discuter de vos défis et à transformer vos processus. Décrivez-nous votre besoin !",
+  description = "Le digital est notre passion. Nous sommes prêts à discuter de vos défis et à transformer vos processus. Décrivez-nous votre besoin !",
   phone = "+226 44 32 38 41",
   email = "Binkoodigitallab@gmail.com",
   web = { label: "BinkoO Digital Lab", url: "https://binkoodigitallab.com" },
