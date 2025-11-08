@@ -576,31 +576,6 @@ export default function Home() {
       </section>
       </AnimatedSection>
 
-      {/* CTA Section */}
-      <AnimatedSection animation="fade-up">
-      <motion.section
-      className="relative text-white overflow-hidden py-16 md:py-20 lg:py-28"
-      style={{
-        background: 'linear-gradient(135deg, #FA2323 0%, #640404 100%)'
-      }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}>
-
-        <div className="container-fluid text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white max-w-4xl mx-auto mb-5 md:mb-6">
-            Prêt à Transformer Votre Vision en Réalité Digitale ?
-          </h2>
-          <AnimatedParagraph delay={0.2}>
-          <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto mb-8 md:mb-10">
-            Contactez-nous dès aujourd'hui pour discuter de votre projet et obtenir un devis gratuit.
-          </p>
-          </AnimatedParagraph>
-        </div>
-      </motion.section>
-      </AnimatedSection>
-
       {/* Contact2 - Juste au-dessus du Footer */}
       <Contact2 />
     </div>;
