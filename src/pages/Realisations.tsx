@@ -62,6 +62,27 @@ const Realisations: React.FC = () => {
     />
   ];
 
+  const bonplatImages = [
+    <img 
+      key="bonplat-1" 
+      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/msedge_f180yDu80q-min-1762783985121.png" 
+      alt="BONPLAT Pingdwendé - Nos Menus"
+      className="rounded-xl w-full h-full object-contain"
+    />,
+    <img 
+      key="bonplat-2" 
+      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/msedge_Gf5hgDL269-min-1762783986305.jpg" 
+      alt="BONPLAT Pingdwendé - Accueil"
+      className="rounded-xl w-full h-full object-contain"
+    />,
+    <img 
+      key="bonplat-3" 
+      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/msedge_W99rJqyLXt-min-1762783985990.png" 
+      alt="BONPLAT Pingdwendé - Service Traiteur"
+      className="rounded-xl w-full h-full object-contain"
+    />
+  ];
+
   const projects = [
     {
       title: 'BinkoO Store',
@@ -78,6 +99,14 @@ const Realisations: React.FC = () => {
       detailedText: 'Ce site web a été conçu pour refléter la personnalité élégante et inspirante de Linda Maïssar GUEYE, écrivaine et correctrice basée à Bobo-Dioulasso. Nous avons opté pour une navigation claire, une présentation harmonieuse de ses livres, et une mise en avant de ses services de correction et de relecture académique. L\'expérience utilisateur est fluide, rapide et agréable sur tous les écrans. Chaque page a été pensée pour inciter à la découverte tout en gardant une touche professionnelle et littéraire. Le résultat : un site sobre, captivant et parfaitement aligné avec la vision d\'une écrivaine moderne et connectée.',
       folderImages: lindaImages,
       link: 'https://lindamaissargueye.netlify.app',
+    },
+    {
+      title: 'BONPLAT Pingdwendé',
+      category: 'Solution culinaire 2.0',
+      description: 'BONPLAT Pingdwendé — La révolution digitale dans l\'art culinaire burkinabè. Un site web minimaliste et ultra-performant couplé à un assistant IA intelligent qui transforme les visiteurs en clients fidèles.',
+      detailedText: 'BONPLAT Pingdwendé — La révolution digitale dans l\'art culinaire burkinabè. Un site web minimaliste et ultra-performant couplé à un assistant IA intelligent qui transforme les visiteurs en clients fidèles. L\'innovation : Un Concierge Digital Intelligent. Contrairement aux chatbots basiques qui donnent des réponses génériques, notre assistant IA comprend le contexte de chaque demande. Il répond instantanément aux questions sur les menus, les prix, les horaires de livraison, et guide naturellement vers la commande. Pourquoi cette technologie change tout : Plus de clients perdus — Réponses immédiates 24h/24, même hors horaires d\'ouverture. Conversion boostée — L\'IA identifie les intentions d\'achat et guide vers la commande. Gain de temps radical — Fini les appels répétitifs pour les mêmes questions. Service personnalisé — Chaque interaction est adaptée au contexte du client. Résultat concret : Vos visiteurs deviennent clients en quelques clics, sans friction, sans attente. Une expérience si fluide qu\'ils reviennent naturellement.',
+      folderImages: bonplatImages,
+      link: 'https://bonplatpingdwende.netlify.app',
     },
   ];
 
