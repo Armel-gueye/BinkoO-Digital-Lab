@@ -390,13 +390,13 @@ const About: React.FC = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-5 md:mb-6 text-white">Notre Engagement</h2>
               <AnimatedParagraph delay={0.2}>
               <div className="text-sm md:text-base lg:text-lg max-w-4xl mx-auto leading-relaxed space-y-4 text-white">
-                <p>
+                <p className="text-white">
                   Chez BinkoO Digital Lab, vous n'êtes pas un simple client : vous êtes un partenaire.
                 </p>
-                <p>
+                <p className="text-white">
                   Notre engagement, c'est de vous accompagner sur la durée, de vous fournir des outils fiables et de toujours garder une touche humaine dans tout ce que nous faisons.
                 </p>
-                <p className="font-semibold">
+                <p className="font-semibold text-white">
                   Votre succès est notre plus belle réussite.
                 </p>
               </div>
