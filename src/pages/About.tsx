@@ -382,7 +382,7 @@ const About: React.FC = () => {
 
           <InteractiveCard delay={200}>
             <div 
-              className="p-8 md:p-10 lg:p-12 text-center"
+              className="p-8 md:p-10 lg:p-12 text-center rounded-2xl"
               style={{
                 background: 'linear-gradient(225deg, hsla(0, 96%, 56%, 1) 0%, hsla(0, 92%, 20%, 1) 80%)'
               }}
