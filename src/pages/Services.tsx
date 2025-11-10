@@ -198,14 +198,17 @@ const Services: React.FC = () => {
         {/* Call to Action */}
         <AnimatedSection animation="fade-up">
         <motion.div
-          className="mt-20 md:mt-24 text-center bg-gradient-to-br from-surface to-accent p-8 md:p-10 lg:p-12 rounded-xl"
+          className="mt-20 md:mt-24 text-center p-8 md:p-10 lg:p-12 rounded-xl"
+          style={{
+            background: 'linear-gradient(225deg, hsla(0, 96%, 56%, 1) 0%, hsla(0, 92%, 20%, 1) 80%)'
+          }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}>
 
           <AnimatedParagraph delay={0.2}>
-          <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-white max-w-3xl mx-auto leading-relaxed">
             Chaque solution que nous proposons est pensée pour simplifier votre quotidien, accélérer vos résultats et renforcer votre impact digital.
           </p>
           </AnimatedParagraph>
