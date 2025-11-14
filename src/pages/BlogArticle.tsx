@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
 import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 // Mock data pour les articles (même structure que Blog.tsx)
 const articles = [
@@ -302,6 +303,39 @@ export default function BlogArticle() {
     });
   };
 
+  const handleShare = async () => {
+    const shareData = {
+      title: article.title,
+      text: article.excerpt,
+      url: window.location.href,
+    };
+
+    try {
+      // Try native share API first
+      if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+        toast.success('Partagé avec succès !');
+      } else {
+        // Fallback: copy to clipboard
+        await navigator.clipboard.writeText(window.location.href);
+        toast.success('Lien copié dans le presse-papiers !');
+      }
+    } catch (error: any) {
+      // If share was cancelled or failed, try clipboard as fallback
+      if (error.name === 'AbortError') {
+        // User cancelled the share, do nothing
+        return;
+      }
+      
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        toast.success('Lien copié dans le presse-papiers !');
+      } catch (clipboardError) {
+        toast.error('Impossible de partager l\'article');
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Image */}
@@ -383,15 +417,7 @@ export default function BlogArticle() {
                   Cet article vous a été utile ?
                 </p>
                 <button
-                  onClick={() => {
-                    if (navigator.share) {
-                      navigator.share({
-                        title: article.title,
-                        text: article.excerpt,
-                        url: window.location.href,
-                      });
-                    }
-                  }}
+                  onClick={handleShare}
                   className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-semibold"
                 >
                   <Share2 className="w-4 h-4" />
