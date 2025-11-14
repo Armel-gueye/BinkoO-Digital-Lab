@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, ChevronDown, ArrowRight, Clock } from 'lucide-react';
 import { AnimatedSection, AnimatedParagraph } from '@/components/AnimatedSection';
+import { Link } from 'react-router-dom';
 
 // Mock data pour les articles
 const articles = [
@@ -211,16 +212,18 @@ export default function Blog() {
                   whileHover={{ y: -8 }}
                 >
                   {/* Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      Nouveau
+                  <Link to={`/blog/${article.id}`}>
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        Nouveau
+                      </div>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Content */}
                   <div className="p-6">
@@ -235,18 +238,23 @@ export default function Blog() {
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                      {article.title}
-                    </h3>
+                    <Link to={`/blog/${article.id}`}>
+                      <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                        {article.title}
+                      </h3>
+                    </Link>
 
                     <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                       {article.excerpt}
                     </p>
 
-                    <button className="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all">
+                    <Link 
+                      to={`/blog/${article.id}`}
+                      className="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
+                    >
                       Lire l'article
                       <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    </Link>
                   </div>
                 </motion.article>
               ))}
@@ -316,42 +324,46 @@ export default function Blog() {
                       >
                         <div className="p-6 space-y-4">
                           {articlesByMonth[month].map((article, idx) => (
-                            <motion.div
+                            <Link
                               key={article.id}
-                              className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors group cursor-pointer"
-                              initial={{ opacity: 0, x: -20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.3, delay: idx * 0.05 }}
+                              to={`/blog/${article.id}`}
                             >
-                              {/* Thumbnail */}
-                              <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
-                                <img
-                                  src={article.image}
-                                  alt={article.title}
-                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                />
-                              </div>
-
-                              {/* Content */}
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
-                                  <span>{formatDate(article.date)}</span>
-                                  <span>•</span>
-                                  <span>{article.readTime}</span>
+                              <motion.div
+                                className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors group cursor-pointer"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.3, delay: idx * 0.05 }}
+                              >
+                                {/* Thumbnail */}
+                                <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                                  <img
+                                    src={article.image}
+                                    alt={article.title}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                  />
                                 </div>
-                                <h4 className="font-bold mb-2 group-hover:text-primary transition-colors line-clamp-1">
-                                  {article.title}
-                                </h4>
-                                <p className="text-sm text-muted-foreground line-clamp-2">
-                                  {article.excerpt}
-                                </p>
-                              </div>
 
-                              {/* Arrow */}
-                              <div className="flex items-center">
-                                <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                              </div>
-                            </motion.div>
+                                {/* Content */}
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                                    <span>{formatDate(article.date)}</span>
+                                    <span>•</span>
+                                    <span>{article.readTime}</span>
+                                  </div>
+                                  <h4 className="font-bold mb-2 group-hover:text-primary transition-colors line-clamp-1">
+                                    {article.title}
+                                  </h4>
+                                  <p className="text-sm text-muted-foreground line-clamp-2">
+                                    {article.excerpt}
+                                  </p>
+                                </div>
+
+                                {/* Arrow */}
+                                <div className="flex items-center">
+                                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                                </div>
+                              </motion.div>
+                            </Link>
                           ))}
                         </div>
                       </motion.div>
