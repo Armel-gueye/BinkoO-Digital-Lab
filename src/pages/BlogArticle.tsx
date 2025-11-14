@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, ArrowLeft, Share2 } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
 import { useEffect } from 'react';
 
 // Mock data pour les articles (même structure que Blog.tsx)
