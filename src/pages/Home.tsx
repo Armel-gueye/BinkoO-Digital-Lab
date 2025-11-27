@@ -195,10 +195,11 @@ export default function Home() {
                 {/* Lottie à gauche sur desktop */}
                 <AnimatedImage delay={0.2}>
                 <div className="order-1">
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden max-w-sm md:max-w-md lg:max-w-full mx-auto">
+                  <div className="aspect-[4/3] rounded-2xl overflow-hidden max-w-sm md:max-w-md lg:max-w-full mx-auto w-full h-full">
                     <LazyLottieIframe
                       src="https://lottie.host/embed/578e0983-2659-40c2-88cf-989315c689b0/KFhpEbNLZ1.lottie"
                       title="Animation IA & Automatisation"
+                      style={{ width: '100%', height: '100%', minHeight: '300px' }}
                     />
                   </div>
                 </div>
@@ -272,10 +273,11 @@ export default function Home() {
                 {/* Lottie à droite sur desktop */}
                 <AnimatedImage delay={0.2}>
                 <div className="order-1 lg:order-2">
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden max-w-sm md:max-w-md lg:max-w-full mx-auto">
+                  <div className="aspect-[4/3] rounded-2xl overflow-hidden max-w-sm md:max-w-md lg:max-w-full mx-auto w-full h-full">
                     <LazyLottieIframe
                       src="https://lottie.host/embed/5094abd8-d328-41f0-82f9-89d30acf9f95/D5m04v3FBU.lottie"
                       title="Animation Création de Sites Web"
+                      style={{ width: '100%', height: '100%', minHeight: '300px' }}
                     />
                   </div>
                 </div>
@@ -291,10 +293,11 @@ export default function Home() {
                 {/* Lottie à gauche sur desktop */}
                 <AnimatedImage delay={0.2}>
                 <div className="order-1">
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden max-w-sm md:max-w-md lg:max-w-full mx-auto">
+                  <div className="aspect-[4/3] rounded-2xl overflow-hidden max-w-sm md:max-w-md lg:max-w-full mx-auto w-full h-full">
                     <LazyLottieIframe
                       src="https://lottie.host/embed/3d0f14dd-a932-47db-8392-075f75c57f99/c2MitpaHjN.lottie"
                       title="Animation Création de Visuels"
+                      style={{ width: '100%', height: '100%', minHeight: '300px' }}
                     />
                   </div>
                 </div>
