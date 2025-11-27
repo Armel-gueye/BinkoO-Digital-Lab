@@ -34,7 +34,7 @@ const Services: React.FC = () => {
   {
     icon: Sparkles,
     title: 'IA & Automatisation',
-    lottieUrl: 'https://lottie.host/040d190a-eee9-4cd8-835d-f2d6624de79c/gKw398Nisw.lottie',
+    lottieUrl: 'https://lottie.host/embed/db8c926f-e2c4-4562-baff-ae53e1a28d18/k9k8p2iDmK.lottie',
     description: 'Gagnez du temps et concentrez-vous sur ce qui compte vraiment. Nous intégrons des solutions d\'automatisation intelligentes pour simplifier vos tâches quotidiennes, améliorer la réactivité de votre entreprise et rendre vos processus plus efficaces.',
     features: [
     'Chatbots et assistants automatiques',
