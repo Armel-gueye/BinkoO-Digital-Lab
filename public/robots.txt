@@ -1,14 +1,11 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
+# BinkoO Digital Lab - Robots.txt
+# Autorisation complète pour l'indexation
 
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://binkoodigitallab.com/sitemap.xml
+
+# Crawl-delay pour éviter la surcharge
+Crawl-delay: 1

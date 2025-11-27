@@ -7,6 +7,7 @@ import OrbitCard from '@/components/ui/OrbitCard';
 import { motion } from 'framer-motion';
 import { AnimatedSection, AnimatedParagraph } from '@/components/AnimatedSection';
 import { Contact2 } from '@/components/Contact2';
+import SEO from '@/components/SEO';
 
 const Contact: React.FC = () => {
   const socialMediaMethods = [
@@ -90,7 +91,14 @@ const Contact: React.FC = () => {
   }));
 
   return (
-    <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+    <>
+      <SEO 
+        title="Contactez l'Agence BinkoO - Bobo-Dioulasso"
+        description="Contactez BinkoO Digital Lab à Bobo-Dioulasso. Nous sommes disponibles sur WhatsApp, téléphone et réseaux sociaux pour discuter de vos projets digitaux. Devis gratuit."
+        canonical="https://binkoodigitallab.com/contact"
+        keywords="contact BinkoO, agence digitale Bobo-Dioulasso, devis gratuit, WhatsApp BinkoO, +226 44 32 38 41, Lafiabougou Secteur 20"
+      />
+      <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <AnimatedSection animation="fade-up">
@@ -242,7 +250,9 @@ const Contact: React.FC = () => {
         </div>
         </AnimatedSection>
       </div>
-    </div>);
+    </div>
+    </>
+  );
 
 };
 

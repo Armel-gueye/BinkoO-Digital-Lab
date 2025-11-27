@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import { AnimatedSection, AnimatedParagraph, AnimatedImage } from '@/components/AnimatedSection';
 import { Contact2 } from '@/components/Contact2';
 import { LazyLottieIframe } from '@/components/ui/LazyLottieIframe';
+import SEO from '@/components/SEO';
 
 export default function Home() {
   const whatsappUrl = 'https://api.whatsapp.com/send?phone=22644323841';
@@ -19,7 +20,14 @@ export default function Home() {
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
-  return <div className="min-h-screen bg-background text-foreground">
+  return <>
+    <SEO 
+      title="BinkoO Digital Lab - Agence d'Automatisation IA & Web au Burkina Faso"
+      description="BinkoO Digital Lab : Votre agence digitale à Bobo-Dioulasso spécialisée en IA, automatisation, chatbots intelligents, développement web et design. Transformez votre business avec l'intelligence artificielle."
+      canonical="https://binkoodigitallab.com"
+      keywords="BinkoO, BinkoO Digital Lab, agence digitale Burkina Faso, automatisation IA Bobo-Dioulasso, développement web, chatbot IA, agence web Burkina, intelligence artificielle, création site web"
+    />
+    <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative w-full h-screen overflow-hidden">
         {/* Robot Model - DO NOT TOUCH POSITIONING */}
@@ -578,5 +586,6 @@ export default function Home() {
 
       {/* Contact2 - Juste au-dessus du Footer */}
       <Contact2 />
-    </div>;
+    </div>
+  </>;
 }

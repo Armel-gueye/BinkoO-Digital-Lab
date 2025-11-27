@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/collapsible";
 import { motion } from 'framer-motion';
 import { AnimatedSection, AnimatedParagraph, AnimatedImage } from '@/components/AnimatedSection';
+import SEO from '@/components/SEO';
 
 const Realisations: React.FC = () => {
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
@@ -112,7 +113,14 @@ const Realisations: React.FC = () => {
 
 
   return (
-    <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+    <>
+      <SEO 
+        title="Nos Réalisations - BinkoO Digital Lab"
+        description="Découvrez nos projets web : sites e-commerce, portfolios d'auteur, solutions IA. Réalisations concrètes pour le marché burkinabè. Design moderne et performances optimales."
+        canonical="https://binkoodigitallab.com/realisations"
+        keywords="réalisations BinkoO, portfolio projets, sites web Burkina Faso, projets e-commerce, BinkoO Store, Linda Maïssar, BONPLAT"
+      />
+      <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <AnimatedSection animation="fade-up">
@@ -238,6 +246,7 @@ const Realisations: React.FC = () => {
         </AnimatedSection>
       </div>
     </div>
+    </>
   );
 };
 

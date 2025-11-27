@@ -13,6 +13,7 @@ import {
   getFeaturedImage,
   getMonthFromDate 
 } from '@/services/blogService';
+import SEO from '@/components/SEO';
 
 // Les interfaces et helpers sont maintenant dans blogService.ts
 
@@ -66,7 +67,14 @@ export default function Blog() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <>
+      <SEO 
+        title="Blog & Actualités IA - BinkoO Digital Lab"
+        description="Découvrez nos articles sur l'IA, l'automatisation, le développement web et le digital. Conseils pratiques et tendances pour booster votre entreprise au Burkina Faso."
+        canonical="https://binkoodigitallab.com/blog"
+        keywords="blog IA Burkina Faso, actualités digital, conseils automatisation, tendances web, BinkoO blog, articles technologie"
+      />
+      <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative py-20 md:py-28 lg:py-36 overflow-hidden">
         {/* Gradient Background */}
@@ -349,5 +357,6 @@ export default function Blog() {
         </section>
       </AnimatedSection>
     </div>
+    </>
   );
 }

@@ -8,6 +8,7 @@ import { FiTarget, FiShield, FiUsers, FiLock, FiDollarSign } from 'react-icons/f
 import { Highlighter } from '@/components/ui/highlighter';
 import { AnimatedSection, AnimatedParagraph, AnimatedImage } from '@/components/AnimatedSection';
 import { LazyLottie } from '@/components/ui/LazyLottie';
+import SEO from '@/components/SEO';
 
 const About: React.FC = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -102,7 +103,14 @@ const About: React.FC = () => {
   };
 
   return (
-    <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+    <>
+      <SEO 
+        title="À Propos - BinkoO Digital Lab"
+        description="Découvrez BinkoO Digital Lab, votre agence digitale au Burkina Faso. Notre histoire, nos valeurs, notre équipe et notre mission : rendre la technologie accessible à tous."
+        canonical="https://binkoodigitallab.com/a-propos"
+        keywords="à propos BinkoO, agence digitale Burkina Faso, histoire BinkoO, équipe, valeurs, mission, Bobo-Dioulasso"
+      />
+      <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <AnimatedSection animation="fade-up">
@@ -412,7 +420,9 @@ const About: React.FC = () => {
         </motion.div>
         </AnimatedSection>
       </div>
-    </div>);
+    </div>
+    </>
+  );
 
 };
 

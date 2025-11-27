@@ -11,6 +11,7 @@ import { motion } from 'framer-motion';
 import { Highlighter } from '@/components/ui/highlighter';
 import { AnimatedSection, AnimatedParagraph, AnimatedImage } from '@/components/AnimatedSection';
 import { Contact2 } from '@/components/Contact2';
+import SEO from '@/components/SEO';
 
 const Services: React.FC = () => {
   const [openItems, setOpenItems] = useState<number[]>([]);
@@ -74,7 +75,14 @@ const Services: React.FC = () => {
 
 
   return (
-    <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+    <>
+      <SEO 
+        title="Nos Services IA & Web - BinkoO Digital Lab"
+        description="Découvrez nos services d'automatisation IA, développement web, chatbots intelligents et création graphique. Solutions digitales sur mesure pour votre entreprise au Burkina Faso."
+        canonical="https://binkoodigitallab.com/services"
+        keywords="services IA Burkina Faso, automatisation entreprise, chatbot WhatsApp, développement web, création site internet, design graphique, BinkoO services"
+      />
+      <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <AnimatedSection animation="fade-up">
@@ -220,7 +228,9 @@ const Services: React.FC = () => {
         title="Prêt à Débloquer Votre Potentiel ?"
         description="Chaque service proposé est une étape vers plus d'efficacité. Expliquez-nous où vous voulez exceller, et nous construirons la solution digitale."
       />
-    </div>);
+    </div>
+    </>
+  );
 
 };
 
