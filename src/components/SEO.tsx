@@ -102,15 +102,131 @@ export default function SEO({
           "@type": "Country",
           "name": "Burkina Faso"
         },
-        "serviceType": [
-          "Intelligence Artificielle",
-          "Automatisation",
-          "Développement Web",
-          "Création de Sites Web",
-          "Chatbots IA",
-          "Design Graphique",
-          "Applications Web"
-        ]
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Services BinkoO Digital Lab",
+          "itemListElement": [
+            {
+              "@type": "OfferCatalog",
+              "name": "IA & Automatisation",
+              "description": "Intégration d'intelligence artificielle, chatbots (WhatsApp/Facebook), agents IA de prospection, scraping de données et automatisation de workflows.",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Chatbots intelligents"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Agents IA sur mesure"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Scraping de données"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Automatisation CRM"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Réceptionniste vocal IA"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "Création Web & Apps",
+              "description": "Développement de sites vitrines, applications web SAAS, landing pages haute conversion et boutiques reliées à WhatsApp.",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Sites vitrines"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Applications Web / SAAS"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Boutiques WhatsApp"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Landing Pages"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "SEO"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "Design & Branding",
+              "description": "Création d'identité visuelle, logos, design pour réseaux sociaux, affiches.",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Logos & Branding"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Flyers & Affiches"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Bannières"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Visuels Réseaux Sociaux"
+                  }
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "@type": "WebSite",

@@ -22,10 +22,10 @@ export default function Home() {
 
   return <>
     <SEO 
-      title="BinkoO Digital Lab - Agence d'Automatisation IA & Web au Burkina Faso"
-      description="BinkoO Digital Lab : Votre agence digitale à Bobo-Dioulasso spécialisée en IA, automatisation, chatbots intelligents, développement web et design. Transformez votre business avec l'intelligence artificielle."
+      title="BinkoO Digital Lab - Agence IA, Web & Design au Burkina Faso"
+      description="Agence digitale experte en automatisation IA, création de sites web modernes et design graphique. Transformez vos processus et votre image de marque au Burkina Faso et en Afrique."
       canonical="https://binkoodigitallab.com"
-      keywords="BinkoO, BinkoO Digital Lab, agence digitale Burkina Faso, automatisation IA Bobo-Dioulasso, développement web, chatbot IA, agence web Burkina, intelligence artificielle, création site web"
+      keywords="agence digitale Burkina Faso, automatisation IA, création site web Bobo-Dioulasso, design graphique, chatbot WhatsApp, BinkoO"
     />
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}

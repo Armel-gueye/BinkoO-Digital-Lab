@@ -77,10 +77,10 @@ const Services: React.FC = () => {
   return (
     <>
       <SEO 
-        title="Nos Services IA & Web - BinkoO Digital Lab"
-        description="Découvrez nos services d'automatisation IA, développement web, chatbots intelligents et création graphique. Solutions digitales sur mesure pour votre entreprise au Burkina Faso."
+        title="Nos Services : Agents IA, Sites Web SAAS & Branding - BinkoO"
+        description="Découvrez nos solutions : Chatbots intelligents, sites e-commerce connectés WhatsApp, applications SAAS et identité visuelle complète. L'IA concrète pour votre croissance."
         canonical="https://binkoodigitallab.com/services"
-        keywords="services IA Burkina Faso, automatisation entreprise, chatbot WhatsApp, développement web, création site internet, design graphique, BinkoO services"
+        keywords="agent IA prospection, scraping données, création application web, logo entreprise, automatisation workflows, site vitrine, SAAS"
       />
       <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">

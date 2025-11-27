@@ -70,9 +70,9 @@ export default function Blog() {
     <>
       <SEO 
         title="Blog & Actualités IA - BinkoO Digital Lab"
-        description="Découvrez nos articles sur l'IA, l'automatisation, le développement web et le digital. Conseils pratiques et tendances pour booster votre entreprise au Burkina Faso."
+        description="Les dernières tendances en intelligence artificielle, automatisation et marketing digital en Afrique. Conseils pour PME et entrepreneurs."
         canonical="https://binkoodigitallab.com/blog"
-        keywords="blog IA Burkina Faso, actualités digital, conseils automatisation, tendances web, BinkoO blog, articles technologie"
+        keywords="actualités IA Afrique, automatisation marketing digital, conseils PME entrepreneurs, tendances digitales Afrique"
       />
       <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
