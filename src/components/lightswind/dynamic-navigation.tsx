@@ -68,7 +68,7 @@ export const DynamicNavigation: React.FC<DynamicNavigationProps> = ({
                 <AnimatePresence>
                   {isActive && !isAnyHovered && (
                     <motion.div
-                      layoutId="active-pill"
+                      layoutId={`active-pill-${item.path}`}
                       className="absolute inset-0 rounded-full bg-primary"
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
