@@ -57,7 +57,7 @@ const Realisations: React.FC = () => {
     />,
     <img 
       key="linda-3" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/msedge_vVh7V5FME2-1760804406978.png" 
+      src="https://i.postimg.cc/Qtc4n44W/msedge-v-Vh7V5FME2.png" 
       alt="Linda Maïssar - Accueil"
       className="rounded-xl w-full h-full object-contain"
     />
