@@ -473,7 +473,7 @@ export default function Home() {
             <AnimatedImage delay={0.3}>
             <div className="relative col-span-full md:col-span-1 lg:col-span-1 row-span-1 rounded-2xl overflow-hidden group border border-border">
               <img
-              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/msedge_oYx9ORuSTc-1760751181832.png"
+              src="https://i.postimg.cc/59kk0ChT/msedge-o-Yx9ORu-STc.png"
               alt="Project 3"
               className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500" />
 
