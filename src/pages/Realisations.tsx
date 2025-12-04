@@ -45,7 +45,7 @@ const Realisations: React.FC = () => {
   const lindaImages = [
     <img 
       key="linda-1" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/msedge_aUwBZ6u5Oh-1760804373538.png" 
+      src="https://i.postimg.cc/NjpwdM9h/msedge-a-Uw-BZ6u5Oh.png" 
       alt="Linda Maïssar - Mes Livres"
       className="rounded-xl w-full h-full object-contain"
     />,
