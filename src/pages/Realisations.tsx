@@ -24,19 +24,19 @@ const Realisations: React.FC = () => {
   const binkooImages = [
     <img 
       key="binkoo-1" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/msedge_mT1m1bMdNY-1760802785161.png" 
+      src="https://i.postimg.cc/85dNGbK6/msedge-m-T1m1b-Md-NY.png" 
       alt="BinkoO Store Hero"
       className="rounded-xl w-full h-full object-contain"
     />,
     <img 
       key="binkoo-2" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/msedge_UswX8ntQGv-1760802798719.png" 
+      src="https://i.postimg.cc/7Y5PGSfy/msedge-Usw-X8nt-QGv.png" 
       alt="BinkoO Store Produits"
       className="rounded-xl w-full h-full object-contain"
     />,
     <img 
       key="binkoo-3" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/msedge_UwTP6vE3Sk-1760802817497.png" 
+      src="https://i.postimg.cc/WzQBJFHk/msedge-Uw-TP6v-E3Sk.png" 
       alt="BinkoO Store Contact"
       className="rounded-xl w-full h-full object-contain"
     />
@@ -45,19 +45,19 @@ const Realisations: React.FC = () => {
   const lindaImages = [
     <img 
       key="linda-1" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/msedge_aUwBZ6u5Oh-1760804373538.png" 
+      src="https://i.postimg.cc/NjpwdM9h/msedge-a-Uw-BZ6u5Oh.png" 
       alt="Linda Maïssar - Mes Livres"
       className="rounded-xl w-full h-full object-contain"
     />,
     <img 
       key="linda-2" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/msedge_oYx9ORuSTc-1760804392530.png" 
+      src="https://i.postimg.cc/59kk0ChT/msedge-o-Yx9ORu-STc.png" 
       alt="Linda Maïssar - Mes Services"
       className="rounded-xl w-full h-full object-contain"
     />,
     <img 
       key="linda-3" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/msedge_vVh7V5FME2-1760804406978.png" 
+      src="https://i.postimg.cc/Qtc4n44W/msedge-v-Vh7V5FME2.png" 
       alt="Linda Maïssar - Accueil"
       className="rounded-xl w-full h-full object-contain"
     />
@@ -66,19 +66,19 @@ const Realisations: React.FC = () => {
   const bonplatImages = [
     <img 
       key="bonplat-1" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/msedge_f180yDu80q-min-1762783985121.png" 
+      src="https://i.postimg.cc/T29QLWBz/msedge-f180y-Du80q.png" 
       alt="BONPLAT Pingdwendé - Nos Menus"
       className="rounded-xl w-full h-full object-contain"
     />,
     <img 
       key="bonplat-2" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/msedge_Gf5hgDL269-min-1762783986305.jpg" 
+      src="https://i.postimg.cc/FFfVTn6k/msedge-Gf5hg-DL269.jpg" 
       alt="BONPLAT Pingdwendé - Accueil"
       className="rounded-xl w-full h-full object-contain"
     />,
     <img 
       key="bonplat-3" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/msedge_W99rJqyLXt-min-1762783985990.png" 
+      src="https://i.postimg.cc/6qmvVwrs/msedge-W99r-Jqy-LXt.png" 
       alt="BONPLAT Pingdwendé - Service Traiteur"
       className="rounded-xl w-full h-full object-contain"
     />
