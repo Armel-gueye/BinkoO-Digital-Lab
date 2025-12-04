@@ -72,7 +72,7 @@ const Realisations: React.FC = () => {
     />,
     <img 
       key="bonplat-2" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/msedge_Gf5hgDL269-min-1762783986305.jpg" 
+      src="https://i.postimg.cc/FFfVTn6k/msedge-Gf5hg-DL269.jpg" 
       alt="BONPLAT Pingdwendé - Accueil"
       className="rounded-xl w-full h-full object-contain"
     />,
