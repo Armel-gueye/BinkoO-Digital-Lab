@@ -24,7 +24,7 @@ const Realisations: React.FC = () => {
   const binkooImages = [
     <img 
       key="binkoo-1" 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/msedge_mT1m1bMdNY-1760802785161.png" 
+      src="https://i.postimg.cc/85dNGbK6/msedge-m-T1m1b-Md-NY.png" 
       alt="BinkoO Store Hero"
       className="rounded-xl w-full h-full object-contain"
     />,
