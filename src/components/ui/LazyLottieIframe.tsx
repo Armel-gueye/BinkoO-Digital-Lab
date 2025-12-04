@@ -14,7 +14,7 @@ interface LazyLottieIframeProps {
  */
 export const LazyLottieIframe: React.FC<LazyLottieIframeProps> = ({ 
   src, 
-  style = {}, 
+  style = { width: '100%', height: '100%' }, 
   className = '',
   title = 'Lottie Animation',
   threshold = 0.1 
