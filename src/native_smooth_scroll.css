@@ -1,0 +1,8 @@
+/* 
+ * Native Smooth Scroll
+ * Lightweight alternative to JS libraries. 
+ * Enables smooth scrolling for anchor links only.
+ */
+html {
+    scroll-behavior: smooth;
+}
