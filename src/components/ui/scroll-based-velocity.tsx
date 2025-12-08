@@ -61,9 +61,11 @@ export function VelocityScroll({ text, default_velocity = 2, className }: Veloci
     useAnimationFrame((t, delta) => {
       let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
-      if (velocityFactor.get() < 0) {
+      const velocity = velocityFactor.get();
+      // Only change direction if the scroll event is significant enough (avoids jitter)
+      if (velocity < -0.2) {
         directionFactor.current = -1;
-      } else if (velocityFactor.get() > 0) {
+      } else if (velocity > 0.2) {
         directionFactor.current = 1;
       }
 
