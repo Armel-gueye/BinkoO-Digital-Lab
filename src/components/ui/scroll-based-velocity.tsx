@@ -59,7 +59,9 @@ export function VelocityScroll({ text, default_velocity = 2, className }: Veloci
 
     const directionFactor = React.useRef<number>(1);
     useAnimationFrame((t, delta) => {
-      let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+      // Clamp delta to avoid huge jumps if frame drops (max 50ms per frame)
+      const clampedDelta = Math.min(delta, 50);
+      let moveBy = directionFactor.current * baseVelocity * (clampedDelta / 1000);
 
       const velocity = velocityFactor.get();
       // Only change direction if the scroll event is significant enough (avoids jitter)
@@ -76,7 +78,7 @@ export function VelocityScroll({ text, default_velocity = 2, className }: Veloci
 
     return (
       <div className="w-full overflow-hidden whitespace-nowrap" ref={containerRef}>
-        <motion.div className={cn('inline-block', className)} style={{ x }}>
+        <motion.div className={cn('inline-block', className)} style={{ x, willChange: "transform" }}>
           {Array.from({ length: repetitions }).map((_, i) => (
             <span key={i} ref={i === 0 ? textRef : null}>
               {children}{' '}
