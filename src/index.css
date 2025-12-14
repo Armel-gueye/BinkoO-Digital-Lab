@@ -67,7 +67,14 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
   body {
+    overflow-x: hidden;
+    width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Poppins', sans-serif;
@@ -314,9 +321,8 @@
 }
 
 /* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-}
+/* Smooth scroll behavior */
+/* html selector is already handled above in the body block consolidation */
 
 /* Focus styles for accessibility */
 *:focus-visible {

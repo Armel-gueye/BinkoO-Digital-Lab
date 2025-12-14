@@ -120,16 +120,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
       <div
         ref={backdropRef}
         className="fixed inset-0 bg-slate-50/80 backdrop-blur-sm"
-        style={{ 
-          opacity: 0, 
-          visibility: 'hidden', 
+        style={{
+          opacity: 0,
+          visibility: 'hidden',
           pointerEvents: isOpen ? 'auto' : 'none',
           zIndex: 40,
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          width: '100vw',
+          width: '100%',
           height: '100dvh',
           minHeight: '100dvh',
           position: 'fixed',
@@ -183,11 +183,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                     className="pill-link"
                     aria-label={item.ariaLabel}
                     style={
-                    {
-                      '--item-rot': `${item.rotation}deg`,
-                      '--hover-bg': item.hoverStyles.bgColor,
-                      '--hover-color': item.hoverStyles.textColor
-                    } as React.CSSProperties
+                      {
+                        '--item-rot': `${item.rotation}deg`,
+                        '--hover-bg': item.hoverStyles.bgColor,
+                        '--hover-color': item.hoverStyles.textColor
+                      } as React.CSSProperties
                     }
                     onClick={() => setIsOpen(false)}>
 
