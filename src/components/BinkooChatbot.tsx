@@ -20,7 +20,7 @@ export const BinkooChatbot: React.FC = () => {
     // ========== GESTION BULLES DE BIENVENUE ==========
     // Vérifier si les bulles ont déjà été affichées
     const welcomeShown = localStorage.getItem('binkoo-welcome-shown');
-    
+
     if (welcomeShown === 'true') {
       // Les bulles ont déjà été affichées, les cacher immédiatement
       if (welcomeBubbles) {
@@ -29,7 +29,7 @@ export const BinkooChatbot: React.FC = () => {
     } else {
       // Première visite : afficher les bulles et marquer comme affichées
       localStorage.setItem('binkoo-welcome-shown', 'true');
-      
+
       // Les bulles s'affichent normalement via l'animation CSS
       setTimeout(hideWelcomeBubbles, 10000);
     }
@@ -62,7 +62,7 @@ export const BinkooChatbot: React.FC = () => {
     // ========== FONCTIONS UI ==========
     function toggleChat() {
       chatWindow?.classList.toggle('active');
-      
+
       if (chatWindow?.classList.contains('active')) {
         hideWelcomeBubblesOnOpen();
         if (!isMobileOrTablet) {
@@ -129,7 +129,7 @@ export const BinkooChatbot: React.FC = () => {
         }
 
         const data = await response.json();
-        
+
         if (data.output) {
           addMessage(data.output);
         } else if (data.message) {
@@ -152,7 +152,7 @@ export const BinkooChatbot: React.FC = () => {
     toggle?.addEventListener('click', toggleChat);
     closeBtn?.addEventListener('click', toggleChat);
     sendBtn?.addEventListener('click', sendMessage);
-    
+
     input?.addEventListener('keypress', (e: KeyboardEvent) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
@@ -176,7 +176,8 @@ export const BinkooChatbot: React.FC = () => {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         /* ========== VARIABLES CSS ========== */
         :root {
             --chatbot-primary: #FF2A00;
@@ -564,8 +565,9 @@ export const BinkooChatbot: React.FC = () => {
         @media (max-width: 480px) {
             #binkoo-chat-window {
                 width: 100vw;
-                height: 100vh;
-                bottom: 0;
+                height: 100dvh;
+                top: 0;
+                bottom: auto;
                 right: 0;
                 border-radius: 0;
             }
@@ -587,7 +589,7 @@ export const BinkooChatbot: React.FC = () => {
             }
         }
       `}} />
-      
+
       {/* Bulles de bienvenue */}
       <div id="binkoo-welcome-bubbles">
         <div className="welcome-bubble">
@@ -631,9 +633,9 @@ export const BinkooChatbot: React.FC = () => {
 
         {/* Input */}
         <div id="binkoo-chat-input-container">
-          <input 
-            type="text" 
-            id="binkoo-chat-input" 
+          <input
+            type="text"
+            id="binkoo-chat-input"
             placeholder="Écrivez votre message..."
             aria-label="Message"
           />
