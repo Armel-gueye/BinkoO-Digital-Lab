@@ -182,7 +182,7 @@ export default function BlogArticle() {
         <div className="container-fluid">
           <div className="max-w-3xl mx-auto">
             <motion.div
-              className="prose prose-gray prose-p:text-[15px] prose-p:md:text-[17px] max-w-none"
+              className="prose prose-gray prose-p:text-[15px] prose-p:md:text-[17px] prose-headings:font-bold prose-h2:text-xl prose-h2:md:text-2xl prose-h3:text-lg prose-h3:md:text-xl max-w-none"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
