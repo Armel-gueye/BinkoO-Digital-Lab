@@ -123,7 +123,7 @@ export default function Home() {
             className="text-foreground hover:text-primary transition-all duration-300 hover:scale-110"
             aria-label="LinkedIn">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 19h3v-9h-3v9zm1.5-10.3c1 0 1.8-.8 1.8-1.8s-.8-1.9-1.8-1.9-1.8.8-1.8 1.8.8 1.9 1.8 1.9zM13 19h3v-4.7c0-2.8 3.5-3 3.5 0v4.7h3v-6c0-4.8-5.4-4.6-6.5-2.3v-1.7h-3v10z" className="!w-full !h-[27px]" />
+              <path d="M8 19h3v-9h-3v9zm1.5-10.3c1 0 1.8-.8 1.8-1.8s-.8-1.9-1.8-1.9-1.8.8-1.8 1.8.8 1.9 1.8 1.9zM13 19h3v-4.7c0-2.8 3.5-3 3.5 0v4.7h3v-6c0-4.8-5.4-4.6-6.5-2.3v-1.7h-3v10z" />
             </svg>
           </a>
 
