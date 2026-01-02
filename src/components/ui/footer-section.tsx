@@ -89,7 +89,7 @@ export function Footer() {
                       <a
                         href={link.href === 'whatsapp' ? '#' : link.href}
                         onClick={link.href === 'whatsapp' ? handleWhatsAppClick : undefined}
-                        className="hover:text-foreground inline-flex items-center gap-2 transition-all duration-300 !whitespace-pre-line !whitespace-pre-line">
+                        className="hover:text-foreground inline-flex items-center gap-2 transition-all duration-300 break-all">
 
                         {link.icon && <link.icon className="size-4" />}
                         {link.title}
