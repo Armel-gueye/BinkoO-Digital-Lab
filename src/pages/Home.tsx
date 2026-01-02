@@ -61,7 +61,7 @@ export default function Home() {
         </motion.div>
 
         {/* Text content absolutely positioned on the left */}
-        <div className="absolute z-10 top-0 left-0 h-full flex items-center pl-16 md:pl-20 lg:pl-32 pt-32 md:pt-40">
+        <div className="absolute z-10 top-0 left-0 h-full flex items-center pl-12 pr-14 md:pl-20 md:pr-0 lg:pl-32 pt-32 md:pt-40">
           <motion.div
           className="max-w-2xl text-left"
           initial={{ opacity: 0, y: 30 }}
