@@ -37,9 +37,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   staggerDelay = 0.12
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  const overlayRef = useRef<HTMLDivElement>(null);
   const menuItemsRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const pillLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
+  const labelRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -56,67 +60,125 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
     };
   }, [isOpen]);
 
+  // Animation effect - aligned with reference code
   useEffect(() => {
-    if (!menuItemsRef.current || !backdropRef.current) return;
+    const overlay = menuItemsRef.current;
+    const backdrop = backdropRef.current;
+    const bubbles = pillLinksRef.current.filter(Boolean);
+    const labels = labelRefs.current.filter(Boolean);
+
+    if (!overlay || !backdrop || !bubbles.length) return;
 
     if (isOpen) {
-      // Show backdrop
-      gsap.to(backdropRef.current, {
+      // Show overlay first
+      gsap.set(overlay, { display: 'flex' });
+
+      // Kill any existing tweens to prevent conflicts
+      gsap.killTweensOf([...bubbles, ...labels, backdrop]);
+
+      // Reset initial state
+      gsap.set(bubbles, { scale: 0, transformOrigin: '50% 50%' });
+      gsap.set(labels, { y: 24, autoAlpha: 0 });
+
+      // Animate backdrop
+      gsap.to(backdrop, {
         autoAlpha: 1,
         duration: 0.3
       });
 
-      // Show menu items
-      gsap.to(menuItemsRef.current, {
-        autoAlpha: 1,
-        duration: 0.1
-      });
+      // Animate bubbles with stagger
+      bubbles.forEach((bubble, i) => {
+        const delay = i * staggerDelay + gsap.utils.random(-0.05, 0.05);
+        const tl = gsap.timeline({ delay });
 
-      // Animate pills
-      gsap.fromTo(
-        pillLinksRef.current,
-        {
-          autoAlpha: 0,
-          y: 60
-        },
-        {
-          autoAlpha: 1,
-          y: 0,
+        tl.to(bubble, {
+          scale: 1,
           duration: animationDuration,
-          ease: animationEase,
-          stagger: staggerDelay
+          ease: animationEase
+        });
+
+        if (labels[i]) {
+          tl.to(
+            labels[i],
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: animationDuration,
+              ease: 'power3.out'
+            },
+            `-=${animationDuration * 0.9}`
+          );
         }
-      );
-    } else {
+      });
+    } else if (showOverlay) {
+      // Kill any existing tweens
+      gsap.killTweensOf([...bubbles, ...labels, backdrop]);
+
       // Hide backdrop
-      gsap.to(backdropRef.current, {
+      gsap.to(backdrop, {
         autoAlpha: 0,
         duration: 0.2
       });
 
-      // Hide pills
-      gsap.to(pillLinksRef.current, {
+      // Hide labels first
+      gsap.to(labels, {
+        y: 24,
         autoAlpha: 0,
-        y: 60,
-        duration: animationDuration * 0.6,
-        ease: 'power2.in',
-        stagger: staggerDelay * 0.5,
+        duration: 0.2,
+        ease: 'power3.in'
+      });
+
+      // Hide bubbles and then hide overlay
+      gsap.to(bubbles, {
+        scale: 0,
+        duration: 0.2,
+        ease: 'power3.in',
         onComplete: () => {
-          gsap.set(menuItemsRef.current, { autoAlpha: 0 });
+          gsap.set(overlay, { display: 'none' });
+          setShowOverlay(false);
         }
       });
     }
-  }, [isOpen, animationDuration, animationEase, staggerDelay]);
+  }, [isOpen, showOverlay, animationDuration, animationEase, staggerDelay]);
+
+  // Handle resize for rotation on desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (isOpen) {
+        const bubbles = pillLinksRef.current.filter(Boolean);
+        const isDesktop = window.innerWidth >= 900;
+
+        bubbles.forEach((bubble, i) => {
+          const item = items[i];
+          if (bubble && item) {
+            const rotation = isDesktop ? (item.rotation ?? 0) : 0;
+            gsap.set(bubble, { rotation });
+          }
+        });
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isOpen, items]);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    const nextState = !isOpen;
+    if (nextState) {
+      setShowOverlay(true);
+    }
+    setIsOpen(nextState);
+  };
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
   };
 
   const positionClass = useFixedPosition ? 'fixed' : 'absolute';
 
   return (
     <>
-      {/* Backdrop overlay - Full screen on mobile/tablet with dvh support */}
+      {/* Backdrop overlay */}
       <div
         ref={backdropRef}
         className="fixed inset-0 bg-slate-50/80 backdrop-blur-sm"
@@ -142,63 +204,69 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         <div
           className="bubble logo-bubble !w-auto !h-full"
           style={{ background: menuBg, color: menuContentColor }}>
-
           <div className="logo-content">{logo}</div>
         </div>
 
         <div
           className="bubble toggle-bubble"
           style={{ background: menuBg }}>
-
           <button
             className={`menu-btn ${isOpen ? 'open' : ''}`}
             onClick={toggleMenu}
             aria-label={menuAriaLabel}
+            aria-pressed={isOpen}
             style={{ background: menuBg }}>
-
             <span className="menu-line" style={{ background: menuContentColor }}></span>
             <span className="menu-line" style={{ background: menuContentColor }}></span>
           </button>
         </div>
       </div>
 
-      <div
-        ref={menuItemsRef}
-        className={`bubble-menu-items ${positionClass}`}
-        style={{ opacity: 0, visibility: 'hidden', pointerEvents: isOpen ? 'auto' : 'none' }}>
+      {/* Menu items - only render when showOverlay is true */}
+      {showOverlay && (
+        <div
+          ref={menuItemsRef}
+          className={`bubble-menu-items ${positionClass}`}
+          style={{ display: 'none', pointerEvents: isOpen ? 'auto' : 'none' }}
+          aria-hidden={!isOpen}>
+          <ul className="pill-list" role="menu" aria-label="Menu links">
+            {items.map((item, index) => {
+              const isEven = items.length % 2 === 0;
+              const needsSpacer = !isEven && index === Math.floor(items.length / 2);
 
-        <ul className="pill-list">
-          {items.map((item, index) => {
-            // Calculate column position
-            const isEven = items.length % 2 === 0;
-            const needsSpacer = !isEven && index === Math.floor(items.length / 2);
-
-            return (
-              <React.Fragment key={index}>
-                {needsSpacer && <li className="pill-spacer" />}
-                <li className="pill-col">
-                  <a
-                    ref={(el) => pillLinksRef.current[index] = el}
-                    href={item.href}
-                    className="pill-link"
-                    aria-label={item.ariaLabel}
-                    style={
-                      {
-                        '--item-rot': `${item.rotation}deg`,
-                        '--hover-bg': item.hoverStyles.bgColor,
-                        '--hover-color': item.hoverStyles.textColor
-                      } as React.CSSProperties
-                    }
-                    onClick={() => setIsOpen(false)}>
-
-                    <span className="pill-label">{item.label}</span>
-                  </a>
-                </li>
-              </React.Fragment>);
-
-          })}
-        </ul>
-      </div>
+              return (
+                <React.Fragment key={index}>
+                  {needsSpacer && <li className="pill-spacer" />}
+                  <li className="pill-col" role="none">
+                    <a
+                      role="menuitem"
+                      ref={(el) => { pillLinksRef.current[index] = el; }}
+                      href={item.href}
+                      className="pill-link"
+                      aria-label={item.ariaLabel}
+                      style={
+                        {
+                          '--item-rot': `${item.rotation}deg`,
+                          '--pill-bg': menuBg,
+                          '--pill-color': menuContentColor,
+                          '--hover-bg': item.hoverStyles.bgColor,
+                          '--hover-color': item.hoverStyles.textColor
+                        } as React.CSSProperties
+                      }
+                      onClick={handleLinkClick}>
+                      <span
+                        className="pill-label"
+                        ref={(el) => { labelRefs.current[index] = el; }}>
+                        {item.label}
+                      </span>
+                    </a>
+                  </li>
+                </React.Fragment>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </>
   );
 };
