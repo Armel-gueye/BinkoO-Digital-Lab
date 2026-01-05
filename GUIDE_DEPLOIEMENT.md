@@ -12,8 +12,9 @@
 
 ### Étape 2 : Ajouter les fichiers (Stage)
 1. Cliquez sur le **"+"** à côté de chaque fichier
+
    - OU cliquez sur **"+ Stage All Changes"** pour tout ajouter
-2. Les fichiers passeront de "Changes" à "Staged Changes"
+3. Les fichiers passeront de "Changes" à "Staged Changes"
 
 ### Étape 3 : Créer un Commit
 1. Dans la zone de texte en haut, tapez un message :
