@@ -54,18 +54,20 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
     const backdrop = backdropRef.current;
     const overlay = menuItemsRef.current;
 
-    // Clear GSAP inline styles completely
+    // Clear GSAP inline styles on menu items
     if (bubbles.length) {
       gsap.set(bubbles, { clearProps: 'all' });
     }
     if (labels.length) {
       gsap.set(labels, { clearProps: 'all' });
     }
+    // Reset backdrop to hidden state (don't clearProps, just set hidden)
     if (backdrop) {
-      gsap.set(backdrop, { clearProps: 'opacity,visibility' });
+      gsap.set(backdrop, { opacity: 0, visibility: 'hidden' });
     }
+    // Hide overlay
     if (overlay) {
-      gsap.set(overlay, { clearProps: 'all' });
+      gsap.set(overlay, { display: 'none', visibility: 'hidden' });
     }
   }, []);
 
