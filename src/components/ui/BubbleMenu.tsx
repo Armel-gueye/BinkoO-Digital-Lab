@@ -40,7 +40,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   const [showOverlay, setShowOverlay] = useState(false);
 
   const menuItemsRef = useRef<HTMLDivElement>(null);
-  const backdropRef = useRef<HTMLDivElement>(null);
   const pillLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const labelRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
@@ -62,9 +61,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   // Animation effect
   useEffect(() => {
     const overlay = menuItemsRef.current;
-    const backdrop = backdropRef.current;
 
-    if (!overlay || !backdrop) return;
+    if (!overlay) return;
 
     if (isOpen && showOverlay) {
       const bubbles = pillLinksRef.current.filter(Boolean);
@@ -78,13 +76,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
       // Reset initial state
       gsap.set(bubbles, { scale: 0, opacity: 1, transformOrigin: '50% 50%' });
       gsap.set(labels, { y: 24, opacity: 0 });
-
-      // Animate backdrop
-      gsap.to(backdrop, {
-        opacity: 1,
-        visibility: 'visible',
-        duration: 0.3
-      });
 
       // Animate bubbles with stagger
       bubbles.forEach((bubble, i) => {
@@ -109,15 +100,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
     } else if (!isOpen && showOverlay) {
       const bubbles = pillLinksRef.current.filter(Boolean);
       const labels = labelRefs.current.filter(Boolean);
-
-      // Hide backdrop
-      gsap.to(backdrop, {
-        opacity: 0,
-        duration: 0.2,
-        onComplete: () => {
-          gsap.set(backdrop, { visibility: 'hidden' });
-        }
-      });
 
       // Hide labels
       if (labels.length) {
@@ -169,19 +151,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
   return (
     <>
-      {/* Backdrop overlay */}
-      <div
-        ref={backdropRef}
-        className="fixed inset-0 bg-slate-50/80 backdrop-blur-sm"
-        style={{
-          opacity: 0,
-          visibility: 'hidden',
-          pointerEvents: isOpen ? 'auto' : 'none',
-          zIndex: 40
-        }}
-        onClick={() => setIsOpen(false)}
-      />
-
       <nav className={`bubble-menu ${positionClass}`} aria-label="Main navigation">
         <div
           className="bubble logo-bubble"
