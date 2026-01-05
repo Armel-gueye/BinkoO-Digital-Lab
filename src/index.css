@@ -347,8 +347,36 @@
   }
 }
 
+@keyframes pulse-ring-mobile {
+  0% {
+    box-shadow: 0 0 0 0 var(--pulse-color, #dc2626);
+    opacity: 0.6;
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px var(--pulse-color, #dc2626);
+    opacity: 0.3;
+  }
+
+  80% {
+    box-shadow: 0 0 0 16px var(--pulse-color, #dc2626);
+    opacity: 0;
+  }
+
+  100% {
+    box-shadow: 0 0 0 16px var(--pulse-color, #dc2626);
+    opacity: 0;
+  }
+}
+
 .animate-pulse-ring {
   animation: pulse-ring var(--duration, 2s) ease-in-out infinite;
+}
+
+@media (max-width: 1024px) {
+  .animate-pulse-ring {
+    animation: pulse-ring-mobile var(--duration, 2s) ease-in-out infinite;
+  }
 }
 
 /* Smooth scroll behavior */
