@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import './BubbleMenu.css';
 
@@ -39,74 +38,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
-  const location = useLocation();
 
   const menuItemsRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const pillLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const labelRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const animationRef = useRef<gsap.core.Timeline[]>([]);
-
-  // Clear all GSAP inline styles
-  const clearAllStyles = useCallback(() => {
-    const bubbles = pillLinksRef.current.filter(Boolean);
-    const labels = labelRefs.current.filter(Boolean);
-    const backdrop = backdropRef.current;
-    const overlay = menuItemsRef.current;
-
-    // Clear GSAP inline styles on menu items
-    if (bubbles.length) {
-      gsap.set(bubbles, { clearProps: 'all' });
-    }
-    if (labels.length) {
-      gsap.set(labels, { clearProps: 'all' });
-    }
-    // Reset backdrop to hidden state (don't clearProps, just set hidden)
-    if (backdrop) {
-      gsap.set(backdrop, { opacity: 0, visibility: 'hidden' });
-    }
-    // Hide overlay
-    if (overlay) {
-      gsap.set(overlay, { display: 'none', visibility: 'hidden' });
-    }
-  }, []);
-
-  // Cleanup function for animations
-  const killAllAnimations = useCallback(() => {
-    animationRef.current.forEach(tl => tl.kill());
-    animationRef.current = [];
-
-    const bubbles = pillLinksRef.current.filter(Boolean);
-    const labels = labelRefs.current.filter(Boolean);
-    const backdrop = backdropRef.current;
-
-    if (bubbles.length) gsap.killTweensOf(bubbles);
-    if (labels.length) gsap.killTweensOf(labels);
-    if (backdrop) gsap.killTweensOf(backdrop);
-  }, []);
-
-  // Close menu and reset on route change
-  useEffect(() => {
-    // Close menu immediately on navigation
-    setIsOpen(false);
-
-    // Kill animations and clear styles
-    killAllAnimations();
-    clearAllStyles();
-
-    // Reset overlay state
-    setShowOverlay(false);
-
-    // Reset refs
-    pillLinksRef.current = [];
-    labelRefs.current = [];
-  }, [location.pathname, killAllAnimations, clearAllStyles]);
-
-  // Reset refs when items change
-  useEffect(() => {
-    pillLinksRef.current = [];
-    labelRefs.current = [];
-  }, [items]);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -127,22 +63,19 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   useEffect(() => {
     const overlay = menuItemsRef.current;
     const backdrop = backdropRef.current;
-    const bubbles = pillLinksRef.current.filter(Boolean);
-    const labels = labelRefs.current.filter(Boolean);
 
     if (!overlay || !backdrop) return;
 
     if (isOpen && showOverlay) {
-      // Kill any existing animations first
-      killAllAnimations();
+      const bubbles = pillLinksRef.current.filter(Boolean);
+      const labels = labelRefs.current.filter(Boolean);
 
-      // Ensure we have elements to animate
       if (!bubbles.length) return;
 
       // Show overlay container
       gsap.set(overlay, { display: 'flex', visibility: 'visible' });
 
-      // Reset initial state for all elements
+      // Reset initial state
       gsap.set(bubbles, { scale: 0, opacity: 1, transformOrigin: '50% 50%' });
       gsap.set(labels, { y: 24, opacity: 0 });
 
@@ -156,31 +89,26 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
       // Animate bubbles with stagger
       bubbles.forEach((bubble, i) => {
         const delay = i * staggerDelay;
-        const tl = gsap.timeline({ delay });
-        animationRef.current.push(tl);
-
-        tl.to(bubble, {
+        gsap.to(bubble, {
           scale: 1,
           duration: animationDuration,
-          ease: animationEase
+          ease: animationEase,
+          delay
         });
 
         if (labels[i]) {
-          tl.to(
-            labels[i],
-            {
-              y: 0,
-              opacity: 1,
-              duration: animationDuration,
-              ease: 'power3.out'
-            },
-            `-=${animationDuration * 0.9}`
-          );
+          gsap.to(labels[i], {
+            y: 0,
+            opacity: 1,
+            duration: animationDuration,
+            ease: 'power3.out',
+            delay: delay + animationDuration * 0.1
+          });
         }
       });
     } else if (!isOpen && showOverlay) {
-      // Closing animation
-      killAllAnimations();
+      const bubbles = pillLinksRef.current.filter(Boolean);
+      const labels = labelRefs.current.filter(Boolean);
 
       // Hide backdrop
       gsap.to(backdrop, {
@@ -191,7 +119,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         }
       });
 
-      // Hide labels first
+      // Hide labels
       if (labels.length) {
         gsap.to(labels, {
           y: 24,
@@ -201,7 +129,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         });
       }
 
-      // Hide bubbles then overlay, then clear all styles
+      // Hide bubbles then overlay
       if (bubbles.length) {
         gsap.to(bubbles, {
           scale: 0,
@@ -209,45 +137,18 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           ease: 'power3.in',
           onComplete: () => {
             gsap.set(overlay, { display: 'none', visibility: 'hidden' });
-            // Clear all GSAP inline styles after animation completes
-            clearAllStyles();
+            // Clear inline styles
+            bubbles.forEach(b => { if (b) gsap.set(b, { clearProps: 'all' }); });
+            labels.forEach(l => { if (l) gsap.set(l, { clearProps: 'all' }); });
             setShowOverlay(false);
           }
         });
       } else {
         gsap.set(overlay, { display: 'none', visibility: 'hidden' });
-        clearAllStyles();
         setShowOverlay(false);
       }
     }
-
-    // Cleanup on unmount
-    return () => {
-      killAllAnimations();
-      clearAllStyles();
-    };
-  }, [isOpen, showOverlay, animationDuration, animationEase, staggerDelay, killAllAnimations, clearAllStyles]);
-
-  // Handle resize for rotation on desktop
-  useEffect(() => {
-    const handleResize = () => {
-      if (isOpen) {
-        const bubbles = pillLinksRef.current.filter(Boolean);
-        const isDesktop = window.innerWidth >= 900;
-
-        bubbles.forEach((bubble, i) => {
-          const item = items[i];
-          if (bubble && item) {
-            const rotation = isDesktop ? (item.rotation ?? 0) : 0;
-            gsap.set(bubble, { rotation });
-          }
-        });
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [isOpen, items]);
+  }, [isOpen, showOverlay, animationDuration, animationEase, staggerDelay]);
 
   const toggleMenu = () => {
     const nextState = !isOpen;
@@ -304,7 +205,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         </div>
       </nav>
 
-      {/* Menu items - only in DOM when showOverlay is true */}
+      {/* Menu items */}
       {showOverlay && (
         <div
           ref={menuItemsRef}
