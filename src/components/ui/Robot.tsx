@@ -1,6 +1,26 @@
-import { Suspense, lazy, useState, useEffect, useRef } from 'react'
+import { Suspense, lazy, useState, useEffect, useRef, Component, ReactNode, ErrorInfo } from 'react'
 import type { Application } from '@splinetool/runtime'
 import { getDeviceCapabilities } from '@/utils/deviceCapabilities'
+
+// Error boundary to prevent Spline crashes from breaking the entire app
+class SplineErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode; fallback: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError(_: Error) {
+    return { hasError: true };
+  }
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Spline failed to load:', error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
 
 const Spline = lazy(() => import('@splinetool/react-spline'))
 
@@ -66,19 +86,30 @@ export default function Robot() {
   // Desktop or capable mobile: Show 3D Spline
   return (
     <div ref={containerRef} className="w-full h-full">
-      <Suspense
+      <SplineErrorBoundary
         fallback={
-          <div className="w-full h-full flex items-center justify-center bg-transparent">
-            <div className="w-full h-full bg-transparent"></div>
-          </div>
+          <img
+            src={ROBOT_FALLBACK_IMAGE}
+            alt="Robot BinkoO Digital Lab"
+            className="w-full h-full object-cover object-center"
+            loading="lazy"
+          />
         }
       >
-        <Spline
-          scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-          className={`w-full h-full transition-opacity duration-[600ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-          onLoad={onLoad}
-        />
-      </Suspense>
+        <Suspense
+          fallback={
+            <div className="w-full h-full flex items-center justify-center bg-transparent">
+              <div className="w-full h-full bg-transparent"></div>
+            </div>
+          }
+        >
+          <Spline
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            className={`w-full h-full transition-opacity duration-[600ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+            onLoad={onLoad}
+          />
+        </Suspense>
+      </SplineErrorBoundary>
     </div>
   )
 }

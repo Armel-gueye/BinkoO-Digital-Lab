@@ -329,28 +329,31 @@
   animation: scaleIn 0.6s ease-out forwards;
 }
 
-/* Pulsating Button Animation - Scale based for better mobile performance */
-@keyframes pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
+/* Pulsating Button Animation - Multiple rings with opacity only (no mobile bug) */
+@keyframes pulse-fade {
+
+  0%,
+  100% {
+    opacity: 0;
   }
 
   50% {
-    transform: scale(1.15);
-    /* ~16px expansion relative to button size */
-    opacity: 0.4;
-  }
-
-  100% {
-    transform: scale(1.3);
-    opacity: 0;
+    opacity: 0.5;
   }
 }
 
-.animate-pulse-ring {
-  animation: pulse-ring var(--duration, 2s) ease-in-out infinite;
-  will-change: transform, opacity;
+.animate-pulse-ring-1 {
+  animation: pulse-fade var(--duration, 2s) ease-in-out infinite;
+}
+
+.animate-pulse-ring-2 {
+  animation: pulse-fade var(--duration, 2s) ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.animate-pulse-ring-3 {
+  animation: pulse-fade var(--duration, 2s) ease-in-out infinite;
+  animation-delay: 0.6s;
 }
 
 /* Smooth scroll behavior */

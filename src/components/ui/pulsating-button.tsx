@@ -34,8 +34,16 @@ export function PulsatingButton({
         >
             <div className="relative z-10">{children}</div>
             <div
-                className="absolute inset-0 rounded-full animate-pulse-ring"
-                style={{ backgroundColor: pulseColor, zIndex: -1 }}
+                className="absolute rounded-full animate-pulse-ring-1"
+                style={{ backgroundColor: pulseColor, inset: '-4px', zIndex: -1 }}
+            />
+            <div
+                className="absolute rounded-full animate-pulse-ring-2"
+                style={{ backgroundColor: pulseColor, inset: '-8px', zIndex: -2 }}
+            />
+            <div
+                className="absolute rounded-full animate-pulse-ring-3"
+                style={{ backgroundColor: pulseColor, inset: '-12px', zIndex: -3 }}
             />
         </button>
     );
