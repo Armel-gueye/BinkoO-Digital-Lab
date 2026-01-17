@@ -66,13 +66,15 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           gsap.to(backdropRef.current, {
             autoAlpha: 1,
             duration: 0.3,
-            force3D: true
+            force3D: true,
+            lazy: true
           });
 
           // Show menu items
           gsap.to(menuItemsRef.current, {
             autoAlpha: 1,
-            duration: 0.1
+            duration: 0.1,
+            lazy: true
           });
 
           // Animate pills
@@ -88,7 +90,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               duration: animationDuration,
               ease: animationEase,
               stagger: staggerDelay,
-              force3D: true
+              force3D: true,
+              lazy: true
             }
           );
         });
@@ -96,7 +99,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         // Hide backdrop
         gsap.to(backdropRef.current, {
           autoAlpha: 0,
-          duration: 0.2
+          duration: 0.2,
+          lazy: true
         });
 
         // Hide pills
@@ -106,6 +110,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           duration: animationDuration * 0.6,
           ease: 'power2.in',
           stagger: staggerDelay * 0.5,
+          lazy: true,
           onComplete: () => {
             gsap.set(menuItemsRef.current, { autoAlpha: 0 });
           }
@@ -143,6 +148,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           position: 'fixed',
           overflow: 'hidden',
           transform: 'translateZ(0)', // Force GPU acceleration
+          WebkitBackdropFilter: 'blur(4px)', // Explicit Safari support
+          backfaceVisibility: 'hidden',
           willChange: 'opacity, visibility'
         }}
         onClick={() => setIsOpen(false)}
@@ -196,7 +203,10 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                       {
                         '--item-rot': `${item.rotation}deg`,
                         '--hover-bg': item.hoverStyles.bgColor,
-                        '--hover-color': item.hoverStyles.textColor
+                        '--hover-color': item.hoverStyles.textColor,
+                        willChange: 'transform, opacity',
+                        backfaceVisibility: 'hidden',
+                        transform: 'translateZ(0)'
                       } as React.CSSProperties
                     }
                     onClick={() => setIsOpen(false)}>

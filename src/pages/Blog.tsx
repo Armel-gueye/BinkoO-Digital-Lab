@@ -117,8 +117,8 @@ export default function Blog() {
           </div>
 
           {/* Decorative elements */}
-          <div className="absolute top-20 right-10 w-20 h-20 bg-primary/10 rounded-full blur-3xl" style={{ willChange: 'filter', isolation: 'isolate' }}></div>
-          <div className="absolute bottom-20 left-10 w-32 h-32 bg-red-500/10 rounded-full blur-3xl" style={{ willChange: 'filter', isolation: 'isolate' }}></div>
+          <div className="absolute top-20 right-10 w-20 h-20 bg-primary/10 rounded-full blur-3xl" style={{ willChange: 'filter', isolation: 'isolate', backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}></div>
+          <div className="absolute bottom-20 left-10 w-32 h-32 bg-red-500/10 rounded-full blur-3xl" style={{ willChange: 'filter', isolation: 'isolate', backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}></div>
         </section>
 
         {/* Latest Articles Section */}
