@@ -33,7 +33,7 @@ export default function Home() {
       <section className="relative w-full h-screen overflow-hidden">
         {/* Robot Model - DO NOT TOUCH POSITIONING */}
         <motion.div
-          className="absolute inset-0 flex items-center justify-center lg:inset-auto lg:bottom-0 lg:right-0 lg:w-1/2 lg:h-full lg:opacity-100 lg:items-end lg:justify-end lg:z-20"
+          className="absolute inset-0 flex items-center justify-center lg:inset-auto lg:bottom-0 lg:right-0 lg:w-1/2 lg:h-full opacity-100 lg:items-end lg:justify-end lg:z-20"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}>
