@@ -19,7 +19,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({
         loop
         playsInline
         poster={posterUrl}
-        className="w-full h-full object-cover scale-[1.45] transform-gpu"
+        className="w-full h-full object-cover scale-[1.55] transform-gpu"
         style={{ filter: 'brightness(1.05)' }}
         aria-hidden="true"
       >
