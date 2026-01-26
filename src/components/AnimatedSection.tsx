@@ -129,3 +129,59 @@ export const AnimatedImage: React.FC<AnimatedSectionProps> = ({
     </motion.div>
   );
 };
+
+// Container pour animer une liste d'éléments en cascade (Stagger)
+export const StaggerContainer: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  delayChildren?: number;
+  staggerChildren?: number;
+}> = ({ children, className = '', delayChildren = 0, staggerChildren = 0.1 }) => {
+  return (
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={{
+        hidden: {},
+        show: {
+          transition: {
+            delayChildren,
+            staggerChildren,
+          },
+        },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+// Élément enfant d'un StaggerContainer
+export const StaggerItem: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  variant?: 'fade-up' | 'fade-in' | 'scale-in';
+}> = ({ children, className = '', variant = 'fade-up' }) => {
+  const variants: any = {
+    'fade-up': {
+      hidden: { opacity: 0, y: 20 },
+      show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } },
+    },
+    'fade-in': {
+      hidden: { opacity: 0 },
+      show: { opacity: 1, transition: { duration: 0.5 } },
+    },
+    'scale-in': {
+      hidden: { opacity: 0, scale: 0.9 },
+      show: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 60, damping: 15 } },
+    },
+  };
+
+  return (
+    <motion.div className={className} variants={variants[variant]}>
+      {children}
+    </motion.div>
+  );
+};

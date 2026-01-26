@@ -400,3 +400,33 @@ img {
     overflow: visible;
   }
 }
+
+/* Stitch Hero Utilities - Moved from component to prevent FOUC */
+.writing-vertical-rl {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+.char-span {
+    display: inline-block;
+    white-space: pre;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #FF2B00;
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}

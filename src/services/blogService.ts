@@ -376,7 +376,7 @@ const mockArticles: BlogPost[] = [
  * Configuration de l'API WordPress (pour future connexion)
  */
 const WORDPRESS_API_CONFIG = {
-  baseUrl: process.env.VITE_WORDPRESS_URL || 'https://votre-site-wordpress.com',
+  baseUrl: import.meta.env.VITE_WORDPRESS_URL || 'https://votre-site-wordpress.com',
   endpoint: '/wp-json/wp/v2/posts',
   params: '_embed', // Inclut les featured media
 };

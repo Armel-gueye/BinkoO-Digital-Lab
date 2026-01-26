@@ -22,7 +22,7 @@ class SplineErrorBoundary extends Component<{ children: ReactNode; fallback: Rea
   }
 }
 
-const Spline = lazy(() => import('@splinetool/react-spline'))
+// const Spline = lazy(() => import('@splinetool/react-spline'))
 
 // Static fallback image for low-end mobile devices ONLY
 const ROBOT_FALLBACK_IMAGE = 'https://i.postimg.cc/c4SvwL8B/Capture-d-ecran-2026-01-03-134631-min.webp';
@@ -68,6 +68,8 @@ export default function Robot() {
     return <div ref={containerRef} className="w-full h-full bg-transparent"></div>;
   }
 
+  /* 
+  // COMMENTED OUT FOR PERFORMANCE (TRANSITION TO VIDEO)
   // Low-end mobile: Show static image
   if (showStatic) {
     return (
@@ -112,4 +114,17 @@ export default function Robot() {
       </SplineErrorBoundary>
     </div>
   )
+  */
+
+  // Fallback while component is used elsewhere during transition
+  return (
+    <div ref={containerRef} className="w-full h-full relative">
+      <img
+        src={ROBOT_FALLBACK_IMAGE}
+        alt="Robot BinkoO Digital Lab"
+        className="w-full h-full object-cover object-center opacity-100"
+        loading="lazy"
+      />
+    </div>
+  );
 }

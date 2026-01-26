@@ -17,6 +17,8 @@ import {
 
 
 
+import { getWhatsAppUrl } from '@/utils/whatsapp';
+
 export default function BlogArticle() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -232,7 +234,7 @@ export default function BlogArticle() {
                 Discutons de vos objectifs et découvrez comment nous pouvons vous aider
               </p>
               <a
-                href="https://api.whatsapp.com/send?phone=22644323841"
+                href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-white text-red-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors shadow-xl"

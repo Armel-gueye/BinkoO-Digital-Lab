@@ -2,14 +2,14 @@ import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Home, ArrowLeft } from "lucide-react";
+import { openWhatsApp } from "@/utils/whatsapp";
 
 const NotFound = () => {
   const location = useLocation();
 
   const handleWhatsAppClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    const whatsappUrl = 'https://api.whatsapp.com/send?phone=22644323841';
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    openWhatsApp();
   };
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const NotFound = () => {
             Page Introuvable
           </h2>
           <p className="font-inter text-muted-foreground leading-relaxed">
-            Oops ! La page que vous cherchez semble s'être volatilisée dans l'espace digital. 
+            Oops ! La page que vous cherchez semble s'être volatilisée dans l'espace digital.
             Retournons en terrain connu.
           </p>
         </div>
@@ -39,9 +39,9 @@ const NotFound = () => {
               Retour à l'accueil
             </Button>
           </Link>
-          <Button 
-            variant="outline" 
-            size="lg" 
+          <Button
+            variant="outline"
+            size="lg"
             onClick={() => window.history.back()}
             className="w-full sm:w-auto"
           >
@@ -52,9 +52,9 @@ const NotFound = () => {
 
         <div className="mt-12 pt-8 border-t border-border">
           <p className="font-inter text-sm text-muted-foreground">
-            Besoin d'aide ? 
-            <a 
-              href="#" 
+            Besoin d'aide ?
+            <a
+              href="#"
               onClick={handleWhatsAppClick}
               className="text-primary hover:underline ml-1"
             >

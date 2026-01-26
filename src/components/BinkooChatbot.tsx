@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const BinkooChatbot: React.FC = () => {
+  const location = useLocation();
+
   useEffect(() => {
+    // ... existing useEffect code ...
     // ========== CONFIGURATION ==========
     const WEBHOOK_URL = 'https://n8n.srv1090303.hstgr.cloud/webhook/d60df4a0-1428-4d3f-8e76-1ef0fb576c4d/chat';
     let sessionId: string | null = null;
@@ -19,7 +23,7 @@ export const BinkooChatbot: React.FC = () => {
 
     // ========== GESTION BULLES DE BIENVENUE ==========
     // Vérifier si les bulles ont déjà été affichées
-    const welcomeShown = localStorage.getItem('binkoo-welcome-shown');
+    const welcomeShown = localStorage.getItem('binkoo-welcome-shown-v2');
 
     if (welcomeShown === 'true') {
       // Les bulles ont déjà été affichées, les cacher immédiatement
@@ -28,7 +32,7 @@ export const BinkooChatbot: React.FC = () => {
       }
     } else {
       // Première visite : afficher les bulles et marquer comme affichées
-      localStorage.setItem('binkoo-welcome-shown', 'true');
+      localStorage.setItem('binkoo-welcome-shown-v2', 'true');
 
       // Les bulles s'affichent normalement via l'animation CSS
       setTimeout(hideWelcomeBubbles, 10000);
@@ -193,7 +197,7 @@ export const BinkooChatbot: React.FC = () => {
         #binkoo-welcome-bubbles {
             position: fixed;
             bottom: 100px;
-            right: 24px;
+            right: 40px; /* Aligned with new button position (md:right-10 = 40px) */
             z-index: 9997;
             display: flex;
             flex-direction: column;
@@ -249,7 +253,7 @@ export const BinkooChatbot: React.FC = () => {
             content: '';
             position: absolute;
             bottom: -8px;
-            right: 24px;
+            right: 28px; /* Adjusted to center over button */
             width: 0;
             height: 0;
             border-left: 8px solid transparent;
@@ -259,36 +263,9 @@ export const BinkooChatbot: React.FC = () => {
         }
 
         /* ========== BOUTON DE TOGGLE ========== */
-        #binkoo-chat-toggle {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 64px;
-            height: 64px;
-            background: var(--chatbot-primary);
-            border: none;
-            border-radius: var(--chatbot-radius);
-            cursor: pointer;
-            box-shadow: var(--chatbot-shadow);
-            z-index: 9998;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform var(--chatbot-transition), box-shadow var(--chatbot-transition);
-            animation: pulse 2s infinite;
-        }
-
-        #binkoo-chat-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(255, 42, 0, 0.4);
-        }
-
-        #binkoo-chat-toggle img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-
+        /* Styles moved to Tailwind classes on the element directly */
+        
+        /* Pulse animation keyframes still needed */
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -530,17 +507,7 @@ export const BinkooChatbot: React.FC = () => {
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
-            #binkoo-chat-toggle {
-                width: 56px;
-                height: 56px;
-                bottom: 20px;
-                right: 20px;
-            }
-
-            #binkoo-chat-toggle img {
-                width: 32px;
-                height: 32px;
-            }
+            /* #binkoo-chat-toggle styles removed in favor of Tailwind utility classes */
 
             #binkoo-chat-window {
                 width: calc(100vw - 32px);
@@ -572,10 +539,7 @@ export const BinkooChatbot: React.FC = () => {
                 border-radius: 0;
             }
 
-            #binkoo-chat-toggle {
-                bottom: 16px;
-                right: 16px;
-            }
+            /* #binkoo-chat-toggle styles removed */
 
             #binkoo-welcome-bubbles {
                 bottom: 84px;
@@ -605,8 +569,18 @@ export const BinkooChatbot: React.FC = () => {
       </div>
 
       {/* Bouton de toggle */}
-      <button id="binkoo-chat-toggle" aria-label="Ouvrir le chat">
-        <img src="https://i.postimg.cc/PrVrcGm4/IMG-2203-modified-min.png" alt="Bino" />
+      <button
+        id="binkoo-chat-toggle"
+        aria-label="Ouvrir le chat"
+        className={`fixed bottom-5 right-5 md:bottom-10 md:right-10 z-50 flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-full bg-primary text-white shadow-xl shadow-red-500/20 transition-all duration-300 hover:scale-110 focus:outline-none animate-fade-in group border-none ${location.pathname === '/' ? 'lg:hidden' : ''}`}
+        style={location.pathname === '/' && window.innerWidth >= 1024 ? { display: 'none' } : {}}
+      >
+        <div className="animate-wiggle w-full h-full flex items-center justify-center group-hover:animate-glow-pulse rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 0 24 24" width="32px" fill="currentColor">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
+          </svg>
+        </div>
       </button>
 
       {/* Fenêtre de chat */}
