@@ -80,11 +80,9 @@ export default {
         "fade-in": {
           "0%": {
             opacity: "0",
-            transform: "translateY(20px)",
           },
           "100%": {
             opacity: "1",
-            transform: "translateY(0)",
           },
         },
         "slide-up": {
@@ -97,12 +95,56 @@ export default {
             transform: "translateY(0)",
           },
         },
+        // Stitch Animations
+        letterReveal: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        revealUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        breathing: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.04)' },
+        },
+        wiggle: {
+          '0%, 85%, 100%': { transform: 'rotate(0deg)' },
+          '87%': { transform: 'rotate(15deg)' },
+          '90%': { transform: 'rotate(-15deg)' },
+          '93%': { transform: 'rotate(10deg)' },
+          '96%': { transform: 'rotate(-10deg)' },
+        },
+        glowPulse: {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(255, 43, 0, 0.4)' },
+          '50%': { boxShadow: '0 0 20px 10px rgba(255, 43, 0, 0)' },
+        },
+        navReveal: {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+        "fade-in": "fade-in 1s ease-out both",
         "slide-up": "slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+        // Stitch Animations
+        'letter': 'letterReveal 0.6s cubic-bezier(0.2, 0.65, 0.3, 0.9) both',
+        'reveal-up': 'revealUp 0.8s cubic-bezier(0.2, 0.65, 0.3, 0.9) both',
+        'scale-in': 'scaleIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'breathing': 'breathing 3s ease-in-out infinite',
+        'wiggle': 'wiggle 4s ease-in-out infinite',
+        'glow-pulse': 'glowPulse 2s infinite',
+        'nav-reveal': 'navReveal 0.8s ease-out 1.2s both',
       },
     },
   },

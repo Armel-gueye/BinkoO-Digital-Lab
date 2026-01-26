@@ -4,21 +4,22 @@ import { PulsatingButton } from '@/components/ui/pulsating-button';
 import { GetStartedButton } from '@/components/ui/get-started-button';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import { VelocityScroll } from '@/components/ui/scroll-based-velocity';
-import { HeroVisual } from '@/components/ui/HeroVisual';
+import { StitchHero as HeroVisual } from '@/components/ui/StitchHero';
+// import { HeroVisual as HeroVisualOriginal } from '@/components/ui/HeroVisual';
 // import Robot from '@/components/ui/Robot';
 import TiltedCard from '@/components/ui/TiltedCard';
 import { motion } from 'framer-motion';
-import { AnimatedSection, AnimatedParagraph, AnimatedImage } from '@/components/AnimatedSection';
+import { AnimatedSection, AnimatedParagraph, AnimatedImage, StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import { Contact2 } from '@/components/Contact2';
 import { LazyLottieIframe } from '@/components/ui/LazyLottieIframe';
 import SEO from '@/components/SEO';
 
-export default function Home() {
-  const whatsappUrl = 'https://api.whatsapp.com/send?phone=22644323841';
+import { openWhatsApp } from '@/utils/whatsapp';
 
+export default function Home() {
   const handleWhatsAppClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    openWhatsApp();
   };
 
   return <>
@@ -29,19 +30,23 @@ export default function Home() {
       keywords="agence digitale Burkina Faso, automatisation IA, création site web Bobo-Dioulasso, design graphique, chatbot WhatsApp, BinkoO"
     />
     <div className="min-h-screen bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="relative w-full h-screen overflow-hidden bg-white">
-        {/* Hero Visual - Interactive animated orbs */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center lg:inset-auto lg:bottom-0 lg:right-0 lg:w-1/2 lg:h-full lg:items-end lg:justify-end lg:z-20"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}>
-          <HeroVisual />
-        </motion.div>
+      {/* Desktop Hero - Google Stitch Version */}
+      <div className="hidden lg:block relative w-full h-screen overflow-hidden">
+        <HeroVisual />
+      </div>
 
-        {/* White overlay for mobile and tablet readability only */}
-        <div className="absolute inset-0 bg-white/70 lg:bg-transparent lg:pointer-events-none z-5"></div>
+      {/* Mobile/Tablet Hero - Original Version */}
+      <section className="lg:hidden relative w-full h-screen overflow-hidden bg-white">
+        {/* Hero Visual - Static Image with Overlay */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <img
+            src="/assets/mobile-hero.webp"
+            alt="Background"
+            className="w-full h-full object-cover"
+          />
+          {/* Light white backdrop overlay */}
+          <div className="absolute inset-0 bg-white/80"></div>
+        </div>
 
         {/* Vertical Text on the Left */}
         <motion.div
@@ -81,9 +86,9 @@ export default function Home() {
             {/* Mobile CTA (visible only on small screens) */}
             <div className="lg:hidden">
               <a href="#" onClick={handleWhatsAppClick}>
-                <PulsatingButton>
-                  Devis Gratuit
-                </PulsatingButton>
+                <button className="group relative flex h-14 min-w-[180px] cursor-pointer items-center justify-center overflow-hidden bg-primary px-8 text-white transition-all hover:bg-red-700 rounded-full shadow-lg shadow-red-500/20 animate-breathing border-none">
+                  <span className="relative z-10 text-sm font-bold uppercase tracking-widest text-white">Devis Gratuit</span>
+                </button>
               </a>
             </div>
             {/* Desktop CTA (visible only on large screens) - Moved here below the text */}
@@ -226,16 +231,16 @@ export default function Home() {
                           Intégrez l'intelligence artificielle dans vos processus métier. De l'automatisation des workflows à l'implémentation de systèmes IA personnalisés, nous vous aidons à gagner en efficacité.
                         </p>
                       </AnimatedParagraph>
-                      <ul className="space-y-3 md:space-y-4">
+                      <StaggerContainer className="space-y-3 md:space-y-4" staggerChildren={0.1}>
                         {['Chatbots et assistants virtuels intelligents', 'Automatisation de processus et workflows', 'Solutions IA sur mesure pour votre métier'].map((item, idx) => (
-                          <AnimatedParagraph key={idx} delay={0.4 + idx * 0.1}>
+                          <StaggerItem key={idx} variant="fade-up">
                             <li className="flex items-start gap-3">
                               <Check className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                               <span className="text-sm md:text-base">{item}</span>
                             </li>
-                          </AnimatedParagraph>
+                          </StaggerItem>
                         ))}
-                      </ul>
+                      </StaggerContainer>
                       <div className="flex justify-end pt-4 md:pt-5">
                         <Link to="/services">
                           <GetStartedButton />
@@ -263,16 +268,16 @@ export default function Home() {
                           Nous créons des sites web modernes, des landing pages optimisées et des applications web performantes qui captivent vos utilisateurs et génèrent des résultats concrets.
                         </p>
                       </AnimatedParagraph>
-                      <ul className="space-y-3 md:space-y-4">
+                      <StaggerContainer className="space-y-3 md:space-y-4" staggerChildren={0.1}>
                         {['Landing pages et portfolios professionnels', 'Sites web haute conversion', 'Applications web et SAAS'].map((item, idx) => (
-                          <AnimatedParagraph key={idx} delay={0.4 + idx * 0.1}>
+                          <StaggerItem key={idx} variant="fade-up">
                             <li className="flex items-start gap-3">
                               <Check className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                               <span className="text-sm md:text-base">{item}</span>
                             </li>
-                          </AnimatedParagraph>
+                          </StaggerItem>
                         ))}
-                      </ul>
+                      </StaggerContainer>
                       <div className="flex justify-end pt-4 md:pt-5">
                         <Link to="/services">
                           <GetStartedButton />
@@ -324,16 +329,16 @@ export default function Home() {
                           Des designs créatifs et impactants qui donnent vie à votre marque. De l'identité visuelle complète aux assets digitaux, nous créons des visuels qui marquent les esprits.
                         </p>
                       </AnimatedParagraph>
-                      <ul className="space-y-3 md:space-y-4">
+                      <StaggerContainer className="space-y-3 md:space-y-4" staggerChildren={0.1}>
                         {['Identité visuelle et branding complet', 'Design graphique et illustrations', 'Assets digitaux pour tous supports'].map((item, idx) => (
-                          <AnimatedParagraph key={idx} delay={0.4 + idx * 0.1}>
+                          <StaggerItem key={idx} variant="fade-up">
                             <li className="flex items-start gap-3">
                               <Check className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                               <span className="text-sm md:text-base">{item}</span>
                             </li>
-                          </AnimatedParagraph>
+                          </StaggerItem>
                         ))}
-                      </ul>
+                      </StaggerContainer>
                       <div className="flex justify-end pt-4 md:pt-5">
                         <Link to="/services">
                           <GetStartedButton />
@@ -391,16 +396,16 @@ export default function Home() {
                     BinkoO Digital Lab est née d'une passion pour l'innovation digitale. Nous mettons notre expertise au service de votre croissance avec une approche personnalisée et des solutions qui génèrent des résultats concrets.
                   </p>
                 </AnimatedParagraph>
-                <ul className="space-y-3 md:space-y-4">
+                <StaggerContainer className="space-y-3 md:space-y-4" staggerChildren={0.1}>
                   {['Une équipe passionnée et réactive à votre écoute', 'Des solutions sur mesure adaptées à votre budget', 'Technologies de pointe et innovation constante'].map((item, idx) => (
-                    <AnimatedParagraph key={idx} delay={0.4 + idx * 0.1}>
+                    <StaggerItem key={idx} variant="fade-up">
                       <li className="flex items-start gap-3">
                         <Check className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                         <span className="text-sm md:text-base">{item}</span>
                       </li>
-                    </AnimatedParagraph>
+                    </StaggerItem>
                   ))}
-                </ul>
+                </StaggerContainer>
                 <div className="pt-3 md:pt-4">
                   <Link to="/a-propos">
                     <InteractiveHoverButton text="En Savoir Plus" />

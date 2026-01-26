@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Sparkles, Palette, Globe, Check, ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import { LottiePlayer } from '@/components/ui/LottiePlayer';
 import {
   Collapsible,
@@ -10,8 +10,9 @@ import {
   "@/components/ui/collapsible";
 import { motion } from 'framer-motion';
 import { Highlighter } from '@/components/ui/highlighter';
-import { AnimatedSection, AnimatedParagraph, AnimatedImage } from '@/components/AnimatedSection';
+import { AnimatedSection, AnimatedParagraph, AnimatedImage, StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import { Contact2 } from '@/components/Contact2';
+import { openWhatsApp } from '@/utils/whatsapp';
 import SEO from '@/components/SEO';
 
 const Services: React.FC = () => {
@@ -19,8 +20,7 @@ const Services: React.FC = () => {
 
   const handleWhatsAppClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    const whatsappUrl = 'https://api.whatsapp.com/send?phone=22644323841';
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    openWhatsApp();
   };
 
   const toggleItem = (index: number) => {
@@ -154,9 +154,9 @@ const Services: React.FC = () => {
                       <h3 className="font-semibold text-base md:text-lg">
                         Ce que nous proposons :
                       </h3>
-                      <ul className="space-y-2.5 md:space-y-3">
+                      <StaggerContainer className="space-y-2.5 md:space-y-3" staggerChildren={0.08}>
                         {service.features.map((feature, featureIndex) =>
-                          <AnimatedParagraph key={featureIndex} delay={0.4 + featureIndex * 0.05}>
+                          <StaggerItem key={featureIndex} variant="fade-up">
                             <li className="flex items-start gap-3">
                               <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                               <span className="text-sm md:text-base text-muted-foreground !whitespace-pre-line">
@@ -173,13 +173,13 @@ const Services: React.FC = () => {
                                 )}
                               </span>
                             </li>
-                          </AnimatedParagraph>
+                          </StaggerItem>
                         )}
-                      </ul>
+                      </StaggerContainer>
                     </div>
 
                     <Collapsible open={openItems.includes(index)} onOpenChange={() => toggleItem(index)} className="pt-4 md:pt-5">
-                      <CollapsibleContent className="mb-4">
+                      <CollapsibleContent className="mb-4 overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
                         <div className="bg-muted/50 rounded-lg p-5 md:p-6">
                           <p className="text-[15px] md:text-[17px] leading-relaxed text-muted-foreground">
                             {service.detailedText}

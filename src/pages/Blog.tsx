@@ -14,6 +14,7 @@ import {
   getMonthFromDate
 } from '@/services/blogService';
 import SEO from '@/components/SEO';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
 
 // Les interfaces et helpers sont maintenant dans blogService.ts
 
@@ -344,7 +345,7 @@ export default function Blog() {
                   Discutons de votre projet et découvrez comment nous pouvons vous aider à atteindre vos objectifs
                 </p>
                 <a
-                  href="https://api.whatsapp.com/send?phone=22644323841"
+                  href={getWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center bg-white text-red-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-xl hover:shadow-2xl hover:scale-105 transform duration-300"

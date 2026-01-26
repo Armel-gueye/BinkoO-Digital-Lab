@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/collapsible";
 import { motion } from 'framer-motion';
 import { AnimatedSection, AnimatedParagraph, AnimatedImage } from '@/components/AnimatedSection';
+import { openWhatsApp } from '@/utils/whatsapp';
 import SEO from '@/components/SEO';
 
 const Realisations: React.FC = () => {
@@ -17,8 +18,7 @@ const Realisations: React.FC = () => {
 
   const handleWhatsAppClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    const whatsappUrl = 'https://api.whatsapp.com/send?phone=22644323841';
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    openWhatsApp();
   };
 
   const binkooImages = [
@@ -188,7 +188,7 @@ const Realisations: React.FC = () => {
                               <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${expandedProject === index ? 'rotate-180' : ''}`} />
                             </Button>
                           </CollapsibleTrigger>
-                          <CollapsibleContent className="mt-4">
+                          <CollapsibleContent className="mt-4 overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
                             <div className="bg-muted/50 rounded-lg p-4 md:p-5">
                               <p className="text-[15px] md:text-[17px] text-muted-foreground leading-relaxed">
                                 {project.detailedText}

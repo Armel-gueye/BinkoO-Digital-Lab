@@ -3,6 +3,7 @@ import React from 'react';
 import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { Facebook, Instagram, Linkedin, MessageSquare, LucideIcon } from 'lucide-react';
+import { openWhatsApp } from '@/utils/whatsapp';
 
 // Custom TikTok Icon Component
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -54,7 +55,7 @@ const footerLinks: FooterSection[] = [
   {
     label: 'Contact',
     links: [
-      { title: 'WhatsApp', href: 'https://api.whatsapp.com/send?phone=22644323841' },
+      { title: 'WhatsApp', href: 'whatsapp' },
       { title: '+226 44 32 38 41', href: 'tel:+22644323841' },
       { title: 'binkoodigitallab@gmail.com', href: 'mailto:binkoodigitallab@gmail.com' }]
 
@@ -62,6 +63,11 @@ const footerLinks: FooterSection[] = [
 
 
 export function Footer() {
+  const handleWhatsAppClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    openWhatsApp();
+  };
+
   return (
     <footer className="md:rounded-t-6xl relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center rounded-t-4xl border-t bg-[radial-gradient(35%_128px_at_50%_0%,theme(backgroundColor.white/8%),transparent)] px-6 py-12 lg:py-16">
       <div className="bg-foreground/20 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur" />
