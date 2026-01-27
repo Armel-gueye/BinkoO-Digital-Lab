@@ -28,7 +28,6 @@ interface ContactFormBody {
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting check
     const ip = request.headers.get('x-forwarded-for') || 'unknown';
     if (isRateLimited(ip)) {
       return NextResponse.json(
@@ -37,11 +36,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Parse request body
     const body: ContactFormBody = await request.json();
     const { firstname, lastname, email, message, subject } = body;
 
-    // Validate input
     if (!firstname || !lastname || !email || !message) {
       return NextResponse.json(
         { error: 'Missing required fields: firstname, lastname, email, message' },
@@ -49,7 +46,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Sanitize input to prevent injection
     const sanitizedFirstname = String(firstname).slice(0, 100);
     const sanitizedLastname = String(lastname).slice(0, 100);
     const sanitizedEmail = String(email).slice(0, 255);
@@ -58,7 +54,6 @@ export async function POST(request: NextRequest) {
 
     const fullName = `${sanitizedFirstname} ${sanitizedLastname}`;
 
-    // Create HTML email template
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
         <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
@@ -93,7 +88,6 @@ export async function POST(request: NextRequest) {
       </div>
     `;
 
-    // Send email to site owner
     const result = await sendEmail({
       to: 'Binkoodigitallab@gmail.com',
       subject: sanitizedSubject || `Nouvelle demande de contact: ${fullName}`,
@@ -108,7 +102,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send confirmation email to user
     const confirmationHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
         <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
@@ -149,9 +142,7 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error('API error:', errorMessage);
-
+    // Erreur silencieuse
     return NextResponse.json(
       { error: 'Internal server error. Please try again later.' },
       { status: 500 }

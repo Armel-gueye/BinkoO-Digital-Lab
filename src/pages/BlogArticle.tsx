@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import SEO from '@/components/SEO';
 import {
   getPostById,
   type BlogPost,
@@ -12,22 +13,15 @@ import {
   getFeaturedImage,
   getMonthFromDate
 } from '@/services/blogService';
-
-// Les interfaces et helpers sont maintenant dans blogService.ts
-
-
-
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 
 export default function BlogArticle() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // État pour l'article (chargé depuis le service)
   const [article, setArticle] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Charger l'article au montage et au changement d'ID
   useEffect(() => {
     const loadArticle = async () => {
       if (!id) return;
@@ -37,7 +31,6 @@ export default function BlogArticle() {
         const post = await getPostById(Number(id));
         setArticle(post);
       } catch (error) {
-        console.error('Erreur lors du chargement de l\'article:', error);
       } finally {
         setIsLoading(false);
       }
@@ -46,12 +39,10 @@ export default function BlogArticle() {
     loadArticle();
   }, [id]);
 
-  // Scroll to top on article change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  // Affichage pendant le chargement
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -76,13 +67,13 @@ export default function BlogArticle() {
     );
   }
 
-  // Extraction données WordPress
   const articleTitle = extractText(article.title);
   const articleContent = extractText(article.content);
   const articleExcerpt = stripHtmlTags(extractText(article.excerpt));
   const articleImage = getFeaturedImage(article);
   const articleMonth = article.month || getMonthFromDate(article.date);
   const articleReadTime = article.readTime || calculateReadTime(articleContent);
+  const canonicalUrl = `https://binkoo.digital/blog/${article.slug || id}`;
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -101,19 +92,15 @@ export default function BlogArticle() {
     };
 
     try {
-      // Try native share API first
       if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
         await navigator.share(shareData);
         toast.success('Partagé avec succès !');
       } else {
-        // Fallback: copy to clipboard
         await navigator.clipboard.writeText(window.location.href);
         toast.success('Lien copié dans le presse-papiers !');
       }
     } catch (error: any) {
-      // If share was cancelled or failed, try clipboard as fallback
       if (error.name === 'AbortError') {
-        // User cancelled the share, do nothing
         return;
       }
 
@@ -127,8 +114,15 @@ export default function BlogArticle() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Image */}
+    <>
+      <SEO
+        title={articleTitle}
+        description={articleExcerpt}
+        canonical={canonicalUrl}
+        ogImage={articleImage}
+        ogType="article"
+      />
+      <div className="min-h-screen bg-background">
       <div className="relative h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden">
         <img
           src={articleImage}
@@ -137,7 +131,6 @@ export default function BlogArticle() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
 
-        {/* Back Button */}
         <motion.button
           onClick={() => navigate('/blog')}
           className="absolute top-6 left-6 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white transition-colors shadow-lg"
@@ -149,7 +142,6 @@ export default function BlogArticle() {
           <span className="font-semibold text-sm">Retour au blog</span>
         </motion.button>
 
-        {/* Title Overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 lg:p-16">
           <div className="container-fluid">
             <motion.div
@@ -179,7 +171,6 @@ export default function BlogArticle() {
         </div>
       </div>
 
-      {/* Article Content - Support blocs WordPress */}
       <div className="py-12 md:py-16 lg:py-20">
         <div className="container-fluid">
           <div className="max-w-3xl mx-auto">
@@ -199,7 +190,6 @@ export default function BlogArticle() {
               }}
             />
 
-            {/* Share Section */}
             <motion.div
               className="mt-12 pt-8 border-t border-border"
               initial={{ opacity: 0, y: 20 }}
@@ -220,7 +210,6 @@ export default function BlogArticle() {
               </div>
             </motion.div>
 
-            {/* CTA WhatsApp Section - Positionné après contenu */}
             <motion.div
               className="mt-16 bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 md:p-12 text-center text-white"
               initial={{ opacity: 0, y: 30 }}
@@ -244,7 +233,6 @@ export default function BlogArticle() {
               </a>
             </motion.div>
 
-            {/* Back to Blog Link */}
             <motion.div
               className="mt-12 text-center"
               initial={{ opacity: 0 }}
@@ -262,6 +250,6 @@ export default function BlogArticle() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

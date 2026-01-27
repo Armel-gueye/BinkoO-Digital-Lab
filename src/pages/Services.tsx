@@ -80,12 +80,11 @@ const Services: React.FC = () => {
       <SEO
         title="Nos Services : Agents IA, Sites Web SAAS & Branding - BinkoO"
         description="Découvrez nos solutions : Chatbots intelligents, sites e-commerce connectés WhatsApp, applications SAAS et identité visuelle complète. L'IA concrète pour votre croissance."
-        canonical="https://binkoodigitallab.com/services"
+        canonical="https://binkoo.digital/services"
         keywords="agent IA prospection, scraping données, création application web, logo entreprise, automatisation workflows, site vitrine, SAAS"
       />
       <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
           <AnimatedSection animation="fade-up">
             <motion.div
               className="text-center mb-12 md:mb-16"
@@ -203,7 +202,6 @@ const Services: React.FC = () => {
             )}
           </div>
 
-          {/* Call to Action */}
           <AnimatedSection animation="fade-up">
             <motion.div
               className="mt-20 md:mt-24 text-center p-8 md:p-10 lg:p-12 rounded-xl"
@@ -223,7 +221,6 @@ const Services: React.FC = () => {
             </motion.div>
           </AnimatedSection>
         </div>
-        {/* Contact2 - Juste au-dessus du Footer */}
         <Contact2
           title="Prêt à Débloquer Votre Potentiel ?"
           description="Chaque service proposé est une étape vers plus d'efficacité. Expliquez-nous où vous voulez exceller, et nous construirons la solution digitale."

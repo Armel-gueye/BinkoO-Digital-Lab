@@ -18,7 +18,7 @@ export const Contact2 = ({
   description = "Le digital est notre passion. Nous sommes prêts à discuter de vos défis et à transformer vos processus. Décrivez-nous votre besoin !",
   phone = "+226 44 32 38 41",
   email = "Binkoodigitallab@gmail.com",
-  web = { label: "BinkoO Digital Lab", url: "https://binkoodigitallab.com" },
+  web = { label: "BinkoO Digital Lab", url: "https://binkoo.digital" },
 }: Contact2Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -45,7 +45,6 @@ export const Contact2 = ({
         toast.error(data.message || "Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
       }
     } catch (error) {
-      console.error("Erreur d'envoi:", error);
       toast.error("Erreur serveur. Veuillez réessayer plus tard ou nous contacter directement par email.");
     } finally {
       setIsSubmitting(false);
@@ -88,10 +87,8 @@ export const Contact2 = ({
             </div>
           </div>
           <form onSubmit={handleSubmit} className="mx-auto flex max-w-screen-md flex-col gap-6 rounded-lg border p-10">
-            {/* Web3Forms Access Key - Required hidden field */}
             <input type="hidden" name="access_key" value="55a2547a-7b37-417e-8044-1a73722325ea" />
             
-            {/* Custom subject line for Web3Forms */}
             <input type="hidden" name="_subject" value="Nouvelle demande de contact - BinkoO Digital Lab" />
             
             <div className="flex gap-4">

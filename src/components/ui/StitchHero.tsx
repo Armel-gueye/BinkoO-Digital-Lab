@@ -11,7 +11,6 @@ export const StitchHero: React.FC = () => {
         openWhatsApp();
     };
 
-    // Magnetic effect for the button
     useEffect(() => {
         const btn = btnRef.current;
         if (!btn) return;
@@ -38,13 +37,11 @@ export const StitchHero: React.FC = () => {
         };
     }, []);
 
-    // Chatbot trigger logic
     const handleChatClick = () => {
         const chatWindow = document.getElementById('binkoo-chat-window');
         if (chatWindow) {
             chatWindow.classList.toggle('active');
 
-            // Focus input if not mobile
             const isMobile = window.matchMedia('(max-width: 768px)').matches;
             if (!isMobile) {
                 setTimeout(() => {
@@ -57,7 +54,6 @@ export const StitchHero: React.FC = () => {
 
     return (
         <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-white dark:bg-[#0a0a0a] font-slab lg:text-left text-left">
-            {/* Header / Navigation - Desktop specific */}
             <header className="absolute top-0 left-0 w-full z-50 animate-fade-in" style={{ animationDelay: '100ms' }}>
                 <div className="mx-auto w-full px-8 py-8 md:px-16 md:py-10">
                     <div className="flex items-center justify-between">
@@ -72,6 +68,7 @@ export const StitchHero: React.FC = () => {
 
                         <nav className="hidden lg:flex items-center gap-8 xl:gap-12 animate-nav-reveal">
                             <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/">Accueil</Link>
+
                             <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/services">Services</Link>
                             <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/blog">Blog</Link>
                             <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/realisations">Portfolio</Link>
@@ -79,7 +76,6 @@ export const StitchHero: React.FC = () => {
                             <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/contact">Contact</Link>
                         </nav>
 
-                        {/* Mobile menu button hidden on desktop as this component is mostly for desktop override but keeping structure */}
                         <button className="lg:hidden p-2 text-black dark:text-white">
                             <span className="material-symbols-outlined">menu</span>
                         </button>
@@ -178,9 +174,6 @@ export const StitchHero: React.FC = () => {
                     </svg>
                 </div>
             </button>
-
-            {/* Styles moved to index.css to prevent FOUC */}
-            {/* Fonts are already imported in index.html, but keeping links just in case if not present there, though usually better in index.html */}
         </div>
     );
 };

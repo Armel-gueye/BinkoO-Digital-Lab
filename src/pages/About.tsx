@@ -107,12 +107,11 @@ const About: React.FC = () => {
       <SEO
         title="À Propos - BinkoO Digital Lab"
         description="Découvrez BinkoO Digital Lab, votre agence digitale au Burkina Faso. Notre histoire, nos valeurs, notre équipe et notre mission : rendre la technologie accessible à tous."
-        canonical="https://binkoodigitallab.com/a-propos"
+        canonical="https://binkoo.digital/a-propos"
         keywords="à propos BinkoO, agence digitale Burkina Faso, histoire BinkoO, équipe, valeurs, mission, Bobo-Dioulasso"
       />
       <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
           <AnimatedSection animation="fade-up">
             <motion.div
               className="text-center mb-12 md:mb-16"
@@ -131,7 +130,6 @@ const About: React.FC = () => {
             </motion.div>
           </AnimatedSection>
 
-          {/* Main Story with Values Carousel */}
           <AnimatedSection animation="fade-up" delay={0.1}>
             <motion.div
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 mb-16 md:mb-20"
@@ -191,7 +189,6 @@ const About: React.FC = () => {
                 </StaggerContainer>
               </div>
 
-              {/* Values Carousel - Replaces the red card */}
               <AnimatedImage delay={0.3}>
                 <div className="flex items-center justify-center">
                   <div className="w-full max-w-md">
@@ -213,7 +210,6 @@ const About: React.FC = () => {
             </motion.div>
           </AnimatedSection>
 
-          {/* Lottie Animation */}
           <AnimatedImage delay={0.1}>
             <motion.div
               className="mb-12 md:mb-16 flex justify-center"
@@ -228,7 +224,6 @@ const About: React.FC = () => {
             </motion.div>
           </AnimatedImage>
 
-          {/* Mission */}
           <AnimatedSection animation="fade-up">
             <motion.div
               className="mb-16 md:mb-20"
@@ -253,7 +248,6 @@ const About: React.FC = () => {
             </motion.div>
           </AnimatedSection>
 
-          {/* Pourquoi Nous Faire Confiance - MOVED BEFORE Testimonials */}
           <AnimatedImage delay={0.1}>
             <motion.div
               className="mb-12 md:mb-16 flex justify-center"
@@ -300,7 +294,6 @@ const About: React.FC = () => {
             </motion.div>
           </AnimatedSection>
 
-          {/* Testimonials - MOVED AFTER Pourquoi Nous Faire Confiance */}
           <AnimatedSection animation="fade-up">
             <div className="mb-16 md:mb-20">
               <motion.div
@@ -339,7 +332,6 @@ const About: React.FC = () => {
                   </div>
                 </InteractiveCard>
 
-                {/* Navigation */}
                 <div className="flex items-center justify-center mt-6 space-x-4">
                   <button
                     onClick={prevTestimonial}
@@ -370,7 +362,6 @@ const About: React.FC = () => {
             </div>
           </AnimatedSection>
 
-          {/* Notre Engagement */}
           <AnimatedSection animation="fade-up">
             <motion.div
               className="mt-16 md:mt-20"
@@ -405,7 +396,6 @@ const About: React.FC = () => {
             </motion.div>
           </AnimatedSection>
 
-          {/* Call to Action */}
           <AnimatedSection animation="fade-up">
             <motion.div
               className="mt-20 md:mt-24 text-center"
@@ -414,31 +404,13 @@ const About: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}>
 
-              <h2 className="text-3xl md:text-4xl font-bold mb-5 md:mb-6 !whitespace-pre-line">Rejoignez l'Aventure
-
-              </h2>
-              <AnimatedParagraph delay={0.2}>
-                <p className="text-base md:text-lg text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed">
-                  Prêt à transformer votre vision en réalité digitale ?
-                  Contactez-nous et découvrons ensemble les possibilités infinies.
-                </p>
-              </AnimatedParagraph>
-              <a
-                href="#"
-                onClick={handleWhatsAppClick}>
-
-                <Button size="lg">
-                  Commençons à créer ensemble
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </a>
+              <h2 className="text-3xl md:text-4xl font-bold mb-5 md:mb-6 !whitespace-pre-line">Rejoignez l'Aventure</h2>
             </motion.div>
           </AnimatedSection>
         </div>
       </div>
     </>
   );
-
 };
 
 export default About;

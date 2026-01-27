@@ -147,8 +147,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           minHeight: '100dvh',
           position: 'fixed',
           overflow: 'hidden',
-          transform: 'translateZ(0)', // Force GPU acceleration
-          WebkitBackdropFilter: 'blur(4px)', // Explicit Safari support
+          transform: 'translateZ(0)',
+          WebkitBackdropFilter: 'blur(4px)',
           backfaceVisibility: 'hidden',
           willChange: 'opacity, visibility'
         }}
@@ -186,7 +186,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
         <ul className="pill-list">
           {items.map((item, index) => {
-            // Calculate column position
             const isEven = items.length % 2 === 0;
             const needsSpacer = !isEven && index === Math.floor(items.length / 2);
 

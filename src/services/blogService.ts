@@ -89,17 +89,8 @@ export const getMonthFromDate = (dateString: string): string => {
     .join(' ');
 };
 
-// ============================================
-// MOCK DATA - Compatible WordPress
-// ============================================
-
-/**
- * Données mock pour le développement
- * Structure identique à celle retournée par WordPress REST API
- * 
- * TODO: Remplacer par des appels API réels quand WordPress sera configuré
- */
-const mockArticles: BlogPost[] = [
+// Mock Data
+const MOCK_POSTS: BlogPost[] = [
   {
     id: 1,
     title: { rendered: "Comment l'IA transforme le marketing digital en 2026" },
@@ -385,14 +376,8 @@ const WORDPRESS_API_CONFIG = {
  * Récupère tous les articles
  * 
  * @returns Promise<BlogPost[]>
- * 
- * TODO: Implémenter l'appel API WordPress
- * const response = await fetch(`${WORDPRESS_API_CONFIG.baseUrl}${WORDPRESS_API_CONFIG.endpoint}?${WORDPRESS_API_CONFIG.params}`);
- * const data = await response.json();
- * return data as BlogPost[];
  */
 export const getPosts = async (): Promise<BlogPost[]> => {
-  // Simulation d'un délai réseau pour le réalisme
   await new Promise(resolve => setTimeout(resolve, 300));
 
   return mockArticles;
@@ -403,14 +388,8 @@ export const getPosts = async (): Promise<BlogPost[]> => {
  * 
  * @param id - ID de l'article
  * @returns Promise<BlogPost | null>
- * 
- * TODO: Implémenter l'appel API WordPress
- * const response = await fetch(`${WORDPRESS_API_CONFIG.baseUrl}${WORDPRESS_API_CONFIG.endpoint}/${id}?${WORDPRESS_API_CONFIG.params}`);
- * const data = await response.json();
- * return data as BlogPost;
  */
 export const getPostById = async (id: number): Promise<BlogPost | null> => {
-  // Simulation d'un délai réseau
   await new Promise(resolve => setTimeout(resolve, 200));
 
   return mockArticles.find(article => article.id === id) || null;

@@ -25,7 +25,6 @@ export const StitchNavbar: React.FC = () => {
                         <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/contact">Contact</Link>
                     </nav>
 
-                    {/* Placeholder for symmetry or future actions if needed */}
                     <div className="hidden lg:block w-6"></div>
                 </div>
             </div>

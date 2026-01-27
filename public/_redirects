@@ -1,1 +1,5 @@
+# Redirection du trafic de l'ancien domaine vers le nouveau
+https://binkoodigitallab.netlify.app/* https://binkoo.digital/:splat 301!
+
+# Règles SPA
 /*    /index.html   200

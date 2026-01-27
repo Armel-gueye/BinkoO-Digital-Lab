@@ -59,12 +59,10 @@ export function VelocityScroll({ text, default_velocity = 2, className }: Veloci
 
     const directionFactor = React.useRef<number>(1);
     useAnimationFrame((t, delta) => {
-      // Clamp delta to avoid huge jumps if frame drops (max 50ms per frame)
       const clampedDelta = Math.min(delta, 50);
       let moveBy = directionFactor.current * baseVelocity * (clampedDelta / 1000);
 
       const velocity = velocityFactor.get();
-      // Only change direction if the scroll event is significant enough (avoids jitter)
       if (velocity < -0.2) {
         directionFactor.current = -1;
       } else if (velocity > 0.2) {

@@ -1,8 +1,4 @@
 
-/**
- * Utility for handling WhatsApp communication with pre-filled messages
- */
-
 const WHATSAPP_NUMBER = '22644323841';
 
 const PREFILLED_MESSAGES = [
@@ -14,24 +10,15 @@ const PREFILLED_MESSAGES = [
     "Hello ! J'aimerais transformer mon business avec l'IA, pouvez-vous m'aider ?"
 ];
 
-/**
- * Returns a random pre-filled message
- */
 export const getRandomWhatsAppMessage = () => {
     return PREFILLED_MESSAGES[Math.floor(Math.random() * PREFILLED_MESSAGES.length)];
 };
 
-/**
- * Generates the WhatsApp URL with a random message
- */
 export const getWhatsAppUrl = () => {
     const message = getRandomWhatsAppMessage();
     return `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
 };
 
-/**
- * Opens WhatsApp in a new tab with a random message
- */
 export const openWhatsApp = () => {
     window.open(getWhatsAppUrl(), '_blank', 'noopener,noreferrer');
 };

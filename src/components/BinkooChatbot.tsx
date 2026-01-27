@@ -5,13 +5,10 @@ export const BinkooChatbot: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // ... existing useEffect code ...
-    // ========== CONFIGURATION ==========
     const WEBHOOK_URL = 'https://n8n.srv1090303.hstgr.cloud/webhook/d60df4a0-1428-4d3f-8e76-1ef0fb576c4d/chat';
     let sessionId: string | null = null;
     let isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-    // ========== ÉLÉMENTS DOM ==========
     const toggle = document.getElementById('binkoo-chat-toggle');
     const chatWindow = document.getElementById('binkoo-chat-window');
     const closeBtn = document.getElementById('binkoo-chat-close');
@@ -21,20 +18,14 @@ export const BinkooChatbot: React.FC = () => {
     const typing = document.querySelector('.chat-typing');
     const welcomeBubbles = document.getElementById('binkoo-welcome-bubbles');
 
-    // ========== GESTION BULLES DE BIENVENUE ==========
-    // Vérifier si les bulles ont déjà été affichées
     const welcomeShown = localStorage.getItem('binkoo-welcome-shown-v2');
 
     if (welcomeShown === 'true') {
-      // Les bulles ont déjà été affichées, les cacher immédiatement
       if (welcomeBubbles) {
         welcomeBubbles.style.display = 'none';
       }
     } else {
-      // Première visite : afficher les bulles et marquer comme affichées
       localStorage.setItem('binkoo-welcome-shown-v2', 'true');
-
-      // Les bulles s'affichent normalement via l'animation CSS
       setTimeout(hideWelcomeBubbles, 10000);
     }
 
@@ -63,7 +54,6 @@ export const BinkooChatbot: React.FC = () => {
       return sessionId;
     }
 
-    // ========== FONCTIONS UI ==========
     function toggleChat() {
       chatWindow?.classList.toggle('active');
 
@@ -106,7 +96,6 @@ export const BinkooChatbot: React.FC = () => {
       }
     }
 
-    // ========== ENVOI MESSAGE ==========
     async function sendMessage() {
       const message = input?.value.trim();
       if (!message) return;
@@ -142,7 +131,6 @@ export const BinkooChatbot: React.FC = () => {
           addMessage("Désolé, je n'ai pas pu traiter votre message. Essayez à nouveau.");
         }
       } catch (error) {
-        console.error('Erreur:', error);
         addMessage("Une erreur s'est produite. Veuillez réessayer.");
       } finally {
         setLoading(false);
@@ -170,7 +158,6 @@ export const BinkooChatbot: React.FC = () => {
       getSessionId();
     });
 
-    // Cleanup
     return () => {
       toggle?.removeEventListener('click', toggleChat);
       closeBtn?.removeEventListener('click', toggleChat);
@@ -182,7 +169,7 @@ export const BinkooChatbot: React.FC = () => {
     <>
       <style dangerouslySetInnerHTML={{
         __html: `
-        /* ========== VARIABLES CSS ========== */
+        /* Variables CSS */
         :root {
             --chatbot-primary: #FF2A00;
             --chatbot-white: #FFFFFF;
@@ -193,11 +180,10 @@ export const BinkooChatbot: React.FC = () => {
             --chatbot-transition: 0.3s ease;
         }
 
-        /* ========== BULLES DE BIENVENUE ========== */
         #binkoo-welcome-bubbles {
             position: fixed;
             bottom: 100px;
-            right: 40px; /* Aligned with new button position (md:right-10 = 40px) */
+            right: 40px;
             z-index: 9997;
             display: flex;
             flex-direction: column;
@@ -262,16 +248,11 @@ export const BinkooChatbot: React.FC = () => {
             filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
         }
 
-        /* ========== BOUTON DE TOGGLE ========== */
-        /* Styles moved to Tailwind classes on the element directly */
-        
-        /* Pulse animation keyframes still needed */
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
 
-        /* ========== FENÊTRE DE CHAT ========== */
         #binkoo-chat-window {
             position: fixed;
             bottom: 100px;
@@ -505,10 +486,7 @@ export const BinkooChatbot: React.FC = () => {
             cursor: not-allowed;
         }
 
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
-            /* #binkoo-chat-toggle styles removed in favor of Tailwind utility classes */
-
             #binkoo-chat-window {
                 width: calc(100vw - 32px);
                 height: calc(100vh - 120px);
@@ -538,8 +516,6 @@ export const BinkooChatbot: React.FC = () => {
                 right: 0;
                 border-radius: 0;
             }
-
-            /* #binkoo-chat-toggle styles removed */
 
             #binkoo-welcome-bubbles {
                 bottom: 84px;

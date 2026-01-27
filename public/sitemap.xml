@@ -8,7 +8,7 @@
 
   <!-- Page Accueil -->
   <url>
-    <loc>https://binkoodigitallab.com/</loc>
+    <loc>https://binkoo.digital/</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -16,7 +16,7 @@
 
   <!-- Page Services -->
   <url>
-    <loc>https://binkoodigitallab.com/services</loc>
+    <loc>https://binkoo.digital/services</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -24,7 +24,7 @@
 
   <!-- Page À Propos -->
   <url>
-    <loc>https://binkoodigitallab.com/a-propos</loc>
+    <loc>https://binkoo.digital/a-propos</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -32,7 +32,7 @@
 
   <!-- Page Réalisations -->
   <url>
-    <loc>https://binkoodigitallab.com/realisations</loc>
+    <loc>https://binkoo.digital/realisations</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -40,7 +40,7 @@
 
   <!-- Page Blog -->
   <url>
-    <loc>https://binkoodigitallab.com/blog</loc>
+    <loc>https://binkoo.digital/blog</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -48,7 +48,7 @@
 
   <!-- Page Contact -->
   <url>
-    <loc>https://binkoodigitallab.com/contact</loc>
+    <loc>https://binkoo.digital/contact</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

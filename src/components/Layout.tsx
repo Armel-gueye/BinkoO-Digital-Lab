@@ -43,7 +43,6 @@ const Layout: React.FC<{
       path: '/contact'
     }];
 
-    // Configuration pour BubbleMenu
     const bubbleMenuItems = [
       {
         label: 'accueil',
@@ -93,7 +92,6 @@ const Layout: React.FC<{
       const handleScroll = () => {
         const currentScrollY = window.scrollY;
 
-        // Cache le menu dès qu'on scroll (après seulement 5px)
         if (currentScrollY > 5) {
           setIsVisible(false);
         } else {
@@ -111,7 +109,6 @@ const Layout: React.FC<{
     }, [location.pathname]);
 
     return <div className="min-h-screen bg-background">
-      {/* BubbleMenu for Tablet and Mobile only */}
       <div className="lg:hidden">
         <BubbleMenu
           logo={<span style={{ fontWeight: 700, fontSize: '0.75rem', whiteSpace: 'nowrap' }}>BinkoO Digital Lab</span>}
@@ -126,14 +123,12 @@ const Layout: React.FC<{
         />
       </div>
 
-      {/* Desktop Navigation with StitchNavbar */}
       {!location.pathname.match(/^\/$/) && (
         <div className="hidden lg:block">
           <StitchNavbar />
         </div>
       )}
 
-      {/* Main Content with Page Transition */}
       <AnimatePresence mode="wait">
         <motion.main
           key={location.pathname}
@@ -147,10 +142,8 @@ const Layout: React.FC<{
         </motion.main>
       </AnimatePresence>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Chatbot - appears on all pages */}
       <BinkooChatbot />
     </div>;
   };

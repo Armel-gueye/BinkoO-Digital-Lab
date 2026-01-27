@@ -95,7 +95,7 @@ const Contact: React.FC = () => {
       <SEO
         title="Contactez l'Agence BinkoO - Bobo-Dioulasso"
         description="Contactez BinkoO Digital Lab à Bobo-Dioulasso. Nous sommes disponibles sur WhatsApp, téléphone et réseaux sociaux pour discuter de vos projets digitaux. Devis gratuit."
-        canonical="https://binkoodigitallab.com/contact"
+        canonical="https://binkoo.digital/contact"
         keywords="contact BinkoO, agence digitale Bobo-Dioulasso, devis gratuit, WhatsApp BinkoO, +226 44 32 38 41, Lafiabougou Secteur 20"
       />
       <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">

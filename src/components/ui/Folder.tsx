@@ -36,7 +36,6 @@ const Folder = ({ color = '#5227FF', size = 1, items = [], className = '' }: Fol
   const [open, setOpen] = useState(false);
   const [paperOffsets, setPaperOffsets] = useState(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })));
 
-  // Check if color is a gradient
   const isGradient = color.includes('gradient');
   const folderBackColor = isGradient ? color : darkenColor(color, 0.08);
   const paper1 = darkenColor('#ffffff', 0.1);

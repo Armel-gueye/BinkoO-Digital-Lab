@@ -13,7 +13,6 @@ const OrbitCard: React.FC<OrbitCardProps> = ({
 }) => {
   return (
     <div className={cn("relative rounded-2xl", className)}>
-      {/* Glowing shadow background with animation */}
       <div className="absolute inset-0 z-0 flex items-center justify-center rounded-2xl bg-background">
         <motion.div 
           className="absolute h-full w-full rounded-2xl bg-transparent"
@@ -36,7 +35,6 @@ const OrbitCard: React.FC<OrbitCardProps> = ({
         />
       </div>
 
-      {/* Card Content */}
       <div className="relative z-10 rounded-2xl bg-background">
         {children}
       </div>

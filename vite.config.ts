@@ -3,60 +3,6 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import nodemailer from "nodemailer";
 
-// Minimal plugin to log build-time and dev-time errors to console
-const logErrorsPlugin = () => ({
-  name: "log-errors-plugin",
-  transformIndexHtml() {
-    return {
-      tags: [
-        {
-          tag: "script",
-          injectTo: "head",
-          children: `(() => {
-            try {
-              const logOverlay = () => {
-                const el = document.querySelector('vite-error-overlay');
-                if (!el) return;
-                const root = (el.shadowRoot || el);
-                let text = '';
-                try { text = root.textContent || ''; } catch (_) {}
-                if (text && text.trim()) {
-                  const msg = text.trim();
-                  console.error('[Vite Overlay]', msg);
-                  try {
-                    if (window.parent && window.parent !== window) {
-                      window.parent.postMessage({
-                        type: 'ERROR_CAPTURED',
-                        error: {
-                          message: msg,
-                          stack: undefined,
-                          filename: undefined,
-                          lineno: undefined,
-                          colno: undefined,
-                          source: 'vite.overlay',
-                        },
-                        timestamp: Date.now(),
-                      }, '*');
-                    }
-                  } catch (_) {}
-                }
-              };
-
-              const obs = new MutationObserver(() => logOverlay());
-              obs.observe(document.documentElement, { childList: true, subtree: true });
-
-              window.addEventListener('DOMContentLoaded', logOverlay);
-              logOverlay();
-            } catch (e) {
-              console.warn('[Vite Overlay logger failed]', e);
-            }
-          })();`
-        }
-      ]
-    };
-  },
-});
-
 // In-memory rate limiter
 const requestsMap = new Map<string, number[]>();
 function isRateLimited(ip: string, maxRequests = 5, windowMs = 60_000) {
@@ -103,7 +49,6 @@ async function handleContactApi(req: any, res: any) {
   }
 
   try {
-    // Read JSON body
     const chunks: Buffer[] = [];
     await new Promise<void>((resolve, reject) => {
       req.on("data", (c: Buffer) => chunks.push(c));
@@ -159,7 +104,6 @@ async function handleContactApi(req: any, res: any) {
       </div>
     `;
 
-    // Send to site owner
     const adminInfo = await transporter.sendMail({
       from: process.env.SMTP_USER,
       to: "Binkoodigitallab@gmail.com",
@@ -173,7 +117,6 @@ Message:
 ${sanitizedMessage}`,
     });
 
-    // Send confirmation to user (ignore failure silently)
     try {
       const confirmationHtml = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
@@ -235,7 +178,6 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    logErrorsPlugin(),
     contactApiPlugin(),
   ],
   resolve: {
@@ -247,7 +189,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Séparer les vendors lourds
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
           'vendor-ui': [
             '@radix-ui/react-dialog',
@@ -261,18 +202,15 @@ export default defineConfig({
         },
       },
     },
-    // Optimiser la taille des chunks
     chunkSizeWarningLimit: 1000,
-    // Minification agressive
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true, // Retire les console.log en production
+        drop_console: true,
         drop_debugger: true,
       },
     },
   },
-  // Optimiser les dépendances
   optimizeDeps: {
     include: [
       'react',
@@ -286,4 +224,3 @@ export default defineConfig({
     ],
   },
 });
-// Orchids restart: 1762640463216

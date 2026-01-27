@@ -1,10 +1,5 @@
 import nodemailer from 'nodemailer';
 
-// Validate env variables exist at initialization
-if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-  console.warn('Missing email credentials in environment variables');
-}
-
 export const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -28,7 +23,6 @@ export async function sendEmail(options: EmailOptions): Promise<{
 }> {
   const { to, subject, html, text, from = process.env.SMTP_USER } = options;
 
-  // Input validation
   if (!to || !subject || !html) {
     return {
       success: false,
@@ -36,7 +30,6 @@ export async function sendEmail(options: EmailOptions): Promise<{
     };
   }
 
-  // Email format validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(to)) {
     return {
@@ -50,18 +43,16 @@ export async function sendEmail(options: EmailOptions): Promise<{
       from,
       to,
       subject,
-      text: text || html.replace(/<[^>]*>/g, ''), // Strip HTML for text version
+      text: text || html.replace(/<[^>]*>/g, ''),
       html,
     });
 
-    console.log('Email sent:', info.messageId);
     return {
       success: true,
       message: `Email sent successfully (ID: ${info.messageId})`,
     };
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error('Email sending failed:', errorMessage);
     return {
       success: false,
       error: `Failed to send email: ${errorMessage}`,

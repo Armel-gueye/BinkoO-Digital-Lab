@@ -16,10 +16,7 @@ import {
 import SEO from '@/components/SEO';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 
-// Les interfaces et helpers sont maintenant dans blogService.ts
-
 export default function Blog() {
-  // État pour les articles (chargés depuis le service)
   const [articles, setArticles] = useState<BlogPost[]>([]);
   const [articlesByMonth, setArticlesByMonth] = useState<Record<string, BlogPost[]>>({});
   const [months, setMonths] = useState<string[]>([]);
@@ -27,7 +24,6 @@ export default function Blog() {
 
   const [openMonth, setOpenMonth] = useState<string | null>(null);
 
-  // Charger les articles au montage du composant
   useEffect(() => {
     const loadPosts = async () => {
       try {
@@ -42,7 +38,6 @@ export default function Blog() {
         setMonths(monthKeys);
         setOpenMonth(monthKeys[0] || null);
       } catch (error) {
-        console.error('Erreur lors du chargement des articles:', error);
       } finally {
         setIsLoading(false);
       }
@@ -51,7 +46,6 @@ export default function Blog() {
     loadPosts();
   }, []);
 
-  // Les 3 derniers articles
   const latestArticles = articles.slice(0, 3);
 
   const toggleMonth = (month: string) => {
@@ -72,13 +66,11 @@ export default function Blog() {
       <SEO
         title="Blog & Actualités IA - BinkoO Digital Lab"
         description="Les dernières tendances en intelligence artificielle, automatisation et marketing digital en Afrique. Conseils pour PME et entrepreneurs."
-        canonical="https://binkoodigitallab.com/blog"
+        canonical="https://binkoo.digital/blog"
         keywords="actualités IA Afrique, automatisation marketing digital, conseils PME entrepreneurs, tendances digitales Afrique"
       />
       <div className="min-h-screen bg-background text-foreground">
-        {/* Hero Section */}
         <section className="relative py-20 md:py-28 lg:py-36 overflow-hidden">
-          {/* Gradient Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-gray-50 opacity-60"></div>
 
           <div className="container-fluid relative z-10">
@@ -117,12 +109,10 @@ export default function Blog() {
             </motion.div>
           </div>
 
-          {/* Decorative elements */}
           <div className="absolute top-20 right-10 w-20 h-20 bg-primary/10 rounded-full blur-3xl" style={{ willChange: 'filter', isolation: 'isolate', backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}></div>
           <div className="absolute bottom-20 left-10 w-32 h-32 bg-red-500/10 rounded-full blur-3xl" style={{ willChange: 'filter', isolation: 'isolate', backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}></div>
         </section>
 
-        {/* Latest Articles Section */}
         <AnimatedSection animation="fade-up">
           <section className="py-16 md:py-20 lg:py-24">
             <div className="container-fluid">
@@ -154,7 +144,6 @@ export default function Blog() {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       whileHover={{ y: -8 }}
                     >
-                      {/* Image */}
                       <Link to={`/blog/${article.id}`}>
                         <div className="relative h-48 overflow-hidden">
                           <img
@@ -168,7 +157,6 @@ export default function Blog() {
                         </div>
                       </Link>
 
-                      {/* Content */}
                       <div className="p-6">
                         <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
                           <div className="flex items-center gap-1">
@@ -207,7 +195,6 @@ export default function Blog() {
           </section>
         </AnimatedSection>
 
-        {/* Article History Section */}
         <AnimatedSection animation="fade-up">
           <section className="py-16 md:py-20 lg:py-24 bg-gray-50">
             <div className="container-fluid">
@@ -232,7 +219,6 @@ export default function Blog() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
-                    {/* Month Header */}
                     <button
                       onClick={() => toggleMonth(month)}
                       className="w-full flex items-center justify-between p-6 hover:bg-gray-50 transition-colors"
@@ -256,7 +242,6 @@ export default function Blog() {
                       </motion.div>
                     </button>
 
-                    {/* Articles List */}
                     <AnimatePresence>
                       {openMonth === month && (
                         <motion.div
@@ -284,7 +269,6 @@ export default function Blog() {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ duration: 0.3, delay: idx * 0.05 }}
                                   >
-                                    {/* Thumbnail */}
                                     <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
                                       <img
                                         src={articleImage}
@@ -293,7 +277,6 @@ export default function Blog() {
                                       />
                                     </div>
 
-                                    {/* Content */}
                                     <div className="flex-1 min-w-0">
                                       <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
                                         <span>{formatDate(article.date)}</span>
@@ -308,7 +291,6 @@ export default function Blog() {
                                       </p>
                                     </div>
 
-                                    {/* Arrow */}
                                     <div className="flex items-center">
                                       <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                                     </div>
@@ -327,7 +309,6 @@ export default function Blog() {
           </section>
         </AnimatedSection>
 
-        {/* CTA Section */}
         <AnimatedSection animation="fade-up">
           <section className="py-16 md:py-20 lg:py-24">
             <div className="container-fluid">

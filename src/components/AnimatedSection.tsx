@@ -50,7 +50,7 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
       transition={{
         duration,
         delay,
-        ease: [0.25, 0.1, 0.25, 1], // cubic-bezier for smooth easing
+        ease: [0.25, 0.1, 0.25, 1],
       }}
     >
       {children}
@@ -58,7 +58,6 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   );
 };
 
-// Composant pour animer les titres avec délai progressif
 export const AnimatedTitle: React.FC<AnimatedSectionProps> = ({
   children,
   className = '',
@@ -73,7 +72,7 @@ export const AnimatedTitle: React.FC<AnimatedSectionProps> = ({
       viewport={{ once: true, amount: 0.3 }}
       transition={{
         duration,
-        delay: delay + Math.random() * 0.3, // délai aléatoire pour effet naturel
+        delay: delay + Math.random() * 0.3,
         ease: [0.25, 0.1, 0.25, 1],
       }}
     >
@@ -82,7 +81,6 @@ export const AnimatedTitle: React.FC<AnimatedSectionProps> = ({
   );
 };
 
-// Composant pour animer les paragraphes avec fade simple
 export const AnimatedParagraph: React.FC<AnimatedSectionProps> = ({
   children,
   className = '',
@@ -106,7 +104,6 @@ export const AnimatedParagraph: React.FC<AnimatedSectionProps> = ({
   );
 };
 
-// Composant pour animer les images et cartes avec scale-in
 export const AnimatedImage: React.FC<AnimatedSectionProps> = ({
   children,
   className = '',
@@ -130,7 +127,6 @@ export const AnimatedImage: React.FC<AnimatedSectionProps> = ({
   );
 };
 
-// Container pour animer une liste d'éléments en cascade (Stagger)
 export const StaggerContainer: React.FC<{
   children: React.ReactNode;
   className?: string;
@@ -158,7 +154,6 @@ export const StaggerContainer: React.FC<{
   );
 };
 
-// Élément enfant d'un StaggerContainer
 export const StaggerItem: React.FC<{
   children: React.ReactNode;
   className?: string;

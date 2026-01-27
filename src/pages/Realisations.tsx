@@ -117,7 +117,7 @@ const Realisations: React.FC = () => {
       <SEO
         title="Nos Réalisations - BinkoO Digital Lab"
         description="Découvrez nos projets web : sites e-commerce, portfolios d'auteur, solutions IA. Réalisations concrètes pour le marché burkinabè. Design moderne et performances optimales."
-        canonical="https://binkoodigitallab.com/realisations"
+        canonical="https://binkoo.digital/realisations"
         keywords="réalisations BinkoO, portfolio projets, sites web Burkina Faso, projets e-commerce, BinkoO Store, Linda Maïssar, BONPLAT"
       />
       <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
@@ -216,7 +216,6 @@ const Realisations: React.FC = () => {
             ))}
           </div>
 
-          {/* Call to Action */}
           <AnimatedSection animation="fade-up">
             <motion.div
               className="mt-16 md:mt-20 text-center bg-gradient-to-br from-surface to-accent p-8 md:p-10 lg:p-12 rounded-xl"

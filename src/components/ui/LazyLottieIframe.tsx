@@ -8,10 +8,6 @@ interface LazyLottieIframeProps {
   threshold?: number;
 }
 
-/**
- * LazyLottieIframe - Composant optimisé pour charger les Lotties via iframe uniquement lorsqu'ils sont visibles
- * Utilise IntersectionObserver pour détecter la visibilité
- */
 export const LazyLottieIframe: React.FC<LazyLottieIframeProps> = ({ 
   src, 
   style = { width: '100%', height: '100%' }, 
@@ -22,7 +18,6 @@ export const LazyLottieIframe: React.FC<LazyLottieIframeProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer pour lazy loading
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -37,7 +32,7 @@ export const LazyLottieIframe: React.FC<LazyLottieIframeProps> = ({
       },
       { 
         threshold,
-        rootMargin: '100px' // Commence à charger 100px avant d'être visible
+        rootMargin: '100px'
       }
     );
 
@@ -60,7 +55,6 @@ export const LazyLottieIframe: React.FC<LazyLottieIframeProps> = ({
           loading="lazy"
         />
       ) : (
-        // Placeholder pendant le chargement
         <div 
           className="w-full h-full flex items-center justify-center bg-gray-100/50 animate-pulse rounded-lg"
           style={{ minHeight: '200px' }}

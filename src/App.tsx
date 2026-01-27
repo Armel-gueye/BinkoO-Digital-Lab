@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Layout from "@/components/Layout";
 
-// Lazy load des pages pour améliorer le Time to Interactive
 const Home = lazy(() => import("@/pages/Home"));
 const Services = lazy(() => import("@/pages/Services"));
 const Realisations = lazy(() => import("@/pages/Realisations"));
@@ -16,7 +15,6 @@ const Blog = lazy(() => import("@/pages/Blog"));
 const BlogArticle = lazy(() => import("@/pages/BlogArticle"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Composant de chargement pendant le lazy loading
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-background">
     <div className="text-center">
@@ -33,7 +31,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Layout><Home /></Layout>} />

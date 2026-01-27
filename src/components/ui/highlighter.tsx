@@ -35,8 +35,6 @@ export const Highlighter: React.FC<HighlighterProps> = ({
     );
   }
 
-  // action === 'highlight'
-  // Use black text for light gray backgrounds, white for others
   const textColor = isLightGrayColor(color) ? '#000000' : '#ffffff';
   
   return (

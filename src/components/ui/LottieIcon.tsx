@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Declare the custom element for TypeScript
 declare global {
   namespace JSX {
     interface IntrinsicElements {

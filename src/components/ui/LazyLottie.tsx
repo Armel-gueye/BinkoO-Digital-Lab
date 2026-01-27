@@ -8,10 +8,6 @@ interface LazyLottieProps {
   threshold?: number;
 }
 
-/**
- * LazyLottie - Composant optimisé pour charger les Lotties uniquement lorsqu'ils sont visibles
- * Utilise IntersectionObserver pour détecter la visibilité
- */
 export const LazyLottie: React.FC<LazyLottieProps> = ({ 
   src, 
   style = {}, 
@@ -23,7 +19,6 @@ export const LazyLottie: React.FC<LazyLottieProps> = ({
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Charger le script dotlottie-wc une seule fois
   useEffect(() => {
     if (typeof window !== 'undefined' && !document.querySelector('script[src*="dotlottie-wc"]')) {
       const script = document.createElement('script');
@@ -37,7 +32,6 @@ export const LazyLottie: React.FC<LazyLottieProps> = ({
     }
   }, []);
 
-  // Intersection Observer pour lazy loading
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -52,7 +46,7 @@ export const LazyLottie: React.FC<LazyLottieProps> = ({
       },
       { 
         threshold,
-        rootMargin: '50px' // Commence à charger 50px avant d'être visible
+        rootMargin: '50px'
       }
     );
 
@@ -75,7 +69,6 @@ export const LazyLottie: React.FC<LazyLottieProps> = ({
           style={{ width: '100%', height: '100%' }}
         />
       ) : (
-        // Placeholder pendant le chargement
         <div 
           className="w-full h-full flex items-center justify-center bg-gray-100/50 animate-pulse rounded-lg"
           style={{ minHeight: '200px' }}
@@ -87,7 +80,6 @@ export const LazyLottie: React.FC<LazyLottieProps> = ({
   );
 };
 
-// Déclaration TypeScript pour dotlottie-wc
 declare global {
   namespace JSX {
     interface IntrinsicElements {

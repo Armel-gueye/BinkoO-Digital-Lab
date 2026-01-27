@@ -21,7 +21,7 @@ export default function SEO({
   ogImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/BinkoO-Digital-Lab-PNG-1760749121547.png",
   ogType = "website"
 }: SEOProps) {
-  const siteUrl = "https://binkoodigitallab.com";
+  const siteUrl = "https://binkoo.digital";
   const fullTitle = `${title} | BinkoO Digital Lab`;
   const canonicalUrl = canonical || siteUrl;
 
@@ -252,14 +252,12 @@ export default function SEO({
 
   return (
     <Helmet>
-      {/* Balises Title & Meta de base */}
       <html lang="fr" />
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <link rel="canonical" href={canonicalUrl} />
       
-      {/* Open Graph pour WhatsApp, Facebook, LinkedIn */}
       <meta property="og:site_name" content="BinkoO Digital Lab" />
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={fullTitle} />
@@ -270,13 +268,11 @@ export default function SEO({
       <meta property="og:image:height" content="630" />
       <meta property="og:locale" content="fr_FR" />
       
-      {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
       
-      {/* Métadonnées additionnelles */}
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
       <meta name="author" content="BinkoO Digital Lab" />
       <meta name="geo.region" content="BF-HOU" />
@@ -284,7 +280,6 @@ export default function SEO({
       <meta name="geo.position" content="11.1775;-4.2979" />
       <meta name="ICBM" content="11.1775, -4.2979" />
       
-      {/* Données structurées JSON-LD */}
       <script type="application/ld+json">
         {JSON.stringify(structuredData)}
       </script>

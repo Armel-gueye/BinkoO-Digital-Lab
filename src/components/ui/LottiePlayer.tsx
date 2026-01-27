@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 
-// Declare the custom element type for TypeScript
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -26,7 +25,6 @@ export const LottiePlayer: React.FC<LottiePlayerProps> = ({ src, className = '' 
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Load the dotlottie-wc script if not already loaded
     if (!document.querySelector('script[src*="dotlottie-wc"]')) {
       const script = document.createElement('script');
       script.src = 'https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js';
