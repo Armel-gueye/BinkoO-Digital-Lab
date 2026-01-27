@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
     `;
 
     const result = await sendEmail({
-      to: 'Binkoodigitallab@gmail.com',
+      to: 'contact@binkoo.digital',
       subject: sanitizedSubject || `Nouvelle demande de contact: ${fullName}`,
       html: htmlContent,
       text: `Nom: ${fullName}\nEmail: ${sanitizedEmail}\n${sanitizedSubject ? `Sujet: ${sanitizedSubject}\n` : ''}\nMessage:\n${sanitizedMessage}`,

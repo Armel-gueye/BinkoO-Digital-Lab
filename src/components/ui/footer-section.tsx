@@ -56,7 +56,7 @@ const footerLinks: FooterSection[] = [
     links: [
       { title: 'WhatsApp', href: 'whatsapp' },
       { title: '+226 44 32 38 41', href: 'tel:+22644323841' },
-      { title: 'binkoodigitallab@gmail.com', href: 'mailto:binkoodigitallab@gmail.com' }]
+      { title: 'contact@binkoo.digital', href: 'mailto:contact@binkoo.digital' }]
 
   }];
 

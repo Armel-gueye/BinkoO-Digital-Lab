@@ -17,7 +17,7 @@ export const Contact2 = ({
   title = "Un Projet ? Contactez-nous !",
   description = "Le digital est notre passion. Nous sommes prêts à discuter de vos défis et à transformer vos processus. Décrivez-nous votre besoin !",
   phone = "+226 44 32 38 41",
-  email = "Binkoodigitallab@gmail.com",
+  email = "contact@binkoo.digital",
   web = { label: "BinkoO Digital Lab", url: "https://binkoo.digital" },
 }: Contact2Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,7 +30,6 @@ export const Contact2 = ({
     const formData = new FormData(form);
 
     try {
-      // Using Web3Forms endpoint - 250 submissions/month limit
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData
@@ -88,7 +87,6 @@ export const Contact2 = ({
           </div>
           <form onSubmit={handleSubmit} className="mx-auto flex max-w-screen-md flex-col gap-6 rounded-lg border p-10">
             <input type="hidden" name="access_key" value="55a2547a-7b37-417e-8044-1a73722325ea" />
-            
             <input type="hidden" name="_subject" value="Nouvelle demande de contact - BinkoO Digital Lab" />
             
             <div className="flex gap-4">

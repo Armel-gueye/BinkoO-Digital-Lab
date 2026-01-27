@@ -106,7 +106,7 @@ async function handleContactApi(req: any, res: any) {
 
     const adminInfo = await transporter.sendMail({
       from: process.env.SMTP_USER,
-      to: "Binkoodigitallab@gmail.com",
+      to: "contact@binkoo.digital",
       subject: sanitizedSubject || `Nouvelle demande de contact: ${fullName}`,
       html: htmlContent,
       text: `Nom: ${fullName}
