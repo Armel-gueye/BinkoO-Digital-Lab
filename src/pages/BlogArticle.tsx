@@ -250,6 +250,7 @@ export default function BlogArticle() {
           </div>
         </div>
       </div>
+      </div>
     </>
   );
 }
