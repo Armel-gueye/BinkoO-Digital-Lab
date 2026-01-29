@@ -67,7 +67,10 @@ const Contact: React.FC = () => {
         <iframe
           src={method.lottieUrl}
           className="w-full h-full border-0"
-          style={{ pointerEvents: 'none' }} />
+              style={{ pointerEvents: 'none' }}
+              loading="lazy"
+              referrerPolicy="no-referrer"
+            />
 
       </div>,
 

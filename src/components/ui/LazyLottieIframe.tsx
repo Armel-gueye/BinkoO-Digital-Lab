@@ -59,6 +59,7 @@ export const LazyLottieIframe: React.FC<LazyLottieIframeProps> = ({
           style={{ width: '100%', height: '100%', border: 'none', ...style }}
           title={title}
           loading="lazy"
+          referrerPolicy="no-referrer"
         />
       ) : (
         <div 

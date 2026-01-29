@@ -78,7 +78,7 @@ export const Contact2 = ({
                 </li>
                 <li>
                   <span className="font-bold">Web: </span>
-                  <a href={web.url} target="_blank" className="underline">
+                  <a href={web.url} target="_blank" rel="noopener noreferrer" className="underline">
                     {web.label}
                   </a>
                 </li>
@@ -88,6 +88,7 @@ export const Contact2 = ({
           <form onSubmit={handleSubmit} className="mx-auto flex max-w-screen-md flex-col gap-6 rounded-lg border p-10">
             <input type="hidden" name="access_key" value="55a2547a-7b37-417e-8044-1a73722325ea" />
             <input type="hidden" name="_subject" value="Nouvelle demande de contact - BinkoO Digital Lab" />
+            <input type="text" name="botcheck" tabIndex={-1} autoComplete="off" style={{ position: 'absolute', left: '-5000px' }} />
             
             <div className="flex gap-4">
               <div className="grid w-full items-center gap-1.5">
