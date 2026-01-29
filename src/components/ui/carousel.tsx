@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { motion, useMotionValue, useTransform, MotionValue, useSpring } from 'motion/react';
+import { motion, useMotionValue, useTransform, MotionValue } from 'motion/react';
 import { FiCircle, FiCode, FiFileText, FiLayers, FiLayout } from 'react-icons/fi';
 
 import './Carousel.css';
@@ -81,6 +81,7 @@ const CarouselItemComponent: React.FC<CarouselItemComponentProps> = ({
   isMobile = false
 }) => {
   if (isMobile || !x) {
+    // Mobile: simple div without 3D transforms
     return (
       <motion.div
         className={`carousel-item ${round ? 'round' : ''}`}
@@ -102,6 +103,7 @@ const CarouselItemComponent: React.FC<CarouselItemComponentProps> = ({
     );
   }
 
+  // Desktop: with 3D transforms
   const range = [-(index + 1) * trackItemOffset, -index * trackItemOffset, -(index - 1) * trackItemOffset];
   const outputRange = [90, 0, -90];
   const rotateY = useTransform(x, range, outputRange, { clamp: false });
@@ -141,11 +143,13 @@ export const Carousel: React.FC<CarouselProps> = ({
   const [isMobile, setIsMobile] = useState(false);
   const [containerWidth, setContainerWidth] = useState(baseWidth);
   
+  // Detect mobile
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
       if (mobile) {
+        // On mobile, container width is 100% but items are 90%
         setContainerWidth(window.innerWidth);
       } else {
         setContainerWidth(baseWidth);
@@ -157,14 +161,15 @@ export const Carousel: React.FC<CarouselProps> = ({
     return () => window.removeEventListener('resize', checkMobile);
   }, [baseWidth]);
   
+  // Calculate item width based on mobile or desktop
   const itemWidth = isMobile 
-    ? containerWidth * 0.9 - containerPadding * 2
+    ? containerWidth * 0.9 - containerPadding * 2  // 90% on mobile
     : containerWidth - containerPadding * 2;
   const trackItemOffset = itemWidth + GAP;
 
   const carouselItems = loop ? [...items, items[0]] : items;
-  const x = useSpring(0, { stiffness: 100, damping: 20 });
   const [currentIndex, setCurrentIndex] = useState(0);
+  const x = useMotionValue(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
 
@@ -184,36 +189,23 @@ export const Carousel: React.FC<CarouselProps> = ({
     }
   }, [pauseOnHover]);
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => {
-      if (loop) {
-        return prev + 1;
-      }
-      return (prev + 1) % items.length;
-    });
-  };
-
+  // Autoplay for both mobile and desktop
   useEffect(() => {
-    if (autoplay && !isHovered) {
-      let intervalId: number | undefined;
-      const startInterval = () => {
-        intervalId = window.setInterval(() => {
-          handleNext();
-        }, autoplayDelay);
-      };
-      const idle = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout?: number }) => number }).requestIdleCallback;
-      if (idle) {
-        idle(() => startInterval(), { timeout: 1000 });
-      } else {
-        setTimeout(() => startInterval(), 400);
-      }
-      return () => {
-        if (intervalId) {
-          clearInterval(intervalId);
-        }
-      };
+    if (autoplay && (!pauseOnHover || !isHovered)) {
+      const timer = setInterval(() => {
+        setCurrentIndex(prev => {
+          if (prev === items.length - 1 && loop) {
+            return prev + 1;
+          }
+          if (prev === carouselItems.length - 1) {
+            return loop ? 0 : prev;
+          }
+          return prev + 1;
+        });
+      }, autoplayDelay);
+      return () => clearInterval(timer);
     }
-  }, [autoplay, autoplayDelay, isHovered, currentIndex]);
+  }, [autoplay, autoplayDelay, isHovered, loop, items.length, carouselItems.length, pauseOnHover]);
 
   const effectiveTransition = isResetting ? { duration: 0 } : SPRING_OPTIONS;
 
@@ -257,6 +249,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     setCurrentIndex(index);
   };
 
+  // Use Framer Motion for both mobile and desktop
   return (
     <div
       ref={containerRef}
