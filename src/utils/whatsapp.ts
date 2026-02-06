@@ -2,8 +2,8 @@
 const WHATSAPP_NUMBER = '22644323841';
 
 const PREFILLED_MESSAGES = [
-    "Bonjour BinkoO ! Je souhaiterais obtenir un devis pour un projet digital.",
-    "Hello l'équipe BinkoO ! J'ai vu vos réalisations et j'aimerais discuter d'une collaboration.",
+    "Bonjour BinkoO Digital Lab ! Je souhaiterais obtenir un devis pour un projet digital.",
+    "Hello l'équipe BinkoO Digital Lab ! J'ai vu vos réalisations et j'aimerais discuter d'une collaboration.",
     "Salut ! Je suis intéressé par vos solutions d'IA et d'automatisation pour mon business.",
     "Bonjour ! Je voudrais en savoir plus sur vos services de création web et de branding.",
     "Bonjour BinkoO Digital Lab ! J'ai un projet en tête et j'aimerais avoir votre avis d'experts.",
