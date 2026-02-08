@@ -45,7 +45,7 @@ const footerLinks: FooterSection[] = [
   {
     label: 'Réseaux Sociaux',
     links: [
-      { title: 'LinkedIn', href: 'https://www.linkedin.com/in/binkoo-digital-lab-5a012b385?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app', icon: Linkedin },
+      { title: 'LinkedIn', href: 'https://www.linkedin.com/company/binkoo-digital-lab', icon: Linkedin },
       { title: 'Instagram', href: 'https://www.instagram.com/binkoo_digital_lab?igsh=MXcyYjRpbHBrbjh1ag%3D%3D&utm_source=qr', icon: Instagram },
       { title: 'Facebook', href: 'https://www.facebook.com/share/1JPaSH1STA/?mibextid=wwXIfr', icon: Facebook },
       { title: 'TikTok', href: 'https://www.tiktok.com/@binkoo.digital.lab?_t=ZM-90kNEp9sTGt&_r=1', icon: TikTokIcon }]

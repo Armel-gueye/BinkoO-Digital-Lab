@@ -50,7 +50,7 @@ export default function SEO({
         },
         "sameAs": [
           "https://www.facebook.com/share/1JPaSH1STA/",
-          "https://www.linkedin.com/in/binkoo-digital-lab-5a012b385",
+          "https://www.linkedin.com/company/binkoo-digital-lab",
           "https://www.instagram.com/binkoo_digital_lab",
           "https://www.tiktok.com/@binkoo.digital.lab"
         ],
@@ -257,7 +257,7 @@ export default function SEO({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <link rel="canonical" href={canonicalUrl} />
-      
+
       <meta property="og:site_name" content="BinkoO Digital Lab" />
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={fullTitle} />
@@ -267,19 +267,19 @@ export default function SEO({
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:locale" content="fr_FR" />
-      
+
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
-      
+
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
       <meta name="author" content="BinkoO Digital Lab" />
       <meta name="geo.region" content="BF-HOU" />
       <meta name="geo.placename" content="Bobo-Dioulasso" />
       <meta name="geo.position" content="11.1775;-4.2979" />
       <meta name="ICBM" content="11.1775, -4.2979" />
-      
+
       <script type="application/ld+json">
         {JSON.stringify(structuredData)}
       </script>

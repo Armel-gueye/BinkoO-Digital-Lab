@@ -108,7 +108,7 @@ export default function Home() {
           </a>
 
           <a
-            href="https://www.linkedin.com/in/binkoo-digital-lab-5a012b385?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+            href="https://www.linkedin.com/company/binkoo-digital-lab"
             target="_blank"
             rel="noopener noreferrer"
             className="text-foreground hover:text-primary transition-all duration-300 hover:scale-110"

@@ -17,7 +17,7 @@ const Contact: React.FC = () => {
       title: 'LinkedIn',
       description: 'Suivez nos actualités et connectez-vous avec notre réseau professionnel.',
       action: 'Voir le profil',
-      link: 'https://www.linkedin.com/in/binkoo-digital-lab-5a012b385?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app'
+      link: 'https://www.linkedin.com/company/binkoo-digital-lab'
     },
     {
       lottieUrl: 'https://lottie.host/embed/322ecd45-4d7d-4e25-991d-67cf9f38b60f/25cKPFiX8N.lottie',
@@ -67,10 +67,10 @@ const Contact: React.FC = () => {
         <iframe
           src={method.lottieUrl}
           className="w-full h-full border-0"
-              style={{ pointerEvents: 'none' }}
-              loading="lazy"
-              referrerPolicy="no-referrer"
-            />
+          style={{ pointerEvents: 'none' }}
+          loading="lazy"
+          referrerPolicy="no-referrer"
+        />
 
       </div>,
 
