@@ -1,0 +1,20 @@
+# Headers pour améliorer l'indexation Google
+/*
+  X-Robots-Tag: index, follow
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Headers spécifiques pour les pages principales
+/services
+  X-Robots-Tag: index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1
+
+/a-propos
+  X-Robots-Tag: index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1
+
+/blog
+  X-Robots-Tag: index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1
+
+/realisations
+  X-Robots-Tag: index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1
+
+/contact
+  X-Robots-Tag: index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1
