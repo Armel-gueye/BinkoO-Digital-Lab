@@ -21,6 +21,7 @@ export default function Blog() {
   const [articlesByMonth, setArticlesByMonth] = useState<Record<string, BlogPost[]>>({});
   const [months, setMonths] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const [openMonth, setOpenMonth] = useState<string | null>(null);
 
@@ -28,7 +29,17 @@ export default function Blog() {
     const loadPosts = async () => {
       try {
         setIsLoading(true);
+        setErrorMsg(null);
         const posts = await getPosts();
+
+        if (!posts || posts.length === 0) {
+          setErrorMsg('Aucun article publié pour le moment. Nos prochains articles arrivent bientôt !');
+          setArticles([]);
+          setArticlesByMonth({});
+          setMonths([]);
+          return;
+        }
+
         setArticles(posts);
 
         const grouped = groupPostsByMonth(posts);
@@ -38,6 +49,9 @@ export default function Blog() {
         setMonths(monthKeys);
         setOpenMonth(monthKeys[0] || null);
       } catch (error) {
+        console.error('Erreur lors du chargement des articles:', error);
+        setErrorMsg('Impossible de charger les articles. Veuillez réessayer plus tard.');
+        setArticles([]);
       } finally {
         setIsLoading(false);
       }
@@ -113,201 +127,266 @@ export default function Blog() {
           <div className="absolute bottom-20 left-10 w-32 h-32 bg-red-500/10 rounded-full blur-3xl" style={{ willChange: 'filter', isolation: 'isolate', backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}></div>
         </section>
 
-        <AnimatedSection animation="fade-up">
-          <section className="py-16 md:py-20 lg:py-24">
-            <div className="container-fluid">
-              <motion.div
-                className="text-center mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Derniers Articles</h2>
-                <p className="text-muted-foreground">Les publications les plus récentes</p>
-              </motion.div>
+        {/* Message d'erreur ou d'alerte */}
+        {errorMsg && (
+          <AnimatedSection animation="fade-up">
+            <section className="py-8">
+              <div className="container-fluid">
+                <motion.div
+                  className={`rounded-2xl p-8 text-center border-2 ${articles.length === 0 && !errorMsg.includes('Impossible')
+                      ? 'bg-orange-50 border-orange-300 text-orange-800'
+                      : 'bg-red-50 border-red-300 text-red-800'
+                    }`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="text-4xl mb-4">
+                    {errorMsg.includes('Impossible') ? '⚠️' : '📝'}
+                  </div>
+                  <p className="text-lg font-semibold mb-2">{errorMsg}</p>
+                  <p className="text-sm opacity-75">
+                    {errorMsg.includes('Impossible')
+                      ? 'Vérifiez votre connexion internet ou réessayez dans quelques instants.'
+                      : 'Nos rédacteurs préparent du contenu de qualité. Revenez bientôt !'}
+                  </p>
+                </motion.div>
+              </div>
+            </section>
+          </AnimatedSection>
+        )}
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {latestArticles.map((article, index) => {
-                  const articleTitle = extractText(article.title);
-                  const articleExcerpt = stripHtmlTags(extractText(article.excerpt));
-                  const articleImage = getFeaturedImage(article);
-                  const articleReadTime = article.readTime || calculateReadTime(extractText(article.content));
+        {/* Loading Skeleton */}
+        {isLoading && (
+          <AnimatedSection animation="fade-up">
+            <section className="py-16 md:py-20 lg:py-24">
+              <div className="container-fluid">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">Derniers Articles</h2>
+                  <p className="text-muted-foreground">Chargement en cours...</p>
+                </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="bg-white rounded-2xl overflow-hidden border border-border shadow-sm animate-pulse">
+                      <div className="h-48 bg-gray-200" />
+                      <div className="p-6 space-y-3">
+                        <div className="flex gap-4">
+                          <div className="h-3 w-24 bg-gray-200 rounded" />
+                          <div className="h-3 w-16 bg-gray-200 rounded" />
+                        </div>
+                        <div className="h-5 w-3/4 bg-gray-200 rounded" />
+                        <div className="h-3 w-full bg-gray-200 rounded" />
+                        <div className="h-3 w-2/3 bg-gray-200 rounded" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </AnimatedSection>
+        )}
 
-                  return (
-                    <motion.article
-                      key={article.id}
-                      className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-300"
-                      initial={{ opacity: 0, y: 30 }}
+        {/* Articles récents */}
+        {!isLoading && articles.length > 0 && (
+          <AnimatedSection animation="fade-up">
+            <section className="py-16 md:py-20 lg:py-24">
+              <div className="container-fluid">
+                <motion.div
+                  className="text-center mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">Derniers Articles</h2>
+                  <p className="text-muted-foreground">Les publications les plus récentes</p>
+                </motion.div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {latestArticles.map((article, index) => {
+                    const articleTitle = stripHtmlTags(extractText(article.title));
+                    const articleExcerpt = stripHtmlTags(extractText(article.excerpt));
+                    const articleImage = getFeaturedImage(article);
+                    const articleReadTime = article.readTime || calculateReadTime(extractText(article.content));
+
+                    return (
+                      <motion.article
+                        key={article.id}
+                        className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-300"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                        whileHover={{ y: -8 }}
+                      >
+                        <Link to={`/blog/${article.id}`}>
+                          <div className="relative h-48 overflow-hidden">
+                            <img
+                              src={articleImage}
+                              alt={articleTitle}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold">
+                              Nouveau
+                            </div>
+                          </div>
+                        </Link>
+
+                        <div className="p-6">
+                          <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
+                            <div className="flex items-center gap-1">
+                              <Calendar className="w-3.5 h-3.5" />
+                              <span>{formatDate(article.date)}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-3.5 h-3.5" />
+                              <span>{articleReadTime}</span>
+                            </div>
+                          </div>
+
+                          <Link to={`/blog/${article.id}`}>
+                            <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                              {articleTitle}
+                            </h3>
+                          </Link>
+
+                          <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                            {articleExcerpt}
+                          </p>
+
+                          <Link
+                            to={`/blog/${article.id}`}
+                            className="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
+                          >
+                            Lire l'article
+                            <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                          </Link>
+                        </div>
+                      </motion.article>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
+          </AnimatedSection>
+        )}
+
+        {/* Historique par mois */}
+        {!isLoading && months.length > 0 && (
+          <AnimatedSection animation="fade-up">
+            <section className="py-16 md:py-20 lg:py-24 bg-gray-50">
+              <div className="container-fluid">
+                <motion.div
+                  className="text-center mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">Historique des Articles</h2>
+                  <p className="text-muted-foreground">Explorez tous nos articles par mois</p>
+                </motion.div>
+
+                <div className="max-w-4xl mx-auto space-y-4">
+                  {months.map((month, index) => (
+                    <motion.div
+                      key={month}
+                      className="bg-white rounded-xl border border-border overflow-hidden shadow-sm"
+                      initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      whileHover={{ y: -8 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
                     >
-                      <Link to={`/blog/${article.id}`}>
-                        <div className="relative h-48 overflow-hidden">
-                          <img
-                            src={articleImage}
-                            alt={articleTitle}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                          <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold">
-                            Nouveau
-                          </div>
-                        </div>
-                      </Link>
-
-                      <div className="p-6">
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5" />
-                            <span>{formatDate(article.date)}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-3.5 h-3.5" />
-                            <span>{articleReadTime}</span>
-                          </div>
-                        </div>
-
-                        <Link to={`/blog/${article.id}`}>
-                          <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                            {articleTitle}
-                          </h3>
-                        </Link>
-
-                        <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                          {articleExcerpt}
-                        </p>
-
-                        <Link
-                          to={`/blog/${article.id}`}
-                          className="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
-                        >
-                          Lire l'article
-                          <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                      </div>
-                    </motion.article>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        </AnimatedSection>
-
-        <AnimatedSection animation="fade-up">
-          <section className="py-16 md:py-20 lg:py-24 bg-gray-50">
-            <div className="container-fluid">
-              <motion.div
-                className="text-center mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Historique des Articles</h2>
-                <p className="text-muted-foreground">Explorez tous nos articles par mois</p>
-              </motion.div>
-
-              <div className="max-w-4xl mx-auto space-y-4">
-                {months.map((month, index) => (
-                  <motion.div
-                    key={month}
-                    className="bg-white rounded-xl border border-border overflow-hidden shadow-sm"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <button
-                      onClick={() => toggleMonth(month)}
-                      className="w-full flex items-center justify-between p-6 hover:bg-gray-50 transition-colors"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-t from-black via-black to-neutral-700 flex items-center justify-center flex-shrink-0">
-                          <Calendar className="w-6 h-6 text-white" />
-                        </div>
-                        <div className="text-left">
-                          <h3 className="text-xl font-bold">{month}</h3>
-                          <p className="text-sm text-muted-foreground">
-                            {articlesByMonth[month].length} article{articlesByMonth[month].length > 1 ? 's' : ''}
-                          </p>
-                        </div>
-                      </div>
-                      <motion.div
-                        animate={{ rotate: openMonth === month ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
+                      <button
+                        onClick={() => toggleMonth(month)}
+                        className="w-full flex items-center justify-between p-6 hover:bg-gray-50 transition-colors"
                       >
-                        <ChevronDown className="w-6 h-6 text-muted-foreground" />
-                      </motion.div>
-                    </button>
-
-                    <AnimatePresence>
-                      {openMonth === month && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="border-t border-border"
-                        >
-                          <div className="p-6 space-y-4">
-                            {articlesByMonth[month].map((article, idx) => {
-                              const articleTitle = extractText(article.title);
-                              const articleExcerpt = stripHtmlTags(extractText(article.excerpt));
-                              const articleImage = getFeaturedImage(article);
-                              const articleReadTime = article.readTime || calculateReadTime(extractText(article.content));
-
-                              return (
-                                <Link
-                                  key={article.id}
-                                  to={`/blog/${article.id}`}
-                                >
-                                  <motion.div
-                                    className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors group cursor-pointer"
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.3, delay: idx * 0.05 }}
-                                  >
-                                    <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
-                                      <img
-                                        src={articleImage}
-                                        alt={articleTitle}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                      />
-                                    </div>
-
-                                    <div className="flex-1 min-w-0">
-                                      <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
-                                        <span>{formatDate(article.date)}</span>
-                                        <span>•</span>
-                                        <span>{articleReadTime}</span>
-                                      </div>
-                                      <h4 className="font-bold mb-2 group-hover:text-primary transition-colors line-clamp-1">
-                                        {articleTitle}
-                                      </h4>
-                                      <p className="text-sm text-muted-foreground line-clamp-2">
-                                        {articleExcerpt}
-                                      </p>
-                                    </div>
-
-                                    <div className="flex items-center">
-                                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                                    </div>
-                                  </motion.div>
-                                </Link>
-                              );
-                            })}
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-t from-black via-black to-neutral-700 flex items-center justify-center flex-shrink-0">
+                            <Calendar className="w-6 h-6 text-white" />
                           </div>
+                          <div className="text-left">
+                            <h3 className="text-xl font-bold">{month}</h3>
+                            <p className="text-sm text-muted-foreground">
+                              {articlesByMonth[month].length} article{articlesByMonth[month].length > 1 ? 's' : ''}
+                            </p>
+                          </div>
+                        </div>
+                        <motion.div
+                          animate={{ rotate: openMonth === month ? 180 : 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <ChevronDown className="w-6 h-6 text-muted-foreground" />
                         </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                ))}
+                      </button>
+
+                      <AnimatePresence>
+                        {openMonth === month && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="border-t border-border"
+                          >
+                            <div className="p-6 space-y-4">
+                              {articlesByMonth[month].map((article, idx) => {
+                                const articleTitle = stripHtmlTags(extractText(article.title));
+                                const articleExcerpt = stripHtmlTags(extractText(article.excerpt));
+                                const articleImage = getFeaturedImage(article);
+                                const articleReadTime = article.readTime || calculateReadTime(extractText(article.content));
+
+                                return (
+                                  <Link
+                                    key={article.id}
+                                    to={`/blog/${article.id}`}
+                                  >
+                                    <motion.div
+                                      className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors group cursor-pointer"
+                                      initial={{ opacity: 0, x: -20 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ duration: 0.3, delay: idx * 0.05 }}
+                                    >
+                                      <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                                        <img
+                                          src={articleImage}
+                                          alt={articleTitle}
+                                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                        />
+                                      </div>
+
+                                      <div className="flex-1 min-w-0">
+                                        <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                                          <span>{formatDate(article.date)}</span>
+                                          <span>•</span>
+                                          <span>{articleReadTime}</span>
+                                        </div>
+                                        <h4 className="font-bold mb-2 group-hover:text-primary transition-colors line-clamp-1">
+                                          {articleTitle}
+                                        </h4>
+                                        <p className="text-sm text-muted-foreground line-clamp-2">
+                                          {articleExcerpt}
+                                        </p>
+                                      </div>
+
+                                      <div className="flex items-center">
+                                        <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                                      </div>
+                                    </motion.div>
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        </AnimatedSection>
+            </section>
+          </AnimatedSection>
+        )}
 
         <AnimatedSection animation="fade-up">
           <section className="py-16 md:py-20 lg:py-24">

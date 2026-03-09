@@ -428,3 +428,41 @@ img {
 .nav-link:hover::after {
     width: 100%;
 }
+
+/* ============================================
+   Blog Article - Highlighter Effect System
+   ============================================ 
+   Transforms WordPress <strong> and <em> tags
+   into branded visual highlights.
+   
+   <strong> → Alternating Red/Blue background
+   <em> → Orange underline
+   ============================================ */
+
+/* Base styles for all strong tags in blog prose */
+.blog-prose strong {
+  color: white !important;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Italic → Orange underline effect */
+.blog-prose em {
+  font-style: normal !important;
+  text-decoration: none !important;
+  border-bottom: 2px solid #FF9800;
+}
+
+/* Links in prose - override the white color from strong if inside a link */
+.blog-prose a {
+  color: #3B82F6 !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-prose a:hover {
+  color: #E5002E !important;
+}

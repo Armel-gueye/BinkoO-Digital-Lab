@@ -13,6 +13,7 @@ const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const Blog = lazy(() => import("@/pages/Blog"));
 const BlogArticle = lazy(() => import("@/pages/BlogArticle"));
+const TagPage = lazy(() => import("@/pages/TagPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const PageLoader = () => (
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/a-propos" element={<Layout><About /></Layout>} />
             <Route path="/blog" element={<Layout><Blog /></Layout>} />
             <Route path="/blog/:id" element={<Layout><BlogArticle /></Layout>} />
+            <Route path="/blog/tag/:slug" element={<Layout><TagPage /></Layout>} />
             <Route path="/contact" element={<Layout><Contact /></Layout>} />
             <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>

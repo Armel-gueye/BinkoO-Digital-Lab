@@ -7,6 +7,7 @@ interface SEOProps {
   keywords?: string;
   ogImage?: string;
   ogType?: string;
+  robots?: string;
 }
 
 /**
@@ -19,7 +20,8 @@ export default function SEO({
   canonical,
   keywords = "BinkoO, BinkoO Digital Lab, agence digitale Burkina Faso, automatisation IA, développement web, chatbot IA, Bobo-Dioulasso",
   ogImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/BinkoO-Digital-Lab-PNG-1760749121547.png",
-  ogType = "website"
+  ogType = "website",
+  robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
 }: SEOProps) {
   const siteUrl = "https://binkoo.digital";
   const fullTitle = `${title} | BinkoO Digital Lab`;
@@ -273,7 +275,7 @@ export default function SEO({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
 
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="robots" content={robots} />
       <meta name="author" content="BinkoO Digital Lab" />
       <meta name="geo.region" content="BF-HOU" />
       <meta name="geo.placename" content="Bobo-Dioulasso" />
