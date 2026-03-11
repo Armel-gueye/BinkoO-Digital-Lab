@@ -259,14 +259,14 @@ export const getPosts = async (perPage: number = 100): Promise<BlogPost[]> => {
 };
 
 /**
- * Récupère un article par son ID depuis WordPress
+ * Récupère un article par son slug depuis WordPress
  * 
- * @param id - ID de l'article WordPress
+ * @param slug - Slug de l'article WordPress
  * @returns Promise<BlogPost | null>
  */
-export const getPostById = async (id: number): Promise<BlogPost | null> => {
+export const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
   try {
-    const url = `${WP_API_BASE}/posts/${id}?_embed`;
+    const url = `${WP_API_BASE}/posts?slug=${slug}&_embed`;
 
     const response = await fetch(url, {
       headers: {
@@ -275,11 +275,14 @@ export const getPostById = async (id: number): Promise<BlogPost | null> => {
     });
 
     if (!response.ok) {
-      if (response.status === 404) return null;
       throw new Error(`Erreur API WordPress: ${response.status} ${response.statusText}`);
     }
 
-    const post: BlogPost = await response.json();
+    const posts: BlogPost[] = await response.json();
+    
+    if (!posts || posts.length === 0) return null;
+    
+    const post = posts[0];
     const realTitle = extractRealTitle(post);
 
     return {
@@ -292,7 +295,7 @@ export const getPostById = async (id: number): Promise<BlogPost | null> => {
       month: getMonthFromDate(post.date),
     };
   } catch (error) {
-    console.error(`Erreur lors de la récupération de l'article ${id}:`, error);
+    console.error(`Erreur lors de la récupération de l'article par slug ${slug}:`, error);
     return null;
   }
 };

@@ -126,7 +126,7 @@ export default function TagPage() {
                                         transition={{ duration: 0.6, delay: index * 0.1 }}
                                         whileHover={{ y: -8 }}
                                     >
-                                        <Link to={`/blog/${article.id}`} className="block h-full flex flex-col">
+                                        <Link to={`/blog/${article.slug}`} className="block h-full flex flex-col">
                                             <div className="relative h-56 overflow-hidden">
                                                 <img
                                                     src={articleImage}

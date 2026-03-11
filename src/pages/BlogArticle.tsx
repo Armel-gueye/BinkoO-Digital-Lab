@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import DOMPurify from 'dompurify';
 import SEO from '@/components/SEO';
 import {
-  getPostById,
+  getPostBySlug,
   type BlogPost,
   stripHtmlTags,
   calculateReadTime,
@@ -19,7 +19,7 @@ import {
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 
 export default function BlogArticle() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
 
   const [article, setArticle] = useState<BlogPost | null>(null);
@@ -28,12 +28,12 @@ export default function BlogArticle() {
 
   useEffect(() => {
     const loadArticle = async () => {
-      if (!id) return;
+      if (!slug) return;
 
       try {
         setIsLoading(true);
         setErrorMsg(null);
-        const post = await getPostById(Number(id));
+        const post = await getPostBySlug(slug);
         if (!post) {
           setErrorMsg('Cet article est introuvable ou a été retiré.');
         }
@@ -47,11 +47,11 @@ export default function BlogArticle() {
     };
 
     loadArticle();
-  }, [id]);
+  }, [slug]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [slug]);
 
   // Référence pour le contenu de l'article
   const contentRef = useRef<HTMLDivElement>(null);
@@ -113,7 +113,7 @@ export default function BlogArticle() {
   const articleImage = getFeaturedImage(article);
   const articleMonth = article.month || getMonthFromDate(article.date);
   const articleReadTime = article.readTime || calculateReadTime(articleContent);
-  const canonicalUrl = `https://binkoo.digital/blog/${article.slug || id}`;
+  const canonicalUrl = `https://binkoo.digital/blog/${article.slug}`;
 
   // Extraire les tags et données SEO RankMath (via helpers centralisés)
   const tags = getTags(article);

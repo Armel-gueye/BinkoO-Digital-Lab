@@ -219,7 +219,7 @@ export default function Blog() {
                         transition={{ duration: 0.6, delay: index * 0.1 }}
                         whileHover={{ y: -8 }}
                       >
-                        <Link to={`/blog/${article.id}`}>
+                        <Link to={`/blog/${article.slug}`}>
                           <div className="relative h-48 overflow-hidden">
                             <img
                               src={articleImage}
@@ -244,7 +244,7 @@ export default function Blog() {
                             </div>
                           </div>
 
-                          <Link to={`/blog/${article.id}`}>
+                          <Link to={`/blog/${article.slug}`}>
                             <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
                               {articleTitle}
                             </h3>
@@ -339,7 +339,7 @@ export default function Blog() {
                                 return (
                                   <Link
                                     key={article.id}
-                                    to={`/blog/${article.id}`}
+                                    to={`/blog/${article.slug}`}
                                   >
                                     <motion.div
                                       className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors group cursor-pointer"
