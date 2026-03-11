@@ -255,7 +255,7 @@ export default function Blog() {
                           </p>
 
                           <Link
-                            to={`/blog/${article.id}`}
+                            to={`/blog/${article.slug}`}
                             className="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
                           >
                             Lire l'article
