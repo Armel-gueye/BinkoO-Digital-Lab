@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Palette, Globe, Check, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LottiePlayer } from '@/components/ui/LottiePlayer';
@@ -35,6 +36,7 @@ const Services: React.FC = () => {
     {
       icon: Sparkles,
       title: 'IA & Automatisation',
+      slug: 'ia-automatisation',
       lottieUrl: 'https://lottie.host/db8c926f-e2c4-4562-baff-ae53e1a28d18/k9k8p2iDmK.lottie',
       description: 'Gagnez du temps et concentrez-vous sur ce qui compte vraiment. Nous intégrons des solutions d\'automatisation intelligentes pour simplifier vos tâches quotidiennes, améliorer la réactivité de votre entreprise et rendre vos processus plus efficaces.',
       features: [
@@ -47,7 +49,8 @@ const Services: React.FC = () => {
     },
     {
       icon: Globe,
-      title: 'Création de Sites Web & Web Apps',
+      title: 'Sites Web & Web Apps',
+      slug: 'sites-app-web',
       lottieUrl: 'https://lottie.host/4b6b4429-a766-4c55-ae84-4914d41eed3d/YeZXdRzgBB.lottie',
       description: 'Votre présence en ligne, c\'est votre première impression. Nous concevons des sites web modernes, rapides et adaptés à vos besoins, qu\'il s\'agisse d\'un simple site vitrine, d\'une landing page ou d\'une application web complète.',
       features: [
@@ -61,7 +64,8 @@ const Services: React.FC = () => {
     },
     {
       icon: Palette,
-      title: 'Création de Visuels',
+      title: 'Branding & Visuels',
+      slug: 'branding',
       lottieUrl: 'https://lottie.host/5c93b25d-496c-4111-a52a-0cb75d13725e/dX3ZSTwkOZ.lottie',
       description: 'Parce qu\'un bon design parle plus fort que mille mots. Nous créons des visuels qui attirent l\'œil, valorisent votre marque et laissent une impression durable.',
       features: [
@@ -144,9 +148,21 @@ const Services: React.FC = () => {
                     </div>
 
                     <AnimatedParagraph delay={0.3}>
-                      <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                        {service.description}
-                      </p>
+                      <div className="space-y-3">
+                        <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                          {service.description}
+                        </p>
+                        <Link 
+                          to={`/services/${service.slug}`}
+                          className="inline-flex items-center gap-2 text-[15px] font-bold text-primary transition-all duration-300 group relative"
+                        >
+                          <span className="relative">
+                            Découvrir ce service
+                            <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-primary transition-all duration-300 group-hover:w-full"></span>
+                          </span>
+                          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                        </Link>
+                      </div>
                     </AnimatedParagraph>
 
                     <div className="space-y-3 md:space-y-4 pt-2">

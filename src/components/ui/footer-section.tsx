@@ -37,9 +37,9 @@ const footerLinks: FooterSection[] = [
   {
     label: 'Services',
     links: [
-      { title: 'Intelligence Artificielle', href: '/services' },
-      { title: "Branding", href: '/services' },
-      { title: "Création de sites Web", href: '/services' }]
+      { title: 'IA et Automatisation', href: '/services/ia-automatisation' },
+      { title: "Branding", href: '/services/branding' },
+      { title: "Création de sites Web", href: '/services/sites-app-web' }]
 
   },
   {

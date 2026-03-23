@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 # .env # Removed by Orchids to allow .env files
 .env
+
+# Remotion & AI Agent Skills
+remotion/
+.agent/
+.agents/

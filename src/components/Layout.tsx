@@ -8,6 +8,7 @@ import { BubbleMenu } from '@/components/ui/BubbleMenu';
 import { StitchNavbar } from '@/components/ui/StitchNavbar';
 import { BinkooChatbot } from '@/components/BinkooChatbot';
 import { openWhatsApp } from '@/utils/whatsapp';
+import { StaggeredMenu } from '@/components/ui/StaggeredMenu';
 
 const Layout: React.FC<{
   children: React.ReactNode;
@@ -29,6 +30,15 @@ const Layout: React.FC<{
     }, {
       name: 'Services',
       path: '/services'
+    }, {
+      name: 'IA et Automatisation',
+      path: '/services/ia-automatisation'
+    }, {
+      name: 'Sites et App Web',
+      path: '/services/sites-app-web'
+    }, {
+      name: 'Branding',
+      path: '/services/branding'
     }, {
       name: 'Blog',
       path: '/blog'
@@ -56,6 +66,27 @@ const Layout: React.FC<{
         href: '/services',
         ariaLabel: 'Services',
         rotation: 8,
+        hoverStyles: { bgColor: '#FF2B00', textColor: '#ffffff' }
+      },
+      {
+        label: 'ia & auto',
+        href: '/services/ia-automatisation',
+        ariaLabel: 'IA et Automatisation',
+        rotation: -4,
+        hoverStyles: { bgColor: '#FF2B00', textColor: '#ffffff' }
+      },
+      {
+        label: 'sites & web',
+        href: '/services/sites-app-web',
+        ariaLabel: 'Sites et App Web',
+        rotation: 4,
+        hoverStyles: { bgColor: '#FF2B00', textColor: '#ffffff' }
+      },
+      {
+        label: 'branding',
+        href: '/services/branding',
+        ariaLabel: 'Branding',
+        rotation: -4,
         hoverStyles: { bgColor: '#FF2B00', textColor: '#ffffff' }
       },
       {
@@ -88,6 +119,26 @@ const Layout: React.FC<{
       }
     ];
 
+    const staggeredMenuItems = [
+      { label: 'Accueil', ariaLabel: 'Aller à l\'accueil', link: '/' },
+      { label: 'Services', ariaLabel: 'Voir nos services', link: '/services' },
+      { label: 'IA & Automatisation', ariaLabel: 'Intelligence Artificielle', link: '/services/ia-automatisation', isSubItem: true },
+      { label: 'Sites & App Web', ariaLabel: 'Développement Web', link: '/services/sites-app-web', isSubItem: true },
+      { label: 'Branding', ariaLabel: 'Identité Visuelle', link: '/services/branding', isSubItem: true },
+      { label: 'Portfolio', ariaLabel: 'Nos réalisations', link: '/realisations' },
+      { label: 'Blog', ariaLabel: 'Lire notre blog', link: '/blog' },
+      { label: 'À Propos', ariaLabel: 'En savoir plus sur nous', link: '/a-propos' },
+      { label: 'Contact', ariaLabel: 'Nous contacter', link: '/contact' }
+    ];
+
+    const socialItems = [
+      { label: 'Facebook', link: 'https://www.facebook.com/share/1JPaSH1STA/?mibextid=wwXIfr' },
+      { label: 'Instagram', link: 'https://www.instagram.com/binkoo_digital_lab?igsh=MXcyYjRpbHBrbjh1ag%3D%3D&utm_source=qr' },
+      { label: 'LinkedIn', link: 'https://www.linkedin.com/company/binkoo-digital-lab' },
+      { label: 'TikTok', link: 'https://www.tiktok.com/@binkoo.digital.lab?_t=ZM-90kNEp9sTGt&_r=1' },
+      { label: 'WhatsApp', link: 'https://api.whatsapp.com/send?phone=22644323841' }
+    ];
+
     useEffect(() => {
       const handleScroll = () => {
         const currentScrollY = window.scrollY;
@@ -110,16 +161,15 @@ const Layout: React.FC<{
 
     return <div className="min-h-screen bg-background">
       <div className="lg:hidden">
-        <BubbleMenu
-          logo={<span style={{ fontWeight: 700, fontSize: '0.75rem', whiteSpace: 'nowrap' }}>BinkoO Digital Lab</span>}
-          items={bubbleMenuItems}
-          menuAriaLabel="Toggle navigation"
-          menuBg="#ffffff"
-          menuContentColor="#111111"
-          useFixedPosition={true}
-          animationEase="back.out(1.5)"
-          animationDuration={0.5}
-          staggerDelay={0.12}
+        <StaggeredMenu
+          items={staggeredMenuItems}
+          socialItems={socialItems}
+          displaySocials={true}
+          displayItemNumbering={true}
+          accentColor="#E5002E"
+          colors={['#F5F5F5', '#EEEEEE', '#E5002E']}
+          onMenuOpen={() => console.log('Menu opened')}
+          onMenuClose={() => console.log('Menu closed')}
         />
       </div>
 

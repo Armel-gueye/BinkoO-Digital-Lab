@@ -14,6 +14,9 @@ const Contact = lazy(() => import("@/pages/Contact"));
 const Blog = lazy(() => import("@/pages/Blog"));
 const BlogArticle = lazy(() => import("@/pages/BlogArticle"));
 const TagPage = lazy(() => import("@/pages/TagPage"));
+const IAAutomatisation = lazy(() => import("@/pages/services/IAAutomatisation"));
+const SitesAppWeb = lazy(() => import("@/pages/services/SitesAppWeb"));
+const Branding = lazy(() => import("@/pages/services/Branding"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const PageLoader = () => (
@@ -37,6 +40,9 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Layout><Home /></Layout>} />
             <Route path="/services" element={<Layout><Services /></Layout>} />
+            <Route path="/services/ia-automatisation" element={<Layout><IAAutomatisation /></Layout>} />
+            <Route path="/services/sites-app-web" element={<Layout><SitesAppWeb /></Layout>} />
+            <Route path="/services/branding" element={<Layout><Branding /></Layout>} />
             <Route path="/realisations" element={<Layout><Realisations /></Layout>} />
             <Route path="/a-propos" element={<Layout><About /></Layout>} />
             <Route path="/blog" element={<Layout><Blog /></Layout>} />

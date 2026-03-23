@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { openWhatsApp } from '@/utils/whatsapp';
+import { ChevronDown } from 'lucide-react';
+import { AnimatedDropdown } from './AnimatedDropdown';
 
 export const StitchHero: React.FC = () => {
     const btnRef = useRef<HTMLButtonElement>(null);
@@ -69,7 +71,16 @@ export const StitchHero: React.FC = () => {
                         <nav className="hidden lg:flex items-center gap-8 xl:gap-12 animate-nav-reveal">
                             <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/">Accueil</Link>
 
-                            <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/services">Services</Link>
+                            <AnimatedDropdown
+                                text="Services"
+                                items={[
+                                    { name: 'Tous nos services', link: '/services' },
+                                    { name: 'IA et Automatisation', link: '/services/ia-automatisation' },
+                                    { name: 'Sites et App Web', link: '/services/sites-app-web' },
+                                    { name: 'Branding', link: '/services/branding' },
+                                ]}
+                            />
+
                             <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/blog">Blog</Link>
                             <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/realisations">Portfolio</Link>
                             <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/a-propos">À Propos</Link>
