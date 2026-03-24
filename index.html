@@ -4,12 +4,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WMSLH8VCNN"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-WMSLH8VCNN');
+    (function() {
+      function loadGtag() {
+        if (window.gtagLoaded) return;
+        window.gtagLoaded = true;
+        
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-WMSLH8VCNN";
+        document.head.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'G-WMSLH8VCNN');
+      }
+
+      var idleCallback = window.requestIdleCallback;
+      if (idleCallback) {
+        idleCallback(function() { setTimeout(loadGtag, 1500); }, { timeout: 4000 });
+      } else {
+        window.addEventListener('load', function() { setTimeout(loadGtag, 3500); });
+      }
+    })();
   </script>
   <title>BinkoO Digital Lab - Agence Digitale et d'Intelligence Artificielle</title>
   <meta name="description"
@@ -23,11 +42,11 @@
   <link rel="manifest" href="https://binkoo.digital/site.webmanifest" />
   <meta name="apple-mobile-web-app-title" content="BinkoO Digital Lab" />
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts - Optimisé pour la performance (seulement les poids nécessaires) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Roboto+Slab:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <meta name="google-site-verification" content="f01tJ_ciK3UthWagrc6Bo_nSP4uBbTalUe8C2ztGTyQ" />
 

@@ -60,77 +60,71 @@ const SitesAppWeb: React.FC = () => {
       {/* Hero Section */}
       <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection animation="fade-up">
-            <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16">
-              <div className="flex items-center justify-center gap-3 md:gap-4 mb-6">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-t from-black via-black to-neutral-700 flex items-center justify-center flex-shrink-0">
-                  <Globe className="w-6 h-6 md:w-7 md:h-7 text-white" />
-                </div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                  Création de Sites Web & Applications
-                </h1>
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16">
+            <div className="flex items-center justify-center gap-3 md:gap-4 mb-6">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-t from-black via-black to-neutral-700 flex items-center justify-center flex-shrink-0">
+                <Globe className="w-6 h-6 md:w-7 md:h-7 text-white" />
               </div>
-
-              <AnimatedParagraph delay={0.3}>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                  En Afrique de l'Ouest, <strong>votre site web est votre commercial le plus puissant</strong>. Il travaille 24h/24, ne prend jamais de congé et touche des clients que vous n'auriez jamais atteints autrement. Chez BinkoO Digital Lab, nous concevons des sites et applications web <strong>modernes, ultra-rapides et optimisés pour le marché africain</strong> — pensés pour convertir vos visiteurs en clients fidèles.
-                </p>
-              </AnimatedParagraph>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+                Création de Sites Web & Applications
+              </h1>
             </div>
 
-            <AnimatedImage delay={0.2}>
-              <div className="max-w-3xl mx-auto aspect-[4/3] md:aspect-[21/9] rounded-2xl overflow-hidden bg-white p-4 md:p-6 mb-16 shadow-inner border border-border/50">
-                <LottiePlayer src="https://lottie.host/4b6b4429-a766-4c55-ae84-4914d41eed3d/YeZXdRzgBB.lottie" className="w-full h-full" />
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              En Afrique de l'Ouest, <strong>votre site web est votre commercial le plus puissant</strong>. Il travaille 24h/24, ne prend jamais de congé et touche des clients que vous n'auriez jamais atteints autrement. Chez BinkoO Digital Lab, nous concevons des sites et applications web <strong>modernes, ultra-rapides et optimisés pour le marché africain</strong> — pensés pour convertir vos visiteurs en clients fidèles.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto aspect-[4/3] md:aspect-[21/9] rounded-2xl overflow-hidden bg-white p-4 md:p-6 mb-16 shadow-inner border border-border/50">
+            <LottiePlayer src="https://lottie.host/4b6b4429-a766-4c55-ae84-4914d41eed3d/YeZXdRzgBB.lottie" className="w-full h-full" />
+          </div>
+
+          <div className="max-w-4xl mx-auto flex flex-col gap-8 lg:gap-12">
+            {/* Texte descriptif en premier */}
+            <div className="bg-muted/50 rounded-lg p-5 md:p-6 lg:p-8">
+              <p className="text-[15px] md:text-[17px] lg:text-[18px] leading-relaxed text-muted-foreground">
+                Votre <Highlighter action="highlight" color="#E5002E">site web</Highlighter> n'est pas qu'une simple carte de visite numérique. C'est le pilier de votre <Highlighter action="underline" color="#FF9800">stratégie digitale en Afrique de l'Ouest</Highlighter>. Chez BinkoO Digital Lab, chaque site est conçu avec une obsession : la performance. Performance en termes de <Highlighter action="highlight" color="#3B82F6">vitesse de chargement</Highlighter> — essentielle avec les connexions internet africaines. Performance en termes de <Highlighter action="highlight" color="#3B82F6">conversion</Highlighter> — chaque élément est placé stratégiquement pour guider le visiteur vers l'action. Performance en termes de <Highlighter action="highlight" color="#3B82F6">référencement</Highlighter> — pour que vos clients vous trouvent sur Google avant vos concurrents. <br /><br />Que vous soyez un <Highlighter action="underline" color="#FF9800">entrepreneur à Ouagadougou</Highlighter>, un restaurant à Bobo-Dioulasso, un prestataire de services à Abidjan ou une start-up à Dakar, nous créons votre outil digital sur mesure. Nos <Highlighter action="highlight" color="#E5002E">boutiques en ligne</Highlighter> sont connectées à WhatsApp et aux solutions de paiement mobile (Orange Money, Moov Money) pour faciliter l'achat dans le contexte ouest-africain. <br /><br />Chaque site est responsive, sécurisé et livré avec un <Highlighter action="highlight" color="#F3F4F6">nom de domaine professionnel</Highlighter> et un hébergement fiable. Avec BinkoO Digital Lab, votre présence digitale ne dort jamais —  <Highlighter action="underline" color="#FF9800">elle génère des clients, de la crédibilité et de la croissance</Highlighter> jour et nuit.
+              </p>
+            </div>
+
+            {/* Ce que nous proposons en dessous */}
+            <div className="space-y-8">
+              <div className="space-y-4 md:space-y-5">
+                <h3 className="font-bold text-xl md:text-2xl">
+                  Ce que nous proposons :
+                </h3>
+                <StaggerContainer className="grid sm:grid-cols-2 gap-4 md:gap-5" staggerChildren={0.08}>
+                  {[
+                    'Sites vitrines professionnels adaptés à votre image de marque',
+                    'Boutiques en ligne avec paiement Mobile Money & WhatsApp',
+                    'Applications web et SaaS performantes sur mesure',
+                    'Landing pages optimisées pour vos campagnes Facebook & Google',
+                    'Référencement SEO local pour dominer Google au Burkina Faso',
+                    'Sites ultra-rapides, optimisés pour les réseaux 3G/4G africains',
+                    'Nom de domaine et hébergement inclus'
+                  ].map((item, index) => (
+                    <StaggerItem key={index} variant="fade-up">
+                      <div className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-sm md:text-base text-muted-foreground">
+                          {item}
+                        </span>
+                      </div>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
               </div>
-            </AnimatedImage>
 
-            <div className="max-w-4xl mx-auto flex flex-col gap-8 lg:gap-12">
-              {/* Texte descriptif en premier */}
-              <div className="bg-muted/50 rounded-lg p-5 md:p-6 lg:p-8">
-                <p className="text-[15px] md:text-[17px] lg:text-[18px] leading-relaxed text-muted-foreground">
-                  Votre <Highlighter action="highlight" color="#E5002E">site web</Highlighter> n'est pas qu'une simple carte de visite numérique. C'est le pilier de votre <Highlighter action="underline" color="#FF9800">stratégie digitale en Afrique de l'Ouest</Highlighter>. Chez BinkoO Digital Lab, chaque site est conçu avec une obsession : la performance. Performance en termes de <Highlighter action="highlight" color="#3B82F6">vitesse de chargement</Highlighter> — essentielle avec les connexions internet africaines. Performance en termes de <Highlighter action="highlight" color="#3B82F6">conversion</Highlighter> — chaque élément est placé stratégiquement pour guider le visiteur vers l'action. Performance en termes de <Highlighter action="highlight" color="#3B82F6">référencement</Highlighter> — pour que vos clients vous trouvent sur Google avant vos concurrents. <br /><br />Que vous soyez un <Highlighter action="underline" color="#FF9800">entrepreneur à Ouagadougou</Highlighter>, un restaurant à Bobo-Dioulasso, un prestataire de services à Abidjan ou une start-up à Dakar, nous créons votre outil digital sur mesure. Nos <Highlighter action="highlight" color="#E5002E">boutiques en ligne</Highlighter> sont connectées à WhatsApp et aux solutions de paiement mobile (Orange Money, Moov Money) pour faciliter l'achat dans le contexte ouest-africain. <br /><br />Chaque site est responsive, sécurisé et livré avec un <Highlighter action="highlight" color="#F3F4F6">nom de domaine professionnel</Highlighter> et un hébergement fiable. Avec BinkoO Digital Lab, votre présence digitale ne dort jamais —  <Highlighter action="underline" color="#FF9800">elle génère des clients, de la crédibilité et de la croissance</Highlighter> jour et nuit.
-                </p>
-              </div>
-
-              {/* Ce que nous proposons en dessous */}
-              <div className="space-y-8">
-                <div className="space-y-4 md:space-y-5">
-                  <h3 className="font-bold text-xl md:text-2xl">
-                    Ce que nous proposons :
-                  </h3>
-                  <StaggerContainer className="grid sm:grid-cols-2 gap-4 md:gap-5" staggerChildren={0.08}>
-                    {[
-                      'Sites vitrines professionnels adaptés à votre image de marque',
-                      'Boutiques en ligne avec paiement Mobile Money & WhatsApp',
-                      'Applications web et SaaS performantes sur mesure',
-                      'Landing pages optimisées pour vos campagnes Facebook & Google',
-                      'Référencement SEO local pour dominer Google au Burkina Faso',
-                      'Sites ultra-rapides, optimisés pour les réseaux 3G/4G africains',
-                      'Nom de domaine et hébergement inclus'
-                    ].map((item, index) => (
-                      <StaggerItem key={index} variant="fade-up">
-                        <div className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <span className="text-sm md:text-base text-muted-foreground">
-                            {item}
-                          </span>
-                        </div>
-                      </StaggerItem>
-                    ))}
-                  </StaggerContainer>
-                </div>
-
-                <div className="pt-4">
-                  <a href="#" onClick={handleWhatsAppClick} className="inline-block w-full sm:w-auto">
-                    <Button size="lg" className="w-full sm:w-auto px-10">
-                      Lancer mon projet web
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </a>
-                </div>
+              <div className="pt-4">
+                <a href="#" onClick={handleWhatsAppClick} className="inline-block w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto px-10">
+                    Lancer mon projet web
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </a>
               </div>
             </div>
-          </AnimatedSection>
+          </div>
 
           {/* Solutions Grid */}
           <AnimatedSection animation="fade-up">
@@ -150,24 +144,19 @@ const SitesAppWeb: React.FC = () => {
                 </p>
               </motion.div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" staggerChildren={0.1}>
                 {solutions.map((solution, index) => (
-                  <motion.div
-                    key={index}
-                    className="bg-background rounded-2xl p-6 md:p-8 shadow-lg border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-xl"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-t from-black via-black to-neutral-700 flex items-center justify-center mb-4">
-                      <solution.icon className="w-6 h-6 text-white" />
+                  <StaggerItem key={index} variant="fade-up">
+                    <div className="h-full bg-background rounded-2xl p-6 md:p-8 shadow-lg border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-xl">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-t from-black via-black to-neutral-700 flex items-center justify-center mb-4">
+                        <solution.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-lg md:text-xl font-bold mb-3">{solution.title}</h3>
+                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{solution.description}</p>
                     </div>
-                    <h3 className="text-lg md:text-xl font-bold mb-3">{solution.title}</h3>
-                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{solution.description}</p>
-                  </motion.div>
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerContainer>
             </div>
           </AnimatedSection>
 
@@ -177,31 +166,26 @@ const SitesAppWeb: React.FC = () => {
               <h2 className="text-2xl md:text-3xl font-bold mb-10 text-center">
                 Notre processus : de votre idée à votre site en ligne
               </h2>
-              <div className="space-y-8">
+              <StaggerContainer className="space-y-8" staggerChildren={0.15}>
                 {[
                   { step: '01', title: 'Discussion & diagnostic gratuit', desc: 'On échange sur votre projet, vos objectifs et votre marché cible au Burkina Faso ou en Afrique de l\'Ouest. Nous analysons votre positionnement et définissons la meilleure stratégie digitale.' },
                   { step: '02', title: 'Conception & design sur mesure', desc: 'Nous créons une maquette sur mesure qui reflète votre identité de marque. Design moderne, navigation intuitive, et expérience utilisateur optimale — validée par vous avant le développement.' },
                   { step: '03', title: 'Développement & intégrations', desc: 'Nous développons votre site avec les technologies les plus performantes. Intégration de WhatsApp Business, Mobile Money, formulaires de contact, blog SEO et outils d\'analyse.' },
                   { step: '04', title: 'Mise en ligne & accompagnement', desc: 'Votre site est mis en production avec nom de domaine, hébergement et certificat SSL. Nous assurons la formation, le support technique et l\'accompagnement SEO pour garantir vos résultats.' }
                 ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex gap-6 items-start"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.15 }}
-                  >
-                    <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-t from-primary to-red-400 flex items-center justify-center text-white font-bold text-lg">
-                      {item.step}
+                  <StaggerItem key={index} variant="fade-up">
+                    <div className="flex gap-6 items-start">
+                      <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-t from-primary to-red-400 flex items-center justify-center text-white font-bold text-lg">
+                        {item.step}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-lg mb-2">{item.title}</h3>
+                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{item.desc}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{item.desc}</p>
-                    </div>
-                  </motion.div>
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerContainer>
             </div>
           </AnimatedSection>
 

@@ -51,15 +51,28 @@ export const LottiePlayer: React.FC<LottiePlayerProps> = ({ src, className = '' 
 
   useEffect(() => {
     if (!isVisible) return;
-    if (!document.querySelector('script[src*="dotlottie-wc"]')) {
-      const script = document.createElement('script');
-      script.src = 'https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js';
-      script.type = 'module';
-      script.async = true;
-      script.onload = () => setScriptLoaded(true);
-      document.head.appendChild(script);
+    
+    const loadScript = () => {
+      if (!document.querySelector('script[src*="dotlottie-wc"]')) {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js';
+        script.type = 'module';
+        script.async = true;
+        // @ts-ignore
+        script.defer = true;
+        script.onload = () => setScriptLoaded(true);
+        document.head.appendChild(script);
+      } else {
+        setScriptLoaded(true);
+      }
+    };
+
+    // Defer even further to prevent blocking initial paints
+    const idleCallback = (window as any).requestIdleCallback;
+    if (idleCallback) {
+      idleCallback(() => loadScript(), { timeout: 1000 });
     } else {
-      setScriptLoaded(true);
+      setTimeout(loadScript, 500);
     }
   }, [isVisible]);
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { openWhatsApp } from '@/utils/whatsapp';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Menu } from 'lucide-react';
 import { AnimatedDropdown } from './AnimatedDropdown';
 
 export const StitchHero: React.FC = () => {
@@ -87,8 +87,8 @@ export const StitchHero: React.FC = () => {
                             <Link className="nav-link text-base font-medium text-black dark:text-white hover:text-primary transition-colors duration-200" to="/contact">Contact</Link>
                         </nav>
 
-                        <button className="lg:hidden p-2 text-black dark:text-white">
-                            <span className="material-symbols-outlined">menu</span>
+                        <button className="lg:hidden p-2 text-black dark:text-white" aria-label="Menu">
+                            <Menu className="w-6 h-6" />
                         </button>
                     </div>
                 </div>
@@ -166,7 +166,7 @@ export const StitchHero: React.FC = () => {
                                 height={1000}
                                 loading="eager"
                                 decoding="async"
-                                fetchpriority="high"
+                                fetchPriority="high"
                             />
                             <div className="absolute bottom-0 left-0 p-8 z-20">
                                 <span className="block text-xs font-bold uppercase tracking-widest text-white/90 mb-1">

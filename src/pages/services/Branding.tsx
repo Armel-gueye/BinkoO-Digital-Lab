@@ -59,78 +59,72 @@ const Branding: React.FC = () => {
 
       {/* Hero Section */}
       <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection animation="fade-up">
-            <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16">
-              <div className="flex items-center justify-center gap-3 md:gap-4 mb-6">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-t from-black via-black to-neutral-700 flex items-center justify-center flex-shrink-0">
-                  <Palette className="w-6 h-6 md:w-7 md:h-7 text-white" />
-                </div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                  Branding & Identité Visuelle
-                </h1>
+               <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16">
+            <div className="flex items-center justify-center gap-3 md:gap-4 mb-6">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-t from-black via-black to-neutral-700 flex items-center justify-center flex-shrink-0">
+                <Palette className="w-6 h-6 md:w-7 md:h-7 text-white" />
               </div>
-
-              <AnimatedParagraph delay={0.3}>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                  Au Burkina Faso et en Afrique de l'Ouest, <strong>la première impression compte plus que tout</strong>. Un logo amateuriste, des visuels incohérents ou une absence d'identité visuelle vous coûtent des clients chaque jour — souvent sans que vous le sachiez. Chez BinkoO Digital Lab, nous créons des <strong>identités de marque professionnelles et mémorables</strong> qui positionnent votre entreprise comme un acteur crédible, fiable et moderne sur le marché africain.
-                </p>
-              </AnimatedParagraph>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+                Branding & Identité Visuelle
+              </h1>
             </div>
 
-            <AnimatedImage delay={0.2}>
-              <div className="max-w-3xl mx-auto aspect-[4/3] md:aspect-[21/9] rounded-2xl overflow-hidden bg-white p-4 md:p-6 mb-16 shadow-inner border border-border/50">
-                <LottiePlayer src="https://lottie.host/5c93b25d-496c-4111-a52a-0cb75d13725e/dX3ZSTwkOZ.lottie" className="w-full h-full" />
-              </div>
-            </AnimatedImage>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              Au Burkina Faso et en Afrique de l'Ouest, <strong>la première impression compte plus que tout</strong>. Un logo amateuriste, des visuels incohérents ou une absence d'identité visuelle vous coûtent des clients chaque jour — souvent sans que vous le sachiez. Chez BinkoO Digital Lab, nous créons des <strong>identités de marque professionnelles et mémorables</strong> qui positionnent votre entreprise comme un acteur crédible, fiable et moderne sur le marché africain.
+            </p>
+          </div>
 
-            <div className="max-w-4xl mx-auto flex flex-col gap-8 lg:gap-12">
-              {/* Texte descriptif en premier */}
-              <div className="bg-muted/50 rounded-lg p-5 md:p-6 lg:p-8">
-                <p className="text-[15px] md:text-[17px] lg:text-[18px] leading-relaxed text-muted-foreground">
-                  Dans un marché ouest-africain en pleine explosion digitale, votre <Highlighter action="highlight" color="#E5002E">identité visuelle</Highlighter> est votre arme la plus puissante. C'est elle qui fait qu'un client vous choisit plutôt que votre concurrent. C'est elle qui transforme un passant sur les réseaux sociaux en <Highlighter action="underline" color="#FF9800">client fidèle</Highlighter>. Chez BinkoO Digital Lab, nous ne créons pas juste un logo — nous construisons une <Highlighter action="highlight" color="#3B82F6">signature de marque</Highlighter> complète qui raconte votre histoire et inspire confiance. <br /><br />Notre équipe comprend les codes visuels du <Highlighter action="underline" color="#FF9800">marché africain</Highlighter>. Nous savons quelles couleurs captent l'attention à Ouagadougou, quels styles fonctionnent sur les réseaux sociaux en Afrique francophone, et comment adapter votre image pour qu'elle résonne avec votre public local tout en restant moderne et internationale. <br /><br />De la petite <Highlighter action="underline" color="#FF9800">boutique de Bobo-Dioulasso</Highlighter> à la start-up ambitieuse d'Abidjan, du restaurant de Ouagadougou à l'entreprise de BTP à Bamako — chaque projet est unique. Nous concevons des visuels adaptés à vos <Highlighter action="highlight" color="#3B82F6">réseaux sociaux</Highlighter> (Instagram, Facebook, TikTok), vos <Highlighter action="highlight" color="#3B82F6">supports commerciaux</Highlighter> (flyers, brochures, roll-ups) et votre <Highlighter action="highlight" color="#3B82F6">communication digitale</Highlighter> quotidienne. <br /><br /><strong>Résultat : une marque qui se démarque, qui inspire confiance et qui vend.</strong> Votre identité visuelle devient votre avantage compétitif le plus durable.
-                </p>
-              </div>
-
-              {/* Ce que nous proposons en dessous */}
-              <div className="space-y-8">
-                <div className="space-y-4 md:space-y-5">
-                  <h3 className="font-bold text-xl md:text-2xl">
-                    Ce que nous proposons :
-                  </h3>
-                  <StaggerContainer className="grid sm:grid-cols-2 gap-4 md:gap-5" staggerChildren={0.08}>
-                    {[
-                      'Création de logo professionnel unique et mémorable',
-                      'Charte graphique complète (couleurs, typographies, règles)',
-                      'Visuels réseaux sociaux : posts, stories, carrousels, bannières',
-                      'Supports imprimés : flyers, affiches, cartes de visite, roll-ups',
-                      'Motion design et vidéos animées courtes',
-                      'Packaging et design d\'emballages produit',
-                      'Templates personnalisés pour votre communication quotidienne'
-                    ].map((item, index) => (
-                      <StaggerItem key={index} variant="fade-up">
-                        <div className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <span className="text-sm md:text-base text-muted-foreground">
-                            {item}
-                          </span>
-                        </div>
-                      </StaggerItem>
-                    ))}
-                  </StaggerContainer>
-                </div>
-
-                <div className="pt-4">
-                  <a href="#" onClick={handleWhatsAppClick} className="inline-block w-full sm:w-auto">
-                    <Button size="lg" className="w-full sm:w-auto px-10">
-                      Créer mon identité de marque
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </a>
-                </div>
-              </div>
+          <AnimatedImage delay={0.2}>
+            <div className="max-w-3xl mx-auto aspect-[4/3] md:aspect-[21/9] rounded-2xl overflow-hidden bg-white p-4 md:p-6 mb-16 shadow-inner border border-border/50">
+              <LottiePlayer src="https://lottie.host/5c93b25d-496c-4111-a52a-0cb75d13725e/dX3ZSTwkOZ.lottie" className="w-full h-full" />
             </div>
-          </AnimatedSection>
+          </AnimatedImage>
+
+          <div className="max-w-4xl mx-auto flex flex-col gap-8 lg:gap-12">
+            {/* Texte descriptif en premier */}
+            <div className="bg-muted/50 rounded-lg p-5 md:p-6 lg:p-8">
+              <p className="text-[15px] md:text-[17px] lg:text-[18px] leading-relaxed text-muted-foreground">
+                Dans un marché ouest-africain en pleine explosion digitale, votre <Highlighter action="highlight" color="#E5002E">identité visuelle</Highlighter> est votre arme la plus puissante. C'est elle qui fait qu'un client vous choisit plutôt que votre concurrent. C'est elle qui transforme un passant sur les réseaux sociaux en <Highlighter action="underline" color="#FF9800">client fidèle</Highlighter>. Chez BinkoO Digital Lab, nous ne créons pas juste un logo — nous construisons une <Highlighter action="highlight" color="#3B82F6">signature de marque</Highlighter> complète qui raconte votre histoire et inspire confiance. <br /><br />Notre équipe comprend les codes visuels du <Highlighter action="underline" color="#FF9800">marché africain</Highlighter>. Nous savons quelles couleurs captent l'attention à Ouagadougou, quels styles fonctionnent sur les réseaux sociaux en Afrique francophone, et comment adapter votre image pour qu'elle résonne avec votre public local tout en restant moderne et internationale. <br /><br />De la petite <Highlighter action="underline" color="#FF9800">boutique de Bobo-Dioulasso</Highlighter> à la start-up ambitieuse d'Abidjan, du restaurant de Ouagadougou à l'entreprise de BTP à Bamako — chaque projet est unique. Nous concevons des visuels adaptés à vos <Highlighter action="highlight" color="#3B82F6">réseaux sociaux</Highlighter> (Instagram, Facebook, TikTok), vos <Highlighter action="highlight" color="#3B82F6">supports commerciaux</Highlighter> (flyers, brochures, roll-ups) et votre <Highlighter action="highlight" color="#3B82F6">communication digitale</Highlighter> quotidienne. <br /><br /><strong>Résultat : une marque qui se démarque, qui inspire confiance et qui vend.</strong> Votre identité visuelle devient votre avantage compétitif le plus durable.
+              </p>
+            </div>
+
+            {/* Ce que nous proposons en dessous */}
+            <div className="space-y-8">
+              <div className="space-y-4 md:space-y-5">
+                <h3 className="font-bold text-xl md:text-2xl">
+                  Ce que nous proposons :
+                </h3>
+                <StaggerContainer className="grid sm:grid-cols-2 gap-4 md:gap-5" staggerChildren={0.08}>
+                  {[
+                    'Création de logo professionnel unique et mémorable',
+                    'Charte graphique complète (couleurs, typographies, règles)',
+                    'Visuels réseaux sociaux : posts, stories, carrousels, bannières',
+                    'Supports imprimés : flyers, affiches, cartes de visite, roll-ups',
+                    'Motion design et vidéos animées courtes',
+                    'Packaging et design d\'emballages produit',
+                    'Templates personnalisés pour votre communication quotidienne'
+                  ].map((item, index) => (
+                    <StaggerItem key={index} variant="fade-up">
+                      <div className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-sm md:text-base text-muted-foreground">
+                          {item}
+                        </span>
+                      </div>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
+
+              <div className="pt-4">
+                <a href="#" onClick={handleWhatsAppClick} className="inline-block w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto px-10">
+                    Créer mon identité de marque
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </a>
+        </div>
+      </div>
 
           {/* Services Grid */}
           <AnimatedSection animation="fade-up">

@@ -17,7 +17,28 @@ const Layout: React.FC<{
 }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
+    const [mountChatbot, setMountChatbot] = useState(false);
     const location = useLocation();
+
+    // Lazy load chatbot
+    useEffect(() => {
+        const timer = setTimeout(() => setMountChatbot(true), 5000);
+        const handleInteraction = () => {
+            setMountChatbot(true);
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('mousemove', handleInteraction);
+            window.removeEventListener('touchstart', handleInteraction);
+        };
+        window.addEventListener('scroll', handleInteraction, { passive: true });
+        window.addEventListener('mousemove', handleInteraction, { passive: true });
+        window.addEventListener('touchstart', handleInteraction, { passive: true });
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('mousemove', handleInteraction);
+            window.removeEventListener('touchstart', handleInteraction);
+        };
+    }, []);
 
     const handleWhatsAppClick = (e: React.MouseEvent) => {
       e.preventDefault();
@@ -194,7 +215,7 @@ const Layout: React.FC<{
 
       <Footer />
 
-      <BinkooChatbot />
+      {mountChatbot && <BinkooChatbot />}
     </div>;
   };
 export default Layout;

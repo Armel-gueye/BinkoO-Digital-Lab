@@ -60,23 +60,20 @@ const IAAutomatisation: React.FC = () => {
       {/* Hero Section */}
       <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection animation="fade-up">
-            <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16">
-              <div className="flex items-center justify-center gap-3 md:gap-4 mb-6">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-t from-black via-black to-neutral-700 flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-6 h-6 md:w-7 md:h-7 text-white" />
-                </div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                  IA & Automatisation
-                </h1>
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16">
+            <div className="flex items-center justify-center gap-3 md:gap-4 mb-6">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-t from-black via-black to-neutral-700 flex items-center justify-center flex-shrink-0">
+                <Sparkles className="w-6 h-6 md:w-7 md:h-7 text-white" />
               </div>
-
-              <AnimatedParagraph delay={0.3}>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                  Au Burkina Faso et en Afrique de l'Ouest, les entreprises qui grandissent vite ont un point commun : elles automatisent ce qui peut l'être. Chez BinkoO Digital Lab, nous intégrons des <strong>solutions d'intelligence artificielle</strong> concrètes et accessibles pour les PME, commerçants et entrepreneurs africains. Gagnez du temps, réduisez vos coûts et concentrez-vous sur ce qui compte vraiment : <strong>développer votre activité</strong>.
-                </p>
-              </AnimatedParagraph>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+                IA & Automatisation
+              </h1>
             </div>
+
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              Au Burkina Faso et en Afrique de l'Ouest, les entreprises qui grandissent vite ont un point commun : elles automatisent ce qui peut l'être. Chez BinkoO Digital Lab, nous intégrons des <strong>solutions d'intelligence artificielle</strong> concrètes et accessibles pour les PME, commerçants et entrepreneurs africains. Gagnez du temps, réduisez vos coûts et concentrez-vous sur ce qui compte vraiment : <strong>développer votre activité</strong>.
+            </p>
+          </div>
 
             <AnimatedImage delay={0.2}>
               <div className="max-w-3xl mx-auto aspect-[4/3] md:aspect-[21/9] rounded-2xl overflow-hidden bg-white p-4 md:p-6 mb-16 shadow-inner border border-border/50">
@@ -126,10 +123,9 @@ const IAAutomatisation: React.FC = () => {
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </a>
-                </div>
               </div>
             </div>
-          </AnimatedSection>
+          </div>
 
           {/* Use Cases Section */}
           <AnimatedSection animation="fade-up">
