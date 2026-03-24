@@ -198,7 +198,6 @@ export default defineConfig({
             '@radix-ui/react-toast',
           ],
           'vendor-animation': ['framer-motion', 'gsap'],
-          'vendor-spline': ['@splinetool/react-spline', '@splinetool/runtime'],
         },
       },
     },
@@ -218,9 +217,6 @@ export default defineConfig({
       'react-router-dom',
       'framer-motion',
     ],
-    exclude: [
-      '@splinetool/react-spline',
-      '@splinetool/runtime',
-    ],
+    exclude: [],
   },
 });
