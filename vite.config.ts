@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import nodemailer from "nodemailer";
+import Sitemap from "vite-plugin-sitemap";
 
 // In-memory rate limiter
 const requestsMap = new Map<string, number[]>();
@@ -171,7 +172,25 @@ const contactApiPlugin = () => ({
   },
 });
 
-export default defineConfig({
+import type { UserConfig } from 'vite';
+
+export default defineConfig(async (): Promise<UserConfig> => {
+  let blogRoutes: string[] = [];
+  try {
+    const res = await fetch('https://blog.binkoo.digital/wp-json/wp/v2/posts?per_page=100', {
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      const posts = (await res.json()) as any[];
+      if (Array.isArray(posts)) {
+        blogRoutes = posts.map((post) => `/blog/${post.slug}`);
+      }
+    }
+  } catch (error) {
+    console.error("Error fetching blog posts for sitemap generation:", error);
+  }
+
+  return {
   server: {
     host: "::",
     port: 3000,
@@ -179,6 +198,22 @@ export default defineConfig({
   plugins: [
     react(),
     contactApiPlugin(),
+    Sitemap({
+      hostname: 'https://binkoo.digital',
+      dynamicRoutes: [
+        '/',
+        '/services',
+        '/a-propos',
+        '/services/ia-automatisation',
+        '/services/sites-app-web',
+        '/services/branding',
+        '/realisations',
+        '/blog',
+        '/contact',
+        ...blogRoutes
+      ],
+      generateRobotsTxt: true
+    }),
   ],
   resolve: {
     alias: {
@@ -219,4 +254,5 @@ export default defineConfig({
     ],
     exclude: [],
   },
+  };
 });

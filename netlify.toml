@@ -2,10 +2,7 @@
   publish = "dist"
   command = "npm run build"
 
-# Prerendering pour améliorer l'indexation Google
-[[plugins]]
-  package = "@netlify/plugin-sitemap"
-
+# Removed Netlify sitemap plugin to use vite-plugin-sitemap instead for correct SPA indexing
 # Configuration pour le rendu côté serveur (SSR-like behavior)
 [build.environment]
   NODE_VERSION = "18"
