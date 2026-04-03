@@ -176,16 +176,6 @@ export default function BlogArticle() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
 
-          <motion.button
-            onClick={() => navigate('/blog')}
-            className="absolute top-6 left-6 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white transition-colors shadow-lg"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="font-semibold text-sm">Retour au blog</span>
-          </motion.button>
 
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 lg:p-16">
             <div className="container-fluid">
