@@ -61,20 +61,6 @@ export default function TagPage() {
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
                 <div className="container-fluid relative z-10">
-                    <motion.div
-                        className="mb-8"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <Link
-                            to="/blog"
-                            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-medium mb-4"
-                        >
-                            <ArrowLeft className="w-4 h-4" />
-                            Retour au blog
-                        </Link>
-                    </motion.div>
 
                     <AnimatedSection animation="fade-up" className="mb-16">
                         <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-6">
