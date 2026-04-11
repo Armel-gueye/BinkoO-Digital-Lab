@@ -426,16 +426,16 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}>
 
-              {/* Project 1: Large Card */}
+              {/* Project 1: Large Card (AMISI Sarl) */}
               <AnimatedImage delay={0.1}>
                 <div className="relative col-span-full md:col-span-2 lg:col-span-2 row-span-2 rounded-2xl overflow-hidden group border border-border">
                   <img
-                    src="https://i.postimg.cc/FFfVTn6k/msedge-Gf5hg-DL269.jpg"
-                    alt="Project 1"
+                    src="https://res.cloudinary.com/dpvgwvnk8/image/upload/v1775864912/zlkhmhsgcelnuimnz7s9_x2gqlt.webp"
+                    alt="AMISI Sarl"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                     decoding="async"
-                    fetchpriority="low"
+                    fetchPriority="low"
                   />
                   <div className="absolute bottom-5 right-5">
                     <Link to="/realisations" className="bg-white/95 hover:bg-white text-foreground px-4 py-2 rounded-lg flex items-center text-sm font-semibold shadow-lg transition-all hover:scale-105">
@@ -445,7 +445,8 @@ export default function Home() {
                 </div>
               </AnimatedImage>
 
-              {/* Project 2: Top Right */}
+
+              {/* Project 2: Top Right (BinkoO Store) */}
               <AnimatedImage delay={0.2}>
                 <div className="relative col-span-full md:col-span-1 lg:col-span-1 row-span-1 rounded-2xl overflow-hidden group border border-border">
                   <img
@@ -454,7 +455,7 @@ export default function Home() {
                     className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                     decoding="async"
-                    fetchpriority="low"
+                    fetchPriority="low"
                   />
 
                   <div className="absolute bottom-4 right-4">
@@ -465,16 +466,16 @@ export default function Home() {
                 </div>
               </AnimatedImage>
 
-              {/* Project 3: Bottom Right */}
+              {/* Project 3: Bottom Right (BONPLAT) */}
               <AnimatedImage delay={0.3}>
                 <div className="relative col-span-full md:col-span-1 lg:col-span-1 row-span-1 rounded-2xl overflow-hidden group border border-border">
                   <img
-                    src="https://i.postimg.cc/59kk0ChT/msedge-o-Yx9ORu-STc.png"
-                    alt="Project 3"
+                    src="https://i.postimg.cc/FFfVTn6k/msedge-Gf5hg-DL269.jpg"
+                    alt="BONPLAT Pingdwendé"
                     className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                     decoding="async"
-                    fetchpriority="low"
+                    fetchPriority="low"
                   />
 
                   <div className="absolute bottom-4 right-4">

@@ -63,6 +63,28 @@ const Realisations: React.FC = () => {
     />
   ];
 
+  const amisiImages = [
+    <img
+      key="amisi-1"
+      src="https://res.cloudinary.com/dpvgwvnk8/image/upload/v1775864912/zlkhmhsgcelnuimnz7s9_x2gqlt.webp"
+      alt="A.M.I.S.I Sarl - Accueil"
+      className="rounded-xl w-full h-full object-contain"
+    />,
+    <img
+      key="amisi-2"
+      src="https://res.cloudinary.com/dpvgwvnk8/image/upload/v1775864911/bw4xjajo8zgzjjok1f47_vgksyg.webp"
+      alt="A.M.I.S.I Sarl - Services"
+      className="rounded-xl w-full h-full object-contain"
+    />,
+    <img
+      key="amisi-3"
+      src="https://res.cloudinary.com/dpvgwvnk8/image/upload/v1775864912/gviku4fku6t2hrm9rjov_rwol81.webp"
+      alt="A.M.I.S.I Sarl - Immobilier"
+      className="rounded-xl w-full h-full object-contain"
+    />
+  ];
+
+
   const bonplatImages = [
     <img
       key="bonplat-1"
@@ -85,6 +107,31 @@ const Realisations: React.FC = () => {
   ];
 
   const projects = [
+    {
+      title: 'A.M.I.S.I Sarl',
+      category: 'Écosystème Corporate Sur-Mesure',
+      description: 'A.M.I.S.I Sarl — La vitrine digitale d\'un empire multisectoriel au Burkina Faso. La création de ce site web sur-mesure repose sur une architecture Headless ultra-performante, unifiant avec élégance six pôles d\'expertise complexes, de la promotion immobilière au BTP.',
+      detailedText: `A.M.I.S.I Sarl — La vitrine digitale d'un empire multisectoriel au Burkina Faso. La création de ce site web sur-mesure repose sur une architecture Headless ultra-performante, unifiant avec élégance six pôles d'expertise complexes, de la promotion immobilière au BTP.
+
+Le défi stratégique : Structurer la complexité.
+Notre agence digitale a relevé le défi de concevoir une plateforme fluide capable de présenter clairement des services radicalement différents (Immobilier, BTP, Forage, Import-Export, Commerce Général, Alimentation Fine) sans jamais perdre le visiteur. L'enjeu était de créer une expérience utilisateur (UX) limpide tout en garantissant des performances web exceptionnelles.
+
+L'innovation : Une Architecture Headless CMS & Cloudinary.
+Pour ce développement web sur-mesure, nous avons opté pour une approche "Headless" : une interface utilisateur ultra-rapide (React) connectée à un back-office WordPress robuste. Couplée à Cloudinary pour une optimisation et une diffusion instantanée des médias, cette technologie offre une vitesse de chargement fulgurante, un critère essentiel pour l'expérience utilisateur et le référencement naturel (SEO).
+
+Pourquoi cette ingénierie fait la différence :
+
+• Gestion Immobilière Intuitive : Nous avons développé un back-office WordPress entièrement personnalisé. Le fondateur peut publier quotidiennement de nouveaux biens immobiliers (vente/location, filtrage dynamique par date et budget) en quelques clics, sans aucune ligne de code.
+
+• SEO Technique de Haut Niveau : Le site est une machine d'acquisition. Génération dynamique des balises Meta, intégration poussée de Rank Math et implémentation de données structurées (Schema.org) spécifiques à chaque secteur pour dominer les résultats de recherche Google.
+
+• Transfert de Compétences : La technologie ne vaut rien sans l'humain. La livraison du projet a inclus une formation personnalisée d'une heure, rendant le client 100% autonome sur la mise à jour de son contenu.
+
+Résultat concret :
+A.M.I.S.I Sarl possède désormais bien plus qu'un simple site vitrine. C'est un outil de croissance robuste, évolutif et optimisé pour le SEO, qui reflète l'envergure de l'entreprise tout en offrant une gestion quotidienne déconcertante de facilité pour ses équipes.`,
+      folderImages: amisiImages,
+      link: 'https://amisi-logement.sarl',
+    },
     {
       title: 'BONPLAT Pingdwendé',
       category: 'Solution culinaire 2.0',
@@ -118,7 +165,7 @@ const Realisations: React.FC = () => {
         title="Nos Réalisations - BinkoO Digital Lab"
         description="Découvrez nos projets web : sites e-commerce, portfolios d'auteur, solutions IA. Réalisations concrètes pour le marché burkinabè. Design moderne et performances optimales."
         canonical="https://binkoo.digital/realisations"
-        keywords="réalisations BinkoO, portfolio projets, sites web Burkina Faso, projets e-commerce, BinkoO Store, Linda Maïssar, BONPLAT"
+        keywords="réalisations BinkoO, portfolio projets, sites web Burkina Faso, projets e-commerce, AMISI Sarl, BinkoO Store, Linda Maïssar, BONPLAT"
       />
       <div className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -190,7 +237,7 @@ const Realisations: React.FC = () => {
                           </CollapsibleTrigger>
                           <CollapsibleContent className="mt-4 overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
                             <div className="bg-muted/50 rounded-lg p-4 md:p-5">
-                              <p className="text-[15px] md:text-[17px] text-muted-foreground leading-relaxed">
+                              <p className="text-[15px] md:text-[17px] text-muted-foreground leading-relaxed whitespace-pre-wrap">
                                 {project.detailedText}
                               </p>
                             </div>
