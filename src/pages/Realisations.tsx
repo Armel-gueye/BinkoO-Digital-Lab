@@ -136,7 +136,20 @@ A.M.I.S.I Sarl possède désormais bien plus qu'un simple site vitrine. C'est un
       title: 'BONPLAT Pingdwendé',
       category: 'Solution culinaire 2.0',
       description: 'BONPLAT Pingdwendé — La révolution digitale dans l\'art culinaire burkinabè. Un site web minimaliste et ultra-performant couplé à un assistant IA intelligent qui transforme les visiteurs en clients fidèles.',
-      detailedText: 'BONPLAT Pingdwendé — La révolution digitale dans l\'art culinaire burkinabè. Un site web minimaliste et ultra-performant couplé à un assistant IA intelligent qui transforme les visiteurs en clients fidèles. L\'innovation : Un Concierge Digital Intelligent. Contrairement aux chatbots basiques qui donnent des réponses génériques, notre assistant IA comprend le contexte de chaque demande. Il répond instantanément aux questions sur les menus, les prix, les horaires de livraison, et guide naturellement vers la commande. Pourquoi cette technologie change tout : Plus de clients perdus — Réponses immédiates 24h/24, même hors horaires d\'ouverture. Conversion boostée — L\'IA identifie les intentions d\'achat et guide vers la commande. Gain de temps radical — Fini les appels répétitifs pour les mêmes questions. Service personnalisé — Chaque interaction est adaptée au contexte du client. Résultat concret : Vos visiteurs deviennent clients en quelques clics, sans friction, sans attente. Une expérience si fluide qu\'ils reviennent naturellement.',
+      detailedText: `BONPLAT Pingdwendé — La révolution digitale dans l'art culinaire burkinabè. Un site web minimaliste et ultra-performant couplé à un assistant IA intelligent qui transforme les visiteurs en clients fidèles.
+
+L'innovation : Un Concierge Digital Intelligent.
+Contrairement aux chatbots basiques qui donnent des réponses génériques, notre assistant IA comprend le contexte de chaque demande. Il répond instantanément aux questions sur les menus, les prix, les horaires de livraison, et guide naturellement vers la commande.
+
+Pourquoi cette technologie change tout :
+
+• Plus de clients perdus : Réponses immédiates 24h/24, même hors horaires d'ouverture.
+• Conversion boostée : L'IA identifie les intentions d'achat et guide vers la commande.
+• Gain de temps radical : Fini les appels répétitifs pour les mêmes questions.
+• Service personnalisé : Chaque interaction est adaptée au contexte du client.
+
+Résultat concret :
+Vos visiteurs deviennent clients en quelques clics, sans friction, sans attente. Une expérience si fluide qu'ils reviennent naturellement.`,
       folderImages: bonplatImages,
       link: 'https://bonplatpingdwende.netlify.app',
     },
@@ -144,7 +157,18 @@ A.M.I.S.I Sarl possède désormais bien plus qu'un simple site vitrine. C'est un
       title: 'BinkoO Store',
       category: 'E-commerce Moderne & Automatisé',
       description: 'BinkoO Store — La boutique en ligne qui allie design, rapidité et automatisation. Une plateforme e-commerce fluide et intuitive pensée pour le marché burkinabè, avec un système de commande automatique via WhatsApp.',
-      detailedText: 'BinkoO Store est une boutique en ligne nouvelle génération conçue pour offrir une expérience d\'achat rapide, claire et agréable. L\'objectif : permettre aux utilisateurs de commander directement leurs produits via WhatsApp en un clic, sans complications. Le site se distingue par sa vitesse exceptionnelle, son interface minimaliste et un design orienté conversion — chaque section a été pensée pour transformer les visiteurs en acheteurs. Nous avons mis l\'accent sur la fiabilité, la simplicité et la performance mobile, car c\'est là que se trouve la majorité des clients aujourd\'hui. Un projet 100% conçu pour le marché africain moderne.',
+      detailedText: `BinkoO Store est une boutique en ligne nouvelle génération conçue pour offrir une expérience d'achat rapide, claire et agréable.
+
+L'objectif :
+Permettre aux utilisateurs de commander directement leurs produits via WhatsApp en un clic, sans complications.
+
+Le site se distingue par :
+
+• Une vitesse exceptionnelle et une interface minimaliste.
+• Un design orienté conversion, où chaque section a été pensée pour transformer les visiteurs en acheteurs.
+• Une approche axée sur la fiabilité, la simplicité et la performance mobile (là où se trouve la majorité des clients).
+
+Un projet 100% conçu pour le marché africain moderne, alliant design, rapidité et automatisation.`,
       folderImages: binkooImages,
       link: 'https://binkoo.store',
     },
@@ -152,7 +176,18 @@ A.M.I.S.I Sarl possède désormais bien plus qu'un simple site vitrine. C'est un
       title: 'Linda Maïssar GUEYE',
       category: 'Portfolio d\'écrivaine professionnelle',
       description: 'Linda Maïssar GUEYE — Un site d\'auteure à l\'image de ses mots. Un portfolio fluide, esthétique et poétique qui met en valeur ses livres et ses services de correction littéraire.',
-      detailedText: 'Ce site web a été conçu pour refléter la personnalité élégante et inspirante de Linda Maïssar GUEYE, écrivaine et correctrice basée à Bobo-Dioulasso. Nous avons opté pour une navigation claire, une présentation harmonieuse de ses livres, et une mise en avant de ses services de correction et de relecture académique. L\'expérience utilisateur est fluide, rapide et agréable sur tous les écrans. Chaque page a été pensée pour inciter à la découverte tout en gardant une touche professionnelle et littéraire. Le résultat : un site sobre, captivant et parfaitement aligné avec la vision d\'une écrivaine moderne et connectée.',
+      detailedText: `Ce site web a été conçu pour refléter la personnalité élégante et inspirante de Linda Maïssar GUEYE, écrivaine et correctrice basée à Bobo-Dioulasso.
+
+Caractéristiques principales :
+
+• Navigation claire et présentation harmonieuse de ses œuvres littéraires.
+• Mise en avant stratégique de ses services de correction et de relecture académique.
+• Expérience utilisateur premium : fluide, rapide et agréable sur tous les écrans (desktop comme mobile).
+
+Chaque page a été pensée pour inciter à la découverte tout en gardant une touche profondément professionnelle et littéraire.
+
+Le résultat :
+Un site sobre, captivant et parfaitement aligné avec la vision d'une écrivaine moderne et connectée.`,
       folderImages: lindaImages,
       link: 'https://lindamaissargueye.netlify.app',
     },
