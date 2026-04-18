@@ -17,6 +17,8 @@ const TagPage = lazy(() => import("@/pages/TagPage"));
 const IAAutomatisation = lazy(() => import("@/pages/services/IAAutomatisation"));
 const SitesAppWeb = lazy(() => import("@/pages/services/SitesAppWeb"));
 const Branding = lazy(() => import("@/pages/services/Branding"));
+const CaseStudyAmisi = lazy(() => import("@/pages/realisations/CaseStudyAmisi"));
+const CaseStudyBlogAutomation = lazy(() => import("@/pages/realisations/CaseStudyBlogAutomation"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const PageLoader = () => (
@@ -44,6 +46,8 @@ const App = () => (
             <Route path="/services/sites-app-web" element={<Layout><SitesAppWeb /></Layout>} />
             <Route path="/services/branding" element={<Layout><Branding /></Layout>} />
             <Route path="/realisations" element={<Layout><Realisations /></Layout>} />
+            <Route path="/realisations/amisi-sarl" element={<Layout><CaseStudyAmisi /></Layout>} />
+            <Route path="/realisations/automatisation-blog-seo" element={<Layout><CaseStudyBlogAutomation /></Layout>} />
             <Route path="/a-propos" element={<Layout><About /></Layout>} />
             <Route path="/blog" element={<Layout><Blog /></Layout>} />
             <Route path="/blog/:slug" element={<Layout><BlogArticle /></Layout>} />

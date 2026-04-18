@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import InteractiveCard from '@/components/ui/InteractiveCard';
@@ -106,6 +107,28 @@ const Realisations: React.FC = () => {
     />
   ];
 
+  // IMAGES AUTOMATISATION BLOG — Remplacez les src par vos captures (workflow n8n, blog publié, notification Telegram)
+  const blogAutoImages = [
+    <img
+      key="blogauto-1"
+      src="https://i.postimg.cc/FFfVTn6k/msedge-Gf5hg-DL269.jpg"
+      alt="Pipeline automatisation blog SEO - Workflow n8n"
+      className="rounded-xl w-full h-full object-contain"
+    />,
+    <img
+      key="blogauto-2"
+      src="https://i.postimg.cc/FFfVTn6k/msedge-Gf5hg-DL269.jpg"
+      alt="Blog BinkoO Digital Lab - Articles SEO automatisés"
+      className="rounded-xl w-full h-full object-contain"
+    />,
+    <img
+      key="blogauto-3"
+      src="https://i.postimg.cc/FFfVTn6k/msedge-Gf5hg-DL269.jpg"
+      alt="Notification Telegram - Publication automatique"
+      className="rounded-xl w-full h-full object-contain"
+    />
+  ];
+
   const projects = [
     {
       title: 'A.M.I.S.I Sarl',
@@ -128,9 +151,36 @@ Pourquoi cette ingénierie fait la différence :
 • Transfert de Compétences : La technologie ne vaut rien sans l'humain. La livraison du projet a inclus une formation personnalisée d'une heure, rendant le client 100% autonome sur la mise à jour de son contenu.
 
 Résultat concret :
-A.M.I.S.I Sarl possède désormais bien plus qu'un simple site vitrine. C'est un outil de croissance robuste, évolutif et optimisé pour le SEO, qui reflète l'envergure de l'entreprise tout en offrant une gestion quotidienne déconcertante de facilité pour ses équipes.`,
+A.M.I.S.I Sarl possède désormais bien plus qu'un simple site vitrine. C'est un outil de croissance robuste, évolutif et optimisé pour le SEO, qui reflète l'envergure de l'entreprise tout en offrant une gestion quotidienne déconcertante de facilité pour ses équipes.
+
+Une collaboration sans frontières :
+Il est important de souligner que, bien que A.M.I.S.I Sarl soit basée dans une autre ville, la distance n'a jamais été un frein. Nous avons collaboré brillamment à distance, avec une communication fluide et transparente du début à la fin. Ce succès prouve que même depuis une autre ville ou un autre pays, nous sommes pleinement capables de réaliser vos projets digitaux les plus ambitieux en toute confiance et sécurité.`,
       folderImages: amisiImages,
       link: 'https://amisi-logement.sarl',
+      caseStudyLink: '/realisations/amisi-sarl',
+    },
+    {
+      title: 'Automatisation Blog SEO',
+      category: 'Pipeline IA & Automatisation n8n',
+      description: 'Un pipeline de publication autonome qui crée, publie et indexe des articles SEO de 2 000 mots — 3 fois par semaine, sans intervention humaine. Architecture multi-agents avec n8n, l\'intelligence artificielle et WordPress.',
+      detailedText: `Pipeline de publication de contenu entièrement autonome, conçu et exploité en interne par BinkoO Digital Lab. Il s'exécute trois fois par semaine sans intervention humaine.
+
+Le circuit complet :
+
+• Planification automatique et sélection intelligente de catégorie via une base de données cloud (mémoire éditoriale centralisée).
+• Génération du titre par IA avec contrainte géographique Afrique de l'Ouest.
+• Recherche web temps réel et synthèse des sources par une IA spécialisée.
+• Rédaction d'article de 2 000+ mots en HTML natif, directement publiable.
+• Publication WordPress via API REST, image professionnelle, indexation Google proactive.
+• Notification Telegram en temps réel.
+
+Architecture multi-agents :
+Trois modèles d'IA distincts jouent des rôles complémentaires — aucun ne fait le travail d'un autre. Cette séparation des responsabilités garantit la fiabilité et l'intégrité des sources citées.
+
+Ce workflow est en production sur blog.binkoo.digital et génère des articles publiés, indexés et accessibles.`,
+      folderImages: blogAutoImages,
+      link: 'https://blog.binkoo.digital',
+      caseStudyLink: '/realisations/automatisation-blog-seo',
     },
     {
       title: 'BONPLAT Pingdwendé',
@@ -279,17 +329,30 @@ Un site sobre, captivant et parfaitement aligné avec la vision d'une écrivaine
                           </CollapsibleContent>
                         </Collapsible>
 
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-auto inline-block w-fit"
-                        >
-                          <button className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-medium whitespace-nowrap">
-                            <span>Voir le site</span>
-                            <ArrowRight className="h-4 w-4 flex-shrink-0" />
-                          </button>
-                        </a>
+                        <div className="mt-auto flex flex-wrap gap-3">
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block w-fit"
+                          >
+                            <button className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-medium whitespace-nowrap">
+                              <span>Voir le site</span>
+                              <ArrowRight className="h-4 w-4 flex-shrink-0" />
+                            </button>
+                          </a>
+                          {project.caseStudyLink && (
+                            <Link
+                              to={project.caseStudyLink}
+                              className="inline-block w-fit"
+                            >
+                              <button className="inline-flex items-center gap-2 px-4 py-2 bg-foreground text-background rounded-md hover:bg-foreground/90 transition-colors text-sm font-medium whitespace-nowrap">
+                                <span>Étude de cas complète</span>
+                                <ArrowRight className="h-4 w-4 flex-shrink-0" />
+                              </button>
+                            </Link>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </InteractiveCard>
