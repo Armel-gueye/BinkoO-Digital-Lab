@@ -111,19 +111,19 @@ const Realisations: React.FC = () => {
   const blogAutoImages = [
     <img
       key="blogauto-1"
-      src="https://i.postimg.cc/FFfVTn6k/msedge-Gf5hg-DL269.jpg"
+      src="https://res.cloudinary.com/dchyxe0jj/image/upload/q_auto/f_auto/v1776544184/Capture_d_%C3%A9cran_2026-04-18_200909_fcxipu.png"
       alt="Pipeline automatisation blog SEO - Workflow n8n"
       className="rounded-xl w-full h-full object-contain"
     />,
     <img
       key="blogauto-2"
-      src="https://i.postimg.cc/FFfVTn6k/msedge-Gf5hg-DL269.jpg"
+      src="https://res.cloudinary.com/dchyxe0jj/image/upload/q_auto/f_auto/v1776544185/Capture_d_%C3%A9cran_2026-04-18_202604_w5yo4t.png"
       alt="Blog BinkoO Digital Lab - Articles SEO automatisés"
       className="rounded-xl w-full h-full object-contain"
     />,
     <img
       key="blogauto-3"
-      src="https://i.postimg.cc/FFfVTn6k/msedge-Gf5hg-DL269.jpg"
+      src="https://res.cloudinary.com/dchyxe0jj/image/upload/q_auto/f_auto/v1776544183/Capture_d_%C3%A9cran_2026-04-18_201411_wxmkuo.png"
       alt="Notification Telegram - Publication automatique"
       className="rounded-xl w-full h-full object-contain"
     />
