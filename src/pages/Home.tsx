@@ -22,7 +22,7 @@ export default function Home() {
 
   return <>
     <SEO
-      title="BinkoO Digital Lab - Agence IA, Web & Design au Burkina Faso"
+      title="BinkoO Digital Lab - Agence d'Automatisation, d'IA, Web & Design au Burkina Faso"
       description="Agence digitale experte en automatisation IA, création de sites web modernes et design graphique. Transformez vos processus et votre image de marque au Burkina Faso et en Afrique."
       canonical="https://binkoo.digital"
       keywords="agence digitale Burkina Faso, automatisation IA, création site web Bobo-Dioulasso, design graphique, chatbot WhatsApp, BinkoO"
