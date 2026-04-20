@@ -450,7 +450,7 @@ export default function Home() {
               <AnimatedImage delay={0.2}>
                 <div className="relative col-span-full md:col-span-1 lg:col-span-1 row-span-1 rounded-2xl overflow-hidden group border border-border">
                   <img
-                    src="https://i.postimg.cc/85dNGbK6/msedge-m-T1m1b-Md-NY.png"
+                    src="https://res.cloudinary.com/dchyxe0jj/image/upload/q_auto/f_auto/v1776544184/Capture_d_%C3%A9cran_2026-04-18_200909_fcxipu.png"
                     alt="Project 2"
                     className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
