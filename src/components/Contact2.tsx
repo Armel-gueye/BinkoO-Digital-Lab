@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { trackContactFormSubmit } from "@/utils/analytics";
 
 interface Contact2Props {
   title?: string;
@@ -38,12 +39,15 @@ export const Contact2 = ({
       const data = await response.json();
 
       if (data.success) {
+        trackContactFormSubmit(true);
         toast.success("Demande envoyée avec succès ! Nous vous recontacterons sous 24h.");
         form.reset();
       } else {
+        trackContactFormSubmit(false);
         toast.error(data.message || "Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
       }
     } catch (error) {
+      trackContactFormSubmit(false);
       toast.error("Erreur serveur. Veuillez réessayer plus tard ou nous contacter directement par email.");
     } finally {
       setIsSubmitting(false);

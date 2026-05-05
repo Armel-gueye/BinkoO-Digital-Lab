@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { AnimatedSection, AnimatedParagraph, StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import { Contact2 } from '@/components/Contact2';
 import { openWhatsApp, getWhatsAppUrl } from '@/utils/whatsapp';
+import { trackSocialClick, trackDevisClick } from '@/utils/analytics';
 import SEO from '@/components/SEO';
 
 const Contact: React.FC = () => {
@@ -83,7 +84,10 @@ const Contact: React.FC = () => {
         rel={method.link.startsWith('http') ? 'noopener noreferrer' : ''}
         className="inline-block">
 
-        <ThreeDButton className="px-6 py-2.5">
+        <ThreeDButton 
+          className="px-6 py-2.5" 
+          onClick={() => trackSocialClick(`Contact Page: ${method.title}`)}
+        >
           <span className="flex items-center gap-2 justify-center">
             {method.action}
             <ArrowRight className="h-4 w-4" />
@@ -175,7 +179,13 @@ const Contact: React.FC = () => {
                       rel={action.link.startsWith('http') || action.link === 'whatsapp' ? 'noopener noreferrer' : ''}
                       className="mt-auto inline-block">
 
-                      <ThreeDButton className="w-full">
+                      <ThreeDButton 
+                        className="w-full"
+                        onClick={() => {
+                          if (action.title === 'Devis Express') trackDevisClick('contact_page_express');
+                          else if (action.title === 'Appel Découverte') trackSocialClick('Phone Call Discovery');
+                        }}
+                      >
                         <span className="flex items-center gap-2 justify-center">
                           {action.cta}
                           <ArrowRight className="h-3.5 w-3.5" />

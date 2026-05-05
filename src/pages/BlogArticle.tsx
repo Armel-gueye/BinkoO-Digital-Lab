@@ -12,11 +12,11 @@ import {
   calculateReadTime,
   extractText,
   getFeaturedImage,
-  getMonthFromDate,
   getTags,
   getSEOData
 } from '@/services/blogService';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { getWhatsAppUrl, openWhatsApp } from '@/utils/whatsapp';
+import { trackBlogArticleView, trackSocialClick, trackDevisClick } from '@/utils/analytics';
 
 export default function BlogArticle() {
   const { slug } = useParams();
@@ -48,6 +48,12 @@ export default function BlogArticle() {
 
     loadArticle();
   }, [slug]);
+
+  useEffect(() => {
+    if (article && !isLoading) {
+      trackBlogArticleView(articleTitle, slug || '');
+    }
+  }, [article, isLoading, slug, articleTitle]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -138,6 +144,7 @@ export default function BlogArticle() {
     try {
       if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
         await navigator.share(shareData);
+        trackSocialClick(`Share Native: ${articleTitle}`);
         toast.success('Partagé avec succès !');
       } else {
         await navigator.clipboard.writeText(window.location.href);
@@ -150,6 +157,7 @@ export default function BlogArticle() {
 
       try {
         await navigator.clipboard.writeText(window.location.href);
+        trackSocialClick(`Share Clipboard: ${articleTitle}`);
         toast.success('Lien copié dans le presse-papiers !');
       } catch (clipboardError) {
         toast.error('Impossible de partager l\'article');
@@ -278,9 +286,8 @@ export default function BlogArticle() {
                   Discutons de vos objectifs et découvrez comment nous pouvons vous aider
                 </p>
                 <a
-                  href={getWhatsAppUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); trackDevisClick(`blog_article_footer_${slug}`); openWhatsApp(`blog_article_${slug}`); }}
                   className="inline-flex items-center justify-center bg-white text-red-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors shadow-xl"
                 >
                   Contactez-nous sur WhatsApp

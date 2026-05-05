@@ -19,6 +19,11 @@ export const getWhatsAppUrl = () => {
     return `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
 };
 
-export const openWhatsApp = () => {
+export const openWhatsApp = (trackingLocation?: string) => {
+    // Track le clic WhatsApp dans GA4
+    try {
+        const { trackWhatsAppClick } = require('@/utils/analytics');
+        trackWhatsAppClick(trackingLocation || window.location.pathname);
+    } catch {}
     window.open(getWhatsAppUrl(), '_blank', 'noopener,noreferrer');
 };

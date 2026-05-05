@@ -19,6 +19,7 @@ const SitesAppWeb = lazy(() => import("@/pages/services/SitesAppWeb"));
 const Branding = lazy(() => import("@/pages/services/Branding"));
 const CaseStudyAmisi = lazy(() => import("@/pages/realisations/CaseStudyAmisi"));
 const CaseStudyBlogAutomation = lazy(() => import("@/pages/realisations/CaseStudyBlogAutomation"));
+const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const PageLoader = () => (
@@ -53,6 +54,7 @@ const App = () => (
             <Route path="/blog/:slug" element={<Layout><BlogArticle /></Layout>} />
             <Route path="/blog/tag/:slug" element={<Layout><TagPage /></Layout>} />
             <Route path="/contact" element={<Layout><Contact /></Layout>} />
+            <Route path="/politique-confidentialite" element={<Layout><PrivacyPolicy /></Layout>} />
             <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>
         </Suspense>

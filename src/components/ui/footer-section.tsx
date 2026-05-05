@@ -3,6 +3,7 @@ import React from 'react';
 import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { Facebook, Instagram, Linkedin, MessageSquare, LucideIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { openWhatsApp } from '@/utils/whatsapp';
 
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -31,7 +32,8 @@ const footerLinks: FooterSection[] = [
       { title: 'Blog', href: '/blog' },
       { title: 'Portfolio', href: '/realisations' },
       { title: 'A Propos', href: '/a-propos' },
-      { title: 'Contact', href: '/contact' }]
+      { title: 'Contact', href: '/contact' },
+      { title: 'Confidentialité', href: '/politique-confidentialite' }]
 
   },
   {
@@ -89,14 +91,33 @@ export function Footer() {
                 <ul className="text-muted-foreground space-y-3 text-base">
                   {section.links.map((link) =>
                     <li key={link.title}>
-                      <a
-                        href={link.href === 'whatsapp' ? '#' : link.href}
-                        onClick={link.href === 'whatsapp' ? handleWhatsAppClick : undefined}
-                        className="hover:text-foreground inline-flex items-center gap-2 transition-all duration-300 break-all">
-
-                        {link.icon && <link.icon className="size-4" />}
-                        {link.title}
-                      </a>
+                      {link.href === 'whatsapp' ? (
+                        <button
+                          onClick={handleWhatsAppClick}
+                          className="hover:text-foreground inline-flex items-center gap-2 transition-all duration-300 break-all text-left"
+                        >
+                          {link.icon && <link.icon className="size-4" />}
+                          {link.title}
+                        </button>
+                      ) : link.href.startsWith('http') || link.href.startsWith('tel:') || link.href.startsWith('mailto:') ? (
+                        <a
+                          href={link.href}
+                          target={link.href.startsWith('http') ? "_blank" : undefined}
+                          rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                          className="hover:text-foreground inline-flex items-center gap-2 transition-all duration-300 break-all"
+                        >
+                          {link.icon && <link.icon className="size-4" />}
+                          {link.title}
+                        </a>
+                      ) : (
+                        <Link
+                          to={link.href}
+                          className="hover:text-foreground inline-flex items-center gap-2 transition-all duration-300 break-all"
+                        >
+                          {link.icon && <link.icon className="size-4" />}
+                          {link.title}
+                        </Link>
+                      )}
                     </li>
                   )}
                 </ul>

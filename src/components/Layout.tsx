@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { Footer } from '@/components/ui/footer-section';
@@ -9,6 +9,8 @@ import { StitchNavbar } from '@/components/ui/StitchNavbar';
 import { BinkooChatbot } from '@/components/BinkooChatbot';
 import { openWhatsApp } from '@/utils/whatsapp';
 import { StaggeredMenu } from '@/components/ui/StaggeredMenu';
+import CookieConsent from '@/components/CookieConsent';
+import { trackPageView, initScrollDepthTracking } from '@/utils/analytics';
 
 const Layout: React.FC<{
   children: React.ReactNode;
@@ -39,6 +41,17 @@ const Layout: React.FC<{
             window.removeEventListener('touchstart', handleInteraction);
         };
     }, []);
+
+    // GA4: Track page views on route change (SPA)
+    useEffect(() => {
+      trackPageView(location.pathname, document.title);
+    }, [location.pathname]);
+
+    // GA4: Track scroll depth per page
+    useEffect(() => {
+      const cleanup = initScrollDepthTracking();
+      return cleanup;
+    }, [location.pathname]);
 
     const handleWhatsAppClick = (e: React.MouseEvent) => {
       e.preventDefault();
@@ -216,6 +229,9 @@ const Layout: React.FC<{
       <Footer />
 
       {mountChatbot && <BinkooChatbot />}
+
+      {/* Bandeau de consentement cookies RGPD */}
+      <CookieConsent />
     </div>;
   };
 export default Layout;

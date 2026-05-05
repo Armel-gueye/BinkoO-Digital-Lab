@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 import { Highlighter } from '@/components/ui/highlighter';
 import { AnimatedSection, AnimatedParagraph, AnimatedImage, StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import { Contact2 } from '@/components/Contact2';
+import { trackServiceClick, trackDevisClick } from '@/utils/analytics';
 import { openWhatsApp } from '@/utils/whatsapp';
 import SEO from '@/components/SEO';
 
@@ -154,6 +155,7 @@ const Services: React.FC = () => {
                         </p>
                         <Link 
                           to={`/services/${service.slug}`}
+                          onClick={() => trackServiceClick(`Discover: ${service.title}`)}
                           className="inline-flex items-center gap-2 text-[15px] font-bold text-primary transition-all duration-300 group relative"
                         >
                           <span className="relative">
@@ -177,7 +179,10 @@ const Services: React.FC = () => {
                               <span className="text-sm md:text-base text-muted-foreground !whitespace-pre-line">
                                 {feature}
                                 {featureIndex === service.features.length - 1 && (
-                                  <Collapsible open={openItems.includes(index)} onOpenChange={() => toggleItem(index)}>
+                                  <Collapsible open={openItems.includes(index)} onOpenChange={() => {
+                                    if (!openItems.includes(index)) trackServiceClick(`Read More: ${service.title}`);
+                                    toggleItem(index);
+                                  }}>
                                     <CollapsibleTrigger asChild>
                                       <button className="inline-flex items-center gap-1 ml-2 text-muted-foreground/60 hover:text-muted-foreground/80 transition-colors cursor-pointer">
                                         <span className="text-xs font-normal">{openItems.includes(index) ? 'Lire moins' : 'Lire plus...'}</span>
@@ -204,7 +209,7 @@ const Services: React.FC = () => {
 
                       <a
                         href="#"
-                        onClick={handleWhatsAppClick}
+                        onClick={(e) => { trackDevisClick(`services_page_${service.slug}`); handleWhatsAppClick(e); }}
                         className="inline-block w-full sm:w-auto">
                         <Button size="default" className="w-full sm:w-auto">
                           Demander un devis

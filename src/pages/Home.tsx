@@ -12,6 +12,7 @@ import { Contact2 } from '@/components/Contact2';
 import { LazyLottieIframe } from '@/components/ui/LazyLottieIframe';
 import SEO from '@/components/SEO';
 
+import { trackServiceClick, trackPortfolioClick, trackDevisClick } from '@/utils/analytics';
 import { openWhatsApp } from '@/utils/whatsapp';
 
 export default function Home() {
@@ -74,14 +75,14 @@ export default function Home() {
               Le digital n'est pas l'avenir. C'est le présent. Et il commence avec vous.
             </p>
             <div className="lg:hidden">
-              <a href="#" onClick={handleWhatsAppClick}>
+              <a href="#" onClick={(e) => { trackDevisClick('hero_mobile'); handleWhatsAppClick(e); }}>
                 <button className="group relative flex h-14 min-w-[180px] cursor-pointer items-center justify-center overflow-hidden bg-primary px-8 text-white transition-all hover:bg-red-700 rounded-full shadow-lg shadow-red-500/20 animate-breathing border-none">
                   <span className="relative z-10 text-sm font-bold uppercase tracking-widest text-white">Devis Gratuit</span>
                 </button>
               </a>
             </div>
             <div className="hidden lg:block">
-              <a href="#" onClick={handleWhatsAppClick}>
+              <a href="#" onClick={(e) => { trackDevisClick('hero_desktop'); handleWhatsAppClick(e); }}>
                 <PulsatingButton>
                   Devis Gratuit
                 </PulsatingButton>
@@ -222,7 +223,7 @@ export default function Home() {
                         ))}
                       </StaggerContainer>
                       <div className="flex justify-end pt-4 md:pt-5">
-                        <Link to="/services">
+                        <Link to="/services" onClick={() => trackServiceClick('IA & Automatisation')}>
                           <GetStartedButton />
                         </Link>
                       </div>
@@ -259,7 +260,7 @@ export default function Home() {
                         ))}
                       </StaggerContainer>
                       <div className="flex justify-end pt-4 md:pt-5">
-                        <Link to="/services">
+                        <Link to="/services" onClick={() => trackServiceClick('Sites Web & Web App')}>
                           <GetStartedButton />
                         </Link>
                       </div>
@@ -319,7 +320,7 @@ export default function Home() {
                         ))}
                       </StaggerContainer>
                       <div className="flex justify-end pt-4 md:pt-5">
-                        <Link to="/services">
+                        <Link to="/services" onClick={() => trackServiceClick('Création de Visuels')}>
                           <GetStartedButton />
                         </Link>
                       </div>
@@ -386,7 +387,7 @@ export default function Home() {
                   ))}
                 </StaggerContainer>
                 <div className="pt-3 md:pt-4">
-                  <Link to="/a-propos">
+                  <Link to="/a-propos" onClick={() => trackServiceClick('About Section')}>
                     <InteractiveHoverButton text="En Savoir Plus" />
                   </Link>
                 </div>
@@ -438,7 +439,7 @@ export default function Home() {
                     fetchPriority="low"
                   />
                   <div className="absolute bottom-5 right-5">
-                    <Link to="/realisations" className="bg-white/95 hover:bg-white text-foreground px-4 py-2 rounded-lg flex items-center text-sm font-semibold shadow-lg transition-all hover:scale-105">
+                    <Link to="/realisations" onClick={() => trackPortfolioClick('AMISI Sarl')} className="bg-white/95 hover:bg-white text-foreground px-4 py-2 rounded-lg flex items-center text-sm font-semibold shadow-lg transition-all hover:scale-105">
                       Voir le projet <ArrowRight className="ml-2 w-4 h-4" />
                     </Link>
                   </div>
@@ -459,7 +460,7 @@ export default function Home() {
                   />
 
                   <div className="absolute bottom-4 right-4">
-                    <Link to="/realisations" className="bg-white/95 hover:bg-white text-foreground px-3 py-2 rounded-lg flex items-center text-xs font-semibold shadow-lg transition-all hover:scale-105">
+                    <Link to="/realisations" onClick={() => trackPortfolioClick('BinkoO Store')} className="bg-white/95 hover:bg-white text-foreground px-3 py-2 rounded-lg flex items-center text-xs font-semibold shadow-lg transition-all hover:scale-105">
                       Voir le projet <ArrowRight className="ml-1 w-3 h-3" />
                     </Link>
                   </div>
@@ -479,7 +480,7 @@ export default function Home() {
                   />
 
                   <div className="absolute bottom-4 right-4">
-                    <Link to="/realisations" className="bg-white/95 hover:bg-white text-foreground px-3 py-2 rounded-lg flex items-center text-xs font-semibold shadow-lg transition-all hover:scale-105">
+                    <Link to="/realisations" onClick={() => trackPortfolioClick('BONPLAT')} className="bg-white/95 hover:bg-white text-foreground px-3 py-2 rounded-lg flex items-center text-xs font-semibold shadow-lg transition-all hover:scale-105">
                       Voir le projet <ArrowRight className="ml-1 w-3 h-3" />
                     </Link>
                   </div>
@@ -489,7 +490,7 @@ export default function Home() {
             </motion.div>
 
             <div className="text-center">
-              <Link to="/realisations" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8">
+              <Link to="/realisations" onClick={() => trackPortfolioClick('All Projects Button')} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8">
                 Voir Tous Nos Projets
               </Link>
             </div>

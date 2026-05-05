@@ -4,32 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    (function() {
-      function loadGtag() {
-        if (window.gtagLoaded) return;
-        window.gtagLoaded = true;
-        
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = "https://www.googletagmanager.com/gtag/js?id=G-WMSLH8VCNN";
-        document.head.appendChild(script);
-        
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        window.gtag = gtag;
-        gtag('js', new Date());
-        gtag('config', 'G-WMSLH8VCNN');
-      }
-
-      var idleCallback = window.requestIdleCallback;
-      if (idleCallback) {
-        idleCallback(function() { setTimeout(loadGtag, 1500); }, { timeout: 4000 });
-      } else {
-        window.addEventListener('load', function() { setTimeout(loadGtag, 3500); });
-      }
-    })();
-  </script>
+  <!-- GA4 est chargé conditionnellement via le consentement cookies (CookieConsent.tsx) -->
   <title>BinkoO Digital Lab - Agence Digitale et d'Intelligence Artificielle</title>
   <meta name="description"
     content="BinkoO Digital Lab - Votre partenaire digital pour l'IA, le design et le développement web. Solutions innovantes et créatives." />
