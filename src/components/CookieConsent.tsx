@@ -127,10 +127,10 @@ const CookieConsent: React.FC = () => {
                   </div>
                   <button
                     onClick={handleRejectAll}
-                    className="flex h-7 w-7 items-center justify-center rounded-lg hover:bg-gray-100 transition-colors flex-shrink-0"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100/50 hover:bg-gray-200 transition-all flex-shrink-0 group active:scale-90"
                     aria-label="Fermer et refuser les cookies"
                   >
-                    <X className="h-3.5 w-3.5 text-muted-foreground" />
+                    <X className="h-6 w-6 text-muted-foreground group-hover:text-foreground transition-colors" />
                   </button>
                 </div>
 
