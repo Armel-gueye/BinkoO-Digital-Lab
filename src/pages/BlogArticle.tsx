@@ -13,7 +13,8 @@ import {
   extractText,
   getFeaturedImage,
   getTags,
-  getSEOData
+  getSEOData,
+  getMonthFromDate
 } from '@/services/blogService';
 import { getWhatsAppUrl, openWhatsApp } from '@/utils/whatsapp';
 import { trackBlogArticleView, trackSocialClick, trackDevisClick } from '@/utils/analytics';
@@ -25,6 +26,19 @@ export default function BlogArticle() {
   const [article, setArticle] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const articleTitle = article ? stripHtmlTags(extractText(article.title)) : '';
+  const articleExcerpt = article ? stripHtmlTags(extractText(article.excerpt)) : '';
+  const articleContentRaw = article ? extractText(article.content) : '';
+  const articleContent = article ? DOMPurify.sanitize(articleContentRaw, { ADD_ATTR: ['target'] }) : '';
+  const articleImage = article ? getFeaturedImage(article) : '';
+  const articleMonth = article ? (article.month || getMonthFromDate(article.date)) : '';
+  const articleReadTime = article ? (article.readTime || calculateReadTime(articleContent)) : '';
+  const canonicalUrl = article ? `https://binkoo.digital/blog/${article.slug}` : '';
+
+  // Extraire les tags et données SEO RankMath (via helpers centralisés)
+  const tags = article ? getTags(article) : [];
+  const seoData = article ? getSEOData(article) : { title: '', description: '', ogImage: '', robots: '' };
 
   useEffect(() => {
     const loadArticle = async () => {
@@ -110,20 +124,6 @@ export default function BlogArticle() {
       </div>
     );
   }
-
-  const articleTitle = stripHtmlTags(extractText(article.title));
-  // Sécuriser le contenu contre les failles XSS
-  const articleContentRaw = extractText(article.content);
-  const articleContent = DOMPurify.sanitize(articleContentRaw, { ADD_ATTR: ['target'] });
-  const articleExcerpt = stripHtmlTags(extractText(article.excerpt));
-  const articleImage = getFeaturedImage(article);
-  const articleMonth = article.month || getMonthFromDate(article.date);
-  const articleReadTime = article.readTime || calculateReadTime(articleContent);
-  const canonicalUrl = `https://binkoo.digital/blog/${article.slug}`;
-
-  // Extraire les tags et données SEO RankMath (via helpers centralisés)
-  const tags = getTags(article);
-  const seoData = getSEOData(article);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
