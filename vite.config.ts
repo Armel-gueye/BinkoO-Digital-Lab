@@ -212,7 +212,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
         '/contact',
         ...blogRoutes
       ],
-      generateRobotsTxt: true
+      generateRobotsTxt: false
     }),
   ],
   resolve: {
