@@ -176,18 +176,30 @@ import type { UserConfig } from 'vite';
 
 export default defineConfig(async (): Promise<UserConfig> => {
   let blogRoutes: string[] = [];
+  let tagRoutes: string[] = [];
   try {
-    const res = await fetch('https://blog.binkoo.digital/wp-json/wp/v2/posts?per_page=100', {
-      headers: { 'Accept': 'application/json' }
-    });
-    if (res.ok) {
-      const posts = (await res.json()) as any[];
+    const [postsRes, tagsRes] = await Promise.all([
+      fetch('https://blog.binkoo.digital/wp-json/wp/v2/posts?per_page=100', {
+        headers: { 'Accept': 'application/json' }
+      }),
+      fetch('https://blog.binkoo.digital/wp-json/wp/v2/tags?per_page=100', {
+        headers: { 'Accept': 'application/json' }
+      })
+    ]);
+    if (postsRes.ok) {
+      const posts = (await postsRes.json()) as any[];
       if (Array.isArray(posts)) {
         blogRoutes = posts.map((post) => `/blog/${post.slug}`);
       }
     }
+    if (tagsRes.ok) {
+      const tags = (await tagsRes.json()) as any[];
+      if (Array.isArray(tags)) {
+        tagRoutes = tags.map((tag) => `/blog/tag/${tag.slug}`);
+      }
+    }
   } catch (error) {
-    console.error("Error fetching blog posts for sitemap generation:", error);
+    console.error("Error fetching blog data for sitemap generation:", error);
   }
 
   return {
@@ -201,16 +213,19 @@ export default defineConfig(async (): Promise<UserConfig> => {
     Sitemap({
       hostname: 'https://binkoo.digital',
       dynamicRoutes: [
-        '/',
         '/services',
         '/a-propos',
         '/services/ia-automatisation',
         '/services/sites-app-web',
         '/services/branding',
         '/realisations',
+        '/realisations/amisi-sarl',
+        '/realisations/automatisation-blog-seo',
         '/blog',
         '/contact',
-        ...blogRoutes
+        '/politique-confidentialite',
+        ...blogRoutes,
+        ...tagRoutes
       ],
       generateRobotsTxt: false
     }),
@@ -237,13 +252,10 @@ export default defineConfig(async (): Promise<UserConfig> => {
       },
     },
     chunkSizeWarningLimit: 1000,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    minify: 'esbuild',
+  },
+  esbuild: {
+    drop: ['console', 'debugger'],
   },
   optimizeDeps: {
     include: [
