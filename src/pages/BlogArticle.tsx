@@ -4,6 +4,7 @@ import { Calendar, Clock, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import { toast } from 'sonner';
 import DOMPurify from 'dompurify';
+import { Helmet } from 'react-helmet-async';
 import SEO from '@/components/SEO';
 import {
   getPostBySlug,
@@ -39,6 +40,9 @@ export default function BlogArticle() {
   // Extraire les tags et données SEO RankMath (via helpers centralisés)
   const tags = article ? getTags(article) : [];
   const seoData = article ? getSEOData(article) : { title: '', description: '', ogImage: '', robots: '' };
+  
+  // JSON-LD Schema
+  const schemaJsonLd = article?.meta?.schema_jsonld;
 
   useEffect(() => {
     const loadArticle = async () => {
@@ -175,6 +179,13 @@ export default function BlogArticle() {
         robots={seoData.robots}
         ogType="article"
       />
+      {schemaJsonLd && (
+        <Helmet>
+          <script type="application/ld+json">
+            {schemaJsonLd}
+          </script>
+        </Helmet>
+      )}
       <div className="min-h-screen bg-background">
         <div className="relative h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden">
           <img

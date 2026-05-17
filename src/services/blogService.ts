@@ -39,6 +39,10 @@ export interface BlogPost {
   month?: string;
   readTime?: string;
   image?: string;
+  meta?: {
+    schema_jsonld?: string;
+    [key: string]: any;
+  };
   // Données SEO RankMath (si activé via plugin REST Headless)
   rank_math_title?: string;
   rank_math_description?: string;
