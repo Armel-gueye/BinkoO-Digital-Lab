@@ -5,7 +5,7 @@
 # Removed Netlify sitemap plugin to use vite-plugin-sitemap instead for correct SPA indexing
 # Configuration pour le rendu côté serveur (SSR-like behavior)
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
   NODE_OPTIONS = "--max-old-space-size=4096"
 
 # Redirection SPA
