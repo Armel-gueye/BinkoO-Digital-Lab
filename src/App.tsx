@@ -21,6 +21,7 @@ const CaseStudyAmisi = lazy(() => import("@/pages/realisations/CaseStudyAmisi"))
 const CaseStudyBlogAutomation = lazy(() => import("@/pages/realisations/CaseStudyBlogAutomation"));
 const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const LocalHub = lazy(() => import("@/pages/LocalHub"));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-background">
@@ -55,6 +56,7 @@ const App = () => (
             <Route path="/blog/tag/:slug" element={<Layout><TagPage /></Layout>} />
             <Route path="/contact" element={<Layout><Contact /></Layout>} />
             <Route path="/politique-confidentialite" element={<Layout><PrivacyPolicy /></Layout>} />
+            <Route path="/agence-ia-automatisation/:city" element={<Layout><LocalHub /></Layout>} />
             <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>
         </Suspense>

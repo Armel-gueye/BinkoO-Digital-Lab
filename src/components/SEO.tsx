@@ -8,6 +8,7 @@ interface SEOProps {
   ogImage?: string;
   ogType?: string;
   robots?: string;
+  localCity?: string;
 }
 
 /**
@@ -21,7 +22,8 @@ export default function SEO({
   keywords = "BinkoO, BinkoO Digital Lab, agence digitale Burkina Faso, automatisation IA, développement web, chatbot IA, Bobo-Dioulasso",
   ogImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/BinkoO-Digital-Lab-PNG-1760749121547.png",
   ogType = "website",
-  robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  localCity
 }: SEOProps) {
   const siteUrl = "https://binkoo.digital";
   const fullTitle = `${title} | BinkoO Digital Lab`;
@@ -47,7 +49,7 @@ export default function SEO({
           "@type": "ContactPoint",
           "telephone": "+226-44-32-38-41",
           "contactType": "customer service",
-          "areaServed": "BF",
+          "areaServed": localCity ? { "@type": "City", "name": localCity } : "BF",
           "availableLanguage": ["fr", "en"]
         },
         "sameAs": [
@@ -100,7 +102,10 @@ export default function SEO({
             "closes": "18:00"
           }
         ],
-        "areaServed": {
+        "areaServed": localCity ? {
+          "@type": "City",
+          "name": localCity
+        } : {
           "@type": "Country",
           "name": "Burkina Faso"
         },

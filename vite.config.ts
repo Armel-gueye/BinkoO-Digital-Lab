@@ -202,6 +202,9 @@ export default defineConfig(async (): Promise<UserConfig> => {
     console.error("Error fetching blog data for sitemap generation:", error);
   }
 
+  const localHubCities = ['ouagadougou', 'bobo-dioulasso', 'abidjan', 'bamako', 'dakar', 'lome', 'cotonou'];
+  const localHubRoutes = localHubCities.map(city => `/agence-ia-automatisation/${city}`);
+
   return {
   server: {
     host: "::",
@@ -224,6 +227,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
         '/blog',
         '/contact',
         '/politique-confidentialite',
+        ...localHubRoutes,
         ...blogRoutes,
         ...tagRoutes
       ],

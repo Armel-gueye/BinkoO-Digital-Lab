@@ -62,6 +62,16 @@ const footerLinks: FooterSection[] = [
 
   }];
 
+const localHubLinks = [
+  { title: 'Ouagadougou', href: '/agence-ia-automatisation/ouagadougou' },
+  { title: 'Bobo-Dioulasso', href: '/agence-ia-automatisation/bobo-dioulasso' },
+  { title: 'Abidjan', href: '/agence-ia-automatisation/abidjan' },
+  { title: 'Bamako', href: '/agence-ia-automatisation/bamako' },
+  { title: 'Dakar', href: '/agence-ia-automatisation/dakar' },
+  { title: 'Lomé', href: '/agence-ia-automatisation/lome' },
+  { title: 'Cotonou', href: '/agence-ia-automatisation/cotonou' },
+];
+
 
 export function Footer() {
   const handleWhatsAppClick = (e: React.MouseEvent) => {
@@ -126,8 +136,19 @@ export function Footer() {
           )}
         </div>
 
-        <div className="border-t border-border/50 pt-8">
+        <div className="border-t border-border/50 pt-8 space-y-4">
           <AnimatedContainer delay={0.5}>
+            <nav className="flex flex-wrap items-center justify-center gap-x-1 text-[11px] text-muted-foreground/50">
+              <span className="mr-1">Présence :</span>
+              {localHubLinks.map((link, i) => (
+                <span key={link.href} className="inline-flex items-center">
+                  <Link to={link.href} className="hover:text-muted-foreground transition-colors">{link.title}</Link>
+                  {i < localHubLinks.length - 1 && <span className="mx-1">·</span>}
+                </span>
+              ))}
+            </nav>
+          </AnimatedContainer>
+          <AnimatedContainer delay={0.6}>
             <p className="text-muted-foreground text-center text-sm">
               © 2026 BinkoO Digital Lab. Tous droits réservés.
             </p>
