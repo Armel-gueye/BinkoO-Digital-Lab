@@ -44,6 +44,41 @@ export default function BlogArticle() {
   // JSON-LD Schema
   const schemaJsonLd = article?.meta?.schema_jsonld;
 
+  // Custom BlogPosting schema to guarantee publication date and author visibility for AEO / Search engines
+  const generatedSchema = article ? {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${canonicalUrl}#blogposting`,
+    "isPartOf": {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+      "url": canonicalUrl,
+      "name": seoData.title
+    },
+    "headline": articleTitle,
+    "description": seoData.description,
+    "image": seoData.ogImage || articleImage,
+    "datePublished": article.date,
+    "dateModified": article.date,
+    "author": {
+      "@type": "Organization",
+      "name": "BinkoO Digital Lab",
+      "url": "https://binkoo.digital"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "BinkoO Digital Lab",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/BinkoO-Digital-Lab-PNG-1760749121547.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": canonicalUrl
+    }
+  } : null;
+
   useEffect(() => {
     const loadArticle = async () => {
       if (!slug) return;
@@ -179,6 +214,13 @@ export default function BlogArticle() {
         robots={seoData.robots}
         ogType="article"
       />
+      {generatedSchema && (
+        <Helmet>
+          <script type="application/ld+json">
+            {JSON.stringify(generatedSchema)}
+          </script>
+        </Helmet>
+      )}
       {schemaJsonLd && (
         <Helmet>
           <script type="application/ld+json">
@@ -186,12 +228,13 @@ export default function BlogArticle() {
           </script>
         </Helmet>
       )}
-      <div className="min-h-screen bg-background">
+      <article className="min-h-screen bg-background" itemScope itemType="https://schema.org/BlogPosting">
         <div className="relative h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden">
           <img
             src={articleImage}
             alt={articleTitle}
             className="w-full h-full object-cover"
+            itemProp="image"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
 
@@ -207,17 +250,27 @@ export default function BlogArticle() {
                 <p className="text-white/80 text-sm uppercase tracking-wider mb-4">
                   {articleMonth}
                 </p>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight" itemProp="headline">
                   {articleTitle}
                 </h1>
                 <div className="flex items-center gap-6 text-white/90">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    <span className="text-sm">{formatDate(article.date)}</span>
+                    <time dateTime={article.date} itemProp="datePublished" className="text-sm">
+                      {formatDate(article.date)}
+                    </time>
+                    <meta itemProp="dateModified" content={article.date} />
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />
                     <span className="text-sm">{articleReadTime} de lecture</span>
+                  </div>
+                  <div className="hidden" itemProp="author" itemScope itemType="https://schema.org/Organization">
+                    <meta itemProp="name" content="BinkoO Digital Lab" />
+                    <meta itemProp="url" content="https://binkoo.digital" />
+                  </div>
+                  <div className="hidden" itemProp="publisher" itemScope itemType="https://schema.org/Organization">
+                    <meta itemProp="name" content="BinkoO Digital Lab" />
                   </div>
                 </div>
               </motion.div>
@@ -237,6 +290,7 @@ export default function BlogArticle() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 dangerouslySetInnerHTML={{ __html: articleContent }}
+                itemProp="articleBody"
                 style={{
                   lineHeight: '1.8'
                 }}
@@ -323,7 +377,7 @@ export default function BlogArticle() {
             </div>
           </div>
         </div>
-      </div>
+      </article>
     </>
   );
 }
