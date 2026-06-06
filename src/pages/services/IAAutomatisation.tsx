@@ -82,7 +82,21 @@ const IAAutomatisation: React.FC = () => {
             </AnimatedImage>
 
             <div className="max-w-4xl mx-auto flex flex-col gap-8 lg:gap-12">
-              {/* Texte descriptif en premier */}
+            {/* En résumé : Quick Answer AEO */}
+            <div className="bg-background rounded-2xl p-6 md:p-8 border border-border shadow-sm relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -z-10 transition-transform duration-500 group-hover:scale-110" />
+              <h2 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-3">
+                <span className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                  <Sparkles className="w-5 h-5" />
+                </span>
+                Comment l'IA aide-t-elle les entreprises au Burkina Faso ?
+              </h2>
+              <p className="text-[15px] md:text-[17px] leading-relaxed text-muted-foreground">
+                BinkoO Digital Lab intègre des solutions d'intelligence artificielle adaptées aux PME en Afrique de l'Ouest. Nous déployons des chatbots WhatsApp 24/7, automatisons votre prospection commerciale et connectons vos outils. Gagnez du temps, réduisez vos coûts et augmentez vos ventes sans effort manuel supplémentaire.
+              </p>
+            </div>
+
+            {/* Texte descriptif en premier */}
               <div className="bg-muted/50 rounded-lg p-5 md:p-6 lg:p-8">
                 <p className="text-[15px] md:text-[17px] lg:text-[18px] leading-relaxed text-muted-foreground">
                   L'<Highlighter action="highlight" color="#E5002E">intelligence artificielle</Highlighter> n'est plus réservée aux multinationales. Au Burkina Faso et dans toute l'Afrique de l'Ouest, elle devient un <Highlighter action="underline" color="#FF9800">levier de croissance accessible</Highlighter> pour chaque entreprise, du commerçant du Grand Marché de Ouagadougou à la start-up tech de Bobo-Dioulasso. Chez BinkoO Digital Lab, nous transformons les <Highlighter action="highlight" color="#F3F4F6">tâches répétitives et chronophages</Highlighter> en processus automatisés, fiables et rapides. <br /><br />Aujourd'hui, vos clients vous contactent sur <Highlighter action="highlight" color="#3B82F6">WhatsApp, Facebook et Instagram</Highlighter> — souvent en dehors des heures de bureau. Un chatbot intelligent, connecté à vos réseaux et à votre site, répond instantanément, qualifie les prospects et peut même prendre des commandes à votre place. Nos <Highlighter action="highlight" color="#E5002E">agents IA sur mesure</Highlighter> automatisent également la prospection B2B, l'envoi d'e-mails, le suivi client, la collecte de données ou la publication de contenu sur vos réseaux sociaux. <br /><br />Chaque solution est conçue pour le <Highlighter action="underline" color="#FF9800">contexte africain</Highlighter> : des outils simples, des tarifs adaptés, une prise en main rapide. Que vous soyez à Ouagadougou, Bobo-Dioulasso, Abidjan, Dakar ou Bamako, nous adaptons nos automatisations à votre réalité terrain. <br /><br /><strong>Résultat : moins de travail manuel, plus de clients, plus de chiffre d'affaires.</strong> L'IA devient votre collaborateur le plus efficace — disponible 24h/24, 7j/7.
@@ -138,7 +152,7 @@ const IAAutomatisation: React.FC = () => {
                 transition={{ duration: 0.6 }}
               >
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Comment l'IA transforme les entreprises au Burkina Faso
+                  En quoi l'IA transforme-t-elle les entreprises au Burkina Faso ?
                 </h2>
                 <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
                   Des solutions concrètes, adaptées au marché ouest-africain, pour automatiser votre croissance et multiplier vos résultats.
@@ -179,7 +193,7 @@ const IAAutomatisation: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
-                Pourquoi l'IA est indispensable pour les entreprises africaines
+                Pourquoi l'IA est-elle devenue indispensable pour les entreprises africaines ?
               </h2>
               <div className="grid md:grid-cols-3 gap-6 md:gap-8 text-white">
                 <div className="text-center">

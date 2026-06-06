@@ -81,6 +81,20 @@ const Branding: React.FC = () => {
           </AnimatedImage>
 
           <div className="max-w-4xl mx-auto flex flex-col gap-8 lg:gap-12">
+            {/* En résumé : Quick Answer AEO */}
+            <div className="bg-background rounded-2xl p-6 md:p-8 border border-border shadow-sm relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -z-10 transition-transform duration-500 group-hover:scale-110" />
+              <h2 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-3">
+                <span className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                  <Palette className="w-5 h-5" />
+                </span>
+                Comment développer son image de marque en Afrique ?
+              </h2>
+              <p className="text-[15px] md:text-[17px] leading-relaxed text-muted-foreground">
+                BinkoO Digital Lab conçoit votre identité visuelle complète (logo professionnel, charte graphique, visuels réseaux sociaux) pour vous démarquer en Afrique de l'Ouest. Une marque forte renforce votre crédibilité, rassure vos clients locaux et garantit une perception de qualité supérieure face à vos concurrents.
+              </p>
+            </div>
+
             {/* Texte descriptif en premier */}
             <div className="bg-muted/50 rounded-lg p-5 md:p-6 lg:p-8">
               <p className="text-[15px] md:text-[17px] lg:text-[18px] leading-relaxed text-muted-foreground">
@@ -137,7 +151,7 @@ const Branding: React.FC = () => {
                 transition={{ duration: 0.6 }}
               >
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Nos services de branding pour les entreprises africaines
+                  Quels sont nos services de branding pour les entreprises africaines ?
                 </h2>
                 <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
                   Du logo à la charte graphique complète, nous donnons à votre marque l'identité visuelle qu'elle mérite pour conquérir le marché ouest-africain.
@@ -178,7 +192,7 @@ const Branding: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
-                Pourquoi investir dans votre image de marque en Afrique
+                Pourquoi est-il indispensable d'investir dans votre image de marque en Afrique ?
               </h2>
               <div className="grid md:grid-cols-3 gap-6 md:gap-8 text-white text-center">
                 <div>
@@ -201,7 +215,7 @@ const Branding: React.FC = () => {
           <AnimatedSection animation="fade-up">
             <div className="mt-20 md:mt-28 max-w-4xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                L'avantage BinkoO Digital Lab pour votre Branding
+                Quel est l'avantage de choisir BinkoO Digital Lab pour votre Branding ?
               </h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[

@@ -115,17 +115,50 @@ export default function BlogArticle() {
   // Référence pour le contenu de l'article
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Appliquer l'alternance de couleurs sur les <strong> après le rendu
+  // Appliquer le style AEO sur les "Quick Answers" et l'alternance sur les <strong>
   useEffect(() => {
     if (!contentRef.current || !article) return;
 
+    // 1. Détection et stylisation des "Quick Answer Blocks" pour l'AEO
+    // Selon la stratégie AEO : un Quick Answer block est une réponse directe de 40-50 mots située juste après un H2 en question.
+    // Nous allons détecter les paragraphes <p> qui suivent immédiatement un <h2> et qui contiennent du gras (<strong>).
+    const h2Elements = contentRef.current.querySelectorAll('h2');
+    h2Elements.forEach(h2 => {
+      const nextSibling = h2.nextElementSibling;
+      if (nextSibling && nextSibling.tagName.toLowerCase() === 'p') {
+        const p = nextSibling as HTMLElement;
+        // Si le texte commence par <strong> ou contient un <strong> (ce qui est la consigne pour les Quick Answers)
+        if (p.querySelector('strong') || p.querySelector('b')) {
+          p.style.backgroundColor = 'rgba(59, 130, 246, 0.08)'; // Bleu très léger (bg-blue-50/bg-primary/10)
+          p.style.borderLeft = '4px solid #3B82F6';
+          p.style.padding = '1.25rem 1.5rem';
+          p.style.borderRadius = '0 0.5rem 0.5rem 0';
+          p.style.marginTop = '1.5rem';
+          p.style.marginBottom = '2rem';
+          p.style.fontSize = '1.05rem';
+          p.style.lineHeight = '1.7';
+          // On peut aussi ajouter un pseudo-élément ou un attribut, mais les styles inline suffisent
+          p.setAttribute('data-aeo', 'quick-answer');
+        }
+      }
+    });
+
+    // 2. Alternance de couleurs sur les autres <strong> (comme précédemment)
     const strongElements = contentRef.current.querySelectorAll('strong');
     strongElements.forEach((el, index) => {
       const htmlEl = el as HTMLElement;
+      // On ne colore pas les <strong> à l'intérieur d'un bloc Quick Answer s'ils sont le bloc lui-même, 
+      // ou on peut le garder pour faire ressortir les mots-clés. Gardons-le.
       if (index % 2 === 0) {
-        htmlEl.style.backgroundColor = '#E5002E'; // Rouge (odd - index 0, 2, 4...)
+        htmlEl.style.backgroundColor = '#E5002E'; // Rouge
+        htmlEl.style.color = '#FFFFFF';
+        htmlEl.style.padding = '0 0.2rem';
+        htmlEl.style.borderRadius = '0.2rem';
       } else {
-        htmlEl.style.backgroundColor = '#3B82F6'; // Bleu (even - index 1, 3, 5...)
+        htmlEl.style.backgroundColor = '#3B82F6'; // Bleu
+        htmlEl.style.color = '#FFFFFF';
+        htmlEl.style.padding = '0 0.2rem';
+        htmlEl.style.borderRadius = '0.2rem';
       }
     });
   }, [article, isLoading]);
