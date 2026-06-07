@@ -60,10 +60,8 @@ export default function SEO({
       ],
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Lafiabougou, Secteur 20",
         "addressLocality": "Bobo-Dioulasso",
         "addressRegion": "Hauts-Bassins",
-        "postalCode": "",
         "addressCountry": "BF"
       }
     },
@@ -76,7 +74,6 @@ export default function SEO({
       "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Lafiabougou, Secteur 20",
         "addressLocality": "Bobo-Dioulasso",
         "addressRegion": "Hauts-Bassins",
         "addressCountry": "BF"
@@ -253,6 +250,75 @@ export default function SEO({
         "query-input": "required name=search_term_string"
       },
       "inLanguage": "fr-FR"
+    },
+    {
+      "@type": "Service",
+      "@id": `${siteUrl}/#service-ia`,
+      "name": "IA & Automatisation",
+      "description": "Intégration d'intelligence artificielle, chatbots WhatsApp/Facebook, agents IA de prospection, scraping de données et automatisation de workflows.",
+      "provider": {
+        "@id": `${siteUrl}/#organization`
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Burkina Faso"
+        },
+        {
+          "@type": "Country",
+          "name": "Côte d'Ivoire"
+        },
+        {
+          "@type": "Country",
+          "name": "Sénégal"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": `${siteUrl}/#service-web`,
+      "name": "Création Web & Applications",
+      "description": "Développement de sites vitrines professionnels, e-commerce connectés à WhatsApp, applications web (SaaS) et landing pages rapides.",
+      "provider": {
+        "@id": `${siteUrl}/#organization`
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Burkina Faso"
+        },
+        {
+          "@type": "Country",
+          "name": "Côte d'Ivoire"
+        },
+        {
+          "@type": "Country",
+          "name": "Sénégal"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": `${siteUrl}/#service-branding`,
+      "name": "Design & Branding",
+      "description": "Création d'identité visuelle de marque, logos professionnels, chartes graphiques et visuels pour réseaux sociaux.",
+      "provider": {
+        "@id": `${siteUrl}/#organization`
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Burkina Faso"
+        },
+        {
+          "@type": "Country",
+          "name": "Côte d'Ivoire"
+        },
+        {
+          "@type": "Country",
+          "name": "Sénégal"
+        }
+      ]
     }
   ];
 

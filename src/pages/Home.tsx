@@ -21,12 +21,40 @@ export default function Home() {
     openWhatsApp();
   };
 
+  const faqItems = [
+    {
+      q: "Comment se déroule la création d'un site web ou d'une automatisation avec BinkoO ?",
+      a: "Nous commençons par un cadrage gratuit pour analyser vos besoins, suivi d'une proposition commerciale et d'un devis personnalisé. Une fois validé, nous travaillons par sprints de développement avec des livraisons régulières et des phases de validation (paiement aux jalons) jusqu'au lancement."
+    },
+    {
+      q: "Intégrez-vous les paiements Mobile Money sur les sites e-commerce ?",
+      a: "Oui, c'est notre spécialité. Nous connectons vos boutiques et sites web aux solutions de paiement mobile locales d'Afrique de l'Ouest (Orange Money, Moov Money, Wave) pour permettre à vos clients de payer directement depuis leur téléphone."
+    },
+    {
+      q: "Quel est le délai moyen pour concevoir une identité visuelle ou un logo ?",
+      a: "Un logo professionnel seul est livré sous 3 à 5 jours ouvrés. Une identité visuelle complète (logo, charte graphique, templates réseaux sociaux) prend entre 7 et 10 jours ouvrés avec des révisions incluses pour garantir votre entière satisfaction."
+    },
+    {
+      q: "Vos chatbots WhatsApp sont-ils connectés 24h/24 et sécurisés ?",
+      a: "Absolument. Nos chatbots WhatsApp s'appuient sur l'API Cloud officielle de Meta. Ils fonctionnent 24h/24, 7j/7, sur des serveurs sécurisés, et peuvent être connectés directement à votre CRM ou à vos bases de données internes."
+    },
+    {
+      q: "Vos sites web se chargent-ils rapidement en Afrique avec une faible connexion ?",
+      a: "Oui. Nous concevons nos sites et applications web avec des technologies modernes (React, Vite, static site generation) et des médias optimisés en temps réel. Nos sites chargent en moins de 3 secondes, ce qui est parfait pour la connectivité 3G/4G en Afrique subsaharienne."
+    },
+    {
+      q: "Proposez-vous un service de maintenance après le lancement ?",
+      a: "Oui, nous proposons des forfaits de maintenance mensuels ou annuels sur mesure pour assurer le suivi technique, les mises à jour de sécurité, la sauvegarde de vos données et le support utilisateur."
+    }
+  ];
+
   return <>
     <SEO
       title="BinkoO Digital Lab - Agence d'Automatisation, d'IA, Web & Design au Burkina Faso"
       description="Agence digitale experte en automatisation IA, création de sites web modernes et design graphique. Transformez vos processus et votre image de marque au Burkina Faso et en Afrique."
       canonical="https://binkoo.digital"
       keywords="agence digitale Burkina Faso, automatisation IA, création site web Bobo-Dioulasso, design graphique, chatbot WhatsApp, BinkoO"
+      faq={faqItems}
     />
     <div className="min-h-screen bg-background text-foreground">
       <div className="hidden lg:block relative w-full h-screen overflow-hidden">
