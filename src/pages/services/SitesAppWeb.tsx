@@ -48,6 +48,25 @@ const SitesAppWeb: React.FC = () => {
     }
   ];
 
+  const faqItems = [
+    {
+      q: "Combien coûte un site web professionnel au Burkina Faso ?",
+      a: "Le prix dépend de vos besoins (site vitrine, boutique en ligne, application web). Chez BinkoO Digital Lab, nous proposons des tarifs compétitifs et adaptés au marché burkinabè et ouest-africain. Contactez-nous pour un devis gratuit et détaillé en moins de 24 heures."
+    },
+    {
+      q: "Mon site sera-t-il visible sur Google à Ouagadougou et au Burkina ?",
+      a: "Oui. Chaque site que nous créons est optimisé pour le référencement naturel (SEO) local. Nous ciblons les mots-clés stratégiques de votre secteur au Burkina Faso, en Côte d'Ivoire, au Sénégal et dans toute l'Afrique francophone pour maximiser votre visibilité."
+    },
+    {
+      q: "Peut-on intégrer WhatsApp et le paiement Mobile Money ?",
+      a: "Absolument. Nos sites intègrent WhatsApp Business pour la communication directe et les solutions de paiement mobile (Orange Money, Moov Money) adaptées au marché ouest-africain. Vos clients peuvent commander et payer facilement depuis leur téléphone."
+    },
+    {
+      q: "Proposez-vous la maintenance et les mises à jour ?",
+      a: "Oui. Nous assurons un suivi technique continu, les mises à jour de sécurité, les sauvegardes régulières et l'accompagnement pour faire évoluer votre site avec votre entreprise. Votre tranquillité d'esprit est notre priorité."
+    }
+  ];
+
   return (
     <>
       <SEO
@@ -55,6 +74,7 @@ const SitesAppWeb: React.FC = () => {
         description="Créez un site web professionnel, une boutique en ligne ou une application web au Burkina Faso. Sites optimisés SEO, rapides et adaptés au marché africain. Devis gratuit."
         canonical="https://binkoo.digital/services/sites-app-web"
         keywords="création site web Burkina Faso, site internet Ouagadougou, développement web Bobo-Dioulasso, boutique en ligne Afrique, application web Burkina, site e-commerce Afrique de l'Ouest, agence web Ouagadougou, landing page Burkina Faso, site vitrine Afrique, développeur web Burkina, SaaS Afrique"
+        faq={faqItems}
       />
 
       {/* Hero Section */}
@@ -239,24 +259,7 @@ const SitesAppWeb: React.FC = () => {
                 Questions fréquentes sur la création de sites web
               </h2>
               <div className="space-y-6">
-                {[
-                  {
-                    q: "Combien coûte un site web professionnel au Burkina Faso ?",
-                    a: "Le prix dépend de vos besoins (site vitrine, boutique en ligne, application web). Chez BinkoO Digital Lab, nous proposons des tarifs compétitifs et adaptés au marché burkinabè et ouest-africain. Contactez-nous pour un devis gratuit et détaillé en moins de 24 heures."
-                  },
-                  {
-                    q: "Mon site sera-t-il visible sur Google à Ouagadougou et au Burkina ?",
-                    a: "Oui. Chaque site que nous créons est optimisé pour le référencement naturel (SEO) local. Nous ciblons les mots-clés stratégiques de votre secteur au Burkina Faso, en Côte d'Ivoire, au Sénégal et dans toute l'Afrique francophone pour maximiser votre visibilité."
-                  },
-                  {
-                    q: "Peut-on intégrer WhatsApp et le paiement Mobile Money ?",
-                    a: "Absolument. Nos sites intègrent WhatsApp Business pour la communication directe et les solutions de paiement mobile (Orange Money, Moov Money) adaptées au marché ouest-africain. Vos clients peuvent commander et payer facilement depuis leur téléphone."
-                  },
-                  {
-                    q: "Proposez-vous la maintenance et les mises à jour ?",
-                    a: "Oui. Nous assurons un suivi technique continu, les mises à jour de sécurité, les sauvegardes régulières et l'accompagnement pour faire évoluer votre site avec votre entreprise. Votre tranquillité d'esprit est notre priorité."
-                  }
-                ].map((faq, index) => (
+                {faqItems.map((faq, index) => (
                   <motion.div
                     key={index}
                     className="bg-muted/30 rounded-xl p-6"

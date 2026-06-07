@@ -9,6 +9,7 @@ interface SEOProps {
   ogType?: string;
   robots?: string;
   localCity?: string;
+  faq?: { q: string; a: string; }[];
 }
 
 /**
@@ -23,238 +24,256 @@ export default function SEO({
   ogImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/BinkoO-Digital-Lab-PNG-1760749121547.png",
   ogType = "website",
   robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-  localCity
+  localCity,
+  faq
 }: SEOProps) {
   const siteUrl = "https://binkoo.digital";
   const fullTitle = `${title} | BinkoO Digital Lab`;
   const canonicalUrl = canonical || siteUrl;
 
   // Données structurées JSON-LD pour Google
+  const graph: any[] = [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      "name": "BinkoO Digital Lab",
+      "alternateName": ["BinkoO", "Agence BinkoO"],
+      "url": siteUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": ogImage,
+        "width": "600",
+        "height": "600"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+226-44-32-38-41",
+        "contactType": "customer service",
+        "areaServed": localCity ? { "@type": "City", "name": localCity } : "BF",
+        "availableLanguage": ["fr", "en"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/share/1JPaSH1STA/",
+        "https://www.linkedin.com/company/binkoo-digital-lab",
+        "https://www.instagram.com/binkoo_digital_lab",
+        "https://www.tiktok.com/@binkoo.digital.lab"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Lafiabougou, Secteur 20",
+        "addressLocality": "Bobo-Dioulasso",
+        "addressRegion": "Hauts-Bassins",
+        "postalCode": "",
+        "addressCountry": "BF"
+      }
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${siteUrl}/#service`,
+      "name": "BinkoO Digital Lab",
+      "image": ogImage,
+      "description": description,
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Lafiabougou, Secteur 20",
+        "addressLocality": "Bobo-Dioulasso",
+        "addressRegion": "Hauts-Bassins",
+        "addressCountry": "BF"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "11.1775",
+        "longitude": "-4.2979"
+      },
+      "url": siteUrl,
+      "telephone": "+226-44-32-38-41",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": localCity ? {
+        "@type": "City",
+        "name": localCity
+      } : {
+        "@type": "Country",
+        "name": "Burkina Faso"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services BinkoO Digital Lab",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "IA & Automatisation",
+            "description": "Intégration d'intelligence artificielle, chatbots (WhatsApp/Facebook), agents IA de prospection, scraping de données et automatisation de workflows.",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Chatbots intelligents"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Agents IA sur mesure"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Scraping de données"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Automatisation CRM"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Réceptionniste vocal IA"
+                }
+              }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Création Web & Apps",
+            "description": "Développement de sites vitrines, applications web SAAS, landing pages haute conversion et boutiques reliées à WhatsApp.",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Sites vitrines"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Applications Web / SAAS"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Boutiques WhatsApp"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Landing Pages"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "SEO"
+                }
+              }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Design & Branding",
+            "description": "Création d'identité visuelle, logos, design pour réseaux sociaux, affiches.",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Logos & Branding"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Flyers & Affiches"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Bannières"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Visuels Réseaux Sociaux"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "BinkoO Digital Lab",
+      "description": "Agence digitale spécialisée en IA, automatisation et développement web au Burkina Faso",
+      "publisher": {
+        "@id": `${siteUrl}/#organization`
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": `${siteUrl}/blog?q={search_term_string}`
+        },
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": "fr-FR"
+    }
+  ];
+
+  if (faq && faq.length > 0) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}/#faq`,
+      "mainEntity": faq.map(item => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.a
+        }
+      }))
+    });
+  }
+
   const structuredData = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": `${siteUrl}/#organization`,
-        "name": "BinkoO Digital Lab",
-        "alternateName": ["BinkoO", "Agence BinkoO"],
-        "url": siteUrl,
-        "logo": {
-          "@type": "ImageObject",
-          "url": ogImage,
-          "width": "600",
-          "height": "600"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+226-44-32-38-41",
-          "contactType": "customer service",
-          "areaServed": localCity ? { "@type": "City", "name": localCity } : "BF",
-          "availableLanguage": ["fr", "en"]
-        },
-        "sameAs": [
-          "https://www.facebook.com/share/1JPaSH1STA/",
-          "https://www.linkedin.com/company/binkoo-digital-lab",
-          "https://www.instagram.com/binkoo_digital_lab",
-          "https://www.tiktok.com/@binkoo.digital.lab"
-        ],
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Lafiabougou, Secteur 20",
-          "addressLocality": "Bobo-Dioulasso",
-          "addressRegion": "Hauts-Bassins",
-          "postalCode": "",
-          "addressCountry": "BF"
-        }
-      },
-      {
-        "@type": "ProfessionalService",
-        "@id": `${siteUrl}/#service`,
-        "name": "BinkoO Digital Lab",
-        "image": ogImage,
-        "description": description,
-        "priceRange": "$$",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Lafiabougou, Secteur 20",
-          "addressLocality": "Bobo-Dioulasso",
-          "addressRegion": "Hauts-Bassins",
-          "addressCountry": "BF"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "11.1775",
-          "longitude": "-4.2979"
-        },
-        "url": siteUrl,
-        "telephone": "+226-44-32-38-41",
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday"
-            ],
-            "opens": "08:00",
-            "closes": "18:00"
-          }
-        ],
-        "areaServed": localCity ? {
-          "@type": "City",
-          "name": localCity
-        } : {
-          "@type": "Country",
-          "name": "Burkina Faso"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Services BinkoO Digital Lab",
-          "itemListElement": [
-            {
-              "@type": "OfferCatalog",
-              "name": "IA & Automatisation",
-              "description": "Intégration d'intelligence artificielle, chatbots (WhatsApp/Facebook), agents IA de prospection, scraping de données et automatisation de workflows.",
-              "itemListElement": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Chatbots intelligents"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Agents IA sur mesure"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Scraping de données"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Automatisation CRM"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Réceptionniste vocal IA"
-                  }
-                }
-              ]
-            },
-            {
-              "@type": "OfferCatalog",
-              "name": "Création Web & Apps",
-              "description": "Développement de sites vitrines, applications web SAAS, landing pages haute conversion et boutiques reliées à WhatsApp.",
-              "itemListElement": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Sites vitrines"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Applications Web / SAAS"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Boutiques WhatsApp"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Landing Pages"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "SEO"
-                  }
-                }
-              ]
-            },
-            {
-              "@type": "OfferCatalog",
-              "name": "Design & Branding",
-              "description": "Création d'identité visuelle, logos, design pour réseaux sociaux, affiches.",
-              "itemListElement": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Logos & Branding"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Flyers & Affiches"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Bannières"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Visuels Réseaux Sociaux"
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${siteUrl}/#website`,
-        "url": siteUrl,
-        "name": "BinkoO Digital Lab",
-        "description": "Agence digitale spécialisée en IA, automatisation et développement web au Burkina Faso",
-        "publisher": {
-          "@id": `${siteUrl}/#organization`
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": `${siteUrl}/blog?q={search_term_string}`
-          },
-          "query-input": "required name=search_term_string"
-        },
-        "inLanguage": "fr-FR"
-      }
-    ]
+    "@graph": graph
   };
 
   return (

@@ -48,6 +48,25 @@ const Branding: React.FC = () => {
     }
   ];
 
+  const faqItems = [
+    {
+      q: "Combien coûte la création d'un logo au Burkina Faso ?",
+      a: "Le tarif dépend de la complexité du projet (logo seul, logo + charte graphique, identité visuelle complète). Chez BinkoO Digital Lab, nous proposons des formules adaptées au budget des entreprises burkinabè, avec plusieurs options de prix. Contactez-nous pour recevoir un devis gratuit en moins de 24 heures."
+    },
+    {
+      q: "Quelle est la différence entre un logo et une identité visuelle ?",
+      a: "Le logo est le symbole central de votre marque. L'identité visuelle va bien au-delà : elle comprend les couleurs officielles, les typographies, les règles d'utilisation, les modèles pour vos réseaux sociaux et vos supports imprimés. C'est un système complet qui garantit la cohérence de votre communication sur tous les canaux."
+    },
+    {
+      q: "Pouvez-vous créer des visuels pour mes réseaux sociaux ?",
+      a: "Oui, c'est l'un de nos services les plus demandés au Burkina Faso et en Afrique de l'Ouest. Nous créons des templates personnalisés pour Instagram, Facebook, TikTok et LinkedIn : posts, stories, carrousels, bannières publicitaires. Des visuels pro que vous pouvez réutiliser ou que nous alimentons régulièrement pour vous."
+    },
+    {
+      q: "En combien de temps recevrai-je mes créations ?",
+      a: "Un logo seul est livré en 3 à 5 jours ouvrés. Une identité visuelle complète (logo + charte + templates) prend généralement 7 à 10 jours. Les visuels ponctuels (flyers, posts réseaux sociaux) sont livrés en 24 à 48 heures. Chaque livraison inclut des révisions jusqu'à votre entière satisfaction."
+    }
+  ];
+
   return (
     <>
       <SEO
@@ -55,6 +74,7 @@ const Branding: React.FC = () => {
         description="Créez une identité de marque forte au Burkina Faso : logo professionnel, charte graphique, visuels réseaux sociaux et supports publicitaires. Design graphique expert pour entreprises africaines."
         canonical="https://binkoo.digital/services/branding"
         keywords="logo entreprise Burkina Faso, identité visuelle Ouagadougou, design graphique Afrique, charte graphique Bobo-Dioulasso, création logo Afrique de l'Ouest, branding entreprise africaine, visuels réseaux sociaux Burkina, flyer Ouagadougou, design publicitaire Afrique, graphiste Burkina Faso, communication visuelle Afrique de l'Ouest"
+        faq={faqItems}
       />
 
       {/* Hero Section */}
@@ -248,24 +268,7 @@ const Branding: React.FC = () => {
                 Questions fréquentes sur le branding et le design graphique
               </h2>
               <div className="space-y-6">
-                {[
-                  {
-                    q: "Combien coûte la création d'un logo au Burkina Faso ?",
-                    a: "Le tarif dépend de la complexité du projet (logo seul, logo + charte graphique, identité visuelle complète). Chez BinkoO Digital Lab, nous proposons des formules adaptées au budget des entreprises burkinabè, avec plusieurs options de prix. Contactez-nous pour recevoir un devis gratuit en moins de 24 heures."
-                  },
-                  {
-                    q: "Quelle est la différence entre un logo et une identité visuelle ?",
-                    a: "Le logo est le symbole central de votre marque. L'identité visuelle va bien au-delà : elle comprend les couleurs officielles, les typographies, les règles d'utilisation, les modèles pour vos réseaux sociaux et vos supports imprimés. C'est un système complet qui garantit la cohérence de votre communication sur tous les canaux."
-                  },
-                  {
-                    q: "Pouvez-vous créer des visuels pour mes réseaux sociaux ?",
-                    a: "Oui, c'est l'un de nos services les plus demandés au Burkina Faso et en Afrique de l'Ouest. Nous créons des templates personnalisés pour Instagram, Facebook, TikTok et LinkedIn : posts, stories, carrousels, bannières publicitaires. Des visuels pro que vous pouvez réutiliser ou que nous alimentons régulièrement pour vous."
-                  },
-                  {
-                    q: "En combien de temps recevrai-je mes créations ?",
-                    a: "Un logo seul est livré en 3 à 5 jours ouvrés. Une identité visuelle complète (logo + charte + templates) prend généralement 7 à 10 jours. Les visuels ponctuels (flyers, posts réseaux sociaux) sont livrés en 24 à 48 heures. Chaque livraison inclut des révisions jusqu'à votre entière satisfaction."
-                  }
-                ].map((faq, index) => (
+                {faqItems.map((faq, index) => (
                   <motion.div
                     key={index}
                     className="bg-muted/30 rounded-xl p-6"

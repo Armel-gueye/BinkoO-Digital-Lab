@@ -48,6 +48,25 @@ const IAAutomatisation: React.FC = () => {
     }
   ];
 
+  const faqItems = [
+    {
+      q: "L'IA est-elle adaptée aux PME au Burkina Faso ?",
+      a: "Absolument. Nos solutions sont spécialement conçues pour le contexte africain : tarifs accessibles, outils simples à prendre en main, et intégration avec les plateformes que vous utilisez déjà (WhatsApp, Facebook, Instagram). Que vous soyez à Ouagadougou, Bobo-Dioulasso ou ailleurs en Afrique de l'Ouest, l'IA est désormais à votre portée."
+    },
+    {
+      q: "Combien coûte un chatbot WhatsApp pour mon entreprise ?",
+      a: "Le coût varie selon vos besoins (nombre de conversations, fonctionnalités, intégrations). Chez BinkoO Digital Lab, nous proposons des formules adaptées au budget des entreprises burkinabè et ouest-africaines. Contactez-nous pour un devis gratuit et personnalisé."
+    },
+    {
+      q: "Est-ce que l'automatisation va remplacer mes employés ?",
+      a: "Non. L'automatisation libère vos équipes des tâches répétitives pour qu'elles se concentrent sur ce qui crée vraiment de la valeur : la relation client, la stratégie, la vente. C'est un outil qui amplifie les performances humaines, pas qui les remplace."
+    },
+    {
+      q: "Quels résultats concrets puis-je attendre ?",
+      a: "Nos clients constatent généralement une réduction de 50 à 70% du temps consacré aux tâches administratives, une augmentation significative du taux de réponse client, et une croissance du nombre de leads qualifiés grâce à la prospection automatisée."
+    }
+  ];
+
   return (
     <>
       <SEO
@@ -55,6 +74,7 @@ const IAAutomatisation: React.FC = () => {
         description="Automatisez votre entreprise au Burkina Faso et en Afrique de l'Ouest avec l'IA : chatbots WhatsApp, agents IA, prospection automatisée, workflows intelligents. Solutions adaptées aux PME africaines."
         canonical="https://binkoo.digital/services/ia-automatisation"
         keywords="intelligence artificielle Burkina Faso, chatbot WhatsApp Ouagadougou, automatisation entreprise Afrique, agent IA Bobo-Dioulasso, automatisation PME Afrique de l'Ouest, chatbot Facebook entreprise, prospection automatisée Burkina, CRM intelligent Afrique, transformation digitale Burkina Faso"
+        faq={faqItems}
       />
 
       {/* Hero Section */}
@@ -219,24 +239,7 @@ const IAAutomatisation: React.FC = () => {
                 Questions fréquentes sur l'IA et l'automatisation
               </h2>
               <div className="space-y-6">
-                {[
-                  {
-                    q: "L'IA est-elle adaptée aux PME au Burkina Faso ?",
-                    a: "Absolument. Nos solutions sont spécialement conçues pour le contexte africain : tarifs accessibles, outils simples à prendre en main, et intégration avec les plateformes que vous utilisez déjà (WhatsApp, Facebook, Instagram). Que vous soyez à Ouagadougou, Bobo-Dioulasso ou ailleurs en Afrique de l'Ouest, l'IA est désormais à votre portée."
-                  },
-                  {
-                    q: "Combien coûte un chatbot WhatsApp pour mon entreprise ?",
-                    a: "Le coût varie selon vos besoins (nombre de conversations, fonctionnalités, intégrations). Chez BinkoO Digital Lab, nous proposons des formules adaptées au budget des entreprises burkinabè et ouest-africaines. Contactez-nous pour un devis gratuit et personnalisé."
-                  },
-                  {
-                    q: "Est-ce que l'automatisation va remplacer mes employés ?",
-                    a: "Non. L'automatisation libère vos équipes des tâches répétitives pour qu'elles se concentrent sur ce qui crée vraiment de la valeur : la relation client, la stratégie, la vente. C'est un outil qui amplifie les performances humaines, pas qui les remplace."
-                  },
-                  {
-                    q: "Quels résultats concrets puis-je attendre ?",
-                    a: "Nos clients constatent généralement une réduction de 50 à 70% du temps consacré aux tâches administratives, une augmentation significative du taux de réponse client, et une croissance du nombre de leads qualifiés grâce à la prospection automatisée."
-                  }
-                ].map((faq, index) => (
+                {faqItems.map((faq, index) => (
                   <motion.div
                     key={index}
                     className="bg-muted/30 rounded-xl p-6"
