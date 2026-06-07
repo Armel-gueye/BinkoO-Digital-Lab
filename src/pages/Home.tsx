@@ -23,28 +23,44 @@ export default function Home() {
 
   const faqItems = [
     {
-      q: "Comment se déroule la création d'un site web ou d'une automatisation avec BinkoO ?",
-      a: "Nous commençons par un cadrage gratuit pour analyser vos besoins, suivi d'une proposition commerciale et d'un devis personnalisé. Une fois validé, nous travaillons par sprints de développement avec des livraisons régulières et des phases de validation (paiement aux jalons) jusqu'au lancement."
+      q: "Comment se déroule un projet avec BinkoO Digital Lab ?",
+      a: "Nous commençons par un cadrage gratuit pour analyser vos besoins, suivi d'un devis personnalisé. Une fois validé, nous livrons le projet par étapes avec paiement aux jalons. Vous suivez l'avancement en temps réel dès le premier jour."
     },
     {
-      q: "Intégrez-vous les paiements Mobile Money sur les sites e-commerce ?",
-      a: "Oui, c'est notre spécialité. Nous connectons vos boutiques et sites web aux solutions de paiement mobile locales d'Afrique de l'Ouest (Orange Money, Moov Money, Wave) pour permettre à vos clients de payer directement depuis leur téléphone."
+      q: "Combien de temps faut-il pour créer un site web professionnel ?",
+      a: "Un site vitrine simple est livré en 7 à 14 jours ouvrés. Une boutique e-commerce ou une application web sur mesure prend entre 3 et 8 semaines selon la complexité. Un logo seul est livré sous 3 à 5 jours."
     },
     {
-      q: "Quel est le délai moyen pour concevoir une identité visuelle ou un logo ?",
-      a: "Un logo professionnel seul est livré sous 3 à 5 jours ouvrés. Une identité visuelle complète (logo, charte graphique, templates réseaux sociaux) prend entre 7 et 10 jours ouvrés avec des révisions incluses pour garantir votre entière satisfaction."
+      q: "Combien coûte un chatbot WhatsApp pour mon entreprise ?",
+      a: "Le tarif dépend du nombre de conversations, des fonctionnalités et des intégrations. Nous établissons un devis gratuit et personnalisé sous 24 heures après analyse de vos besoins. Contactez-nous via WhatsApp au +226 44 32 38 41."
     },
     {
-      q: "Vos chatbots WhatsApp sont-ils connectés 24h/24 et sécurisés ?",
-      a: "Absolument. Nos chatbots WhatsApp s'appuient sur l'API Cloud officielle de Meta. Ils fonctionnent 24h/24, 7j/7, sur des serveurs sécurisés, et peuvent être connectés directement à votre CRM ou à vos bases de données internes."
+      q: "Do vous intervenez en dehors du Burkina Faso ?",
+      a: "Oui. Nous travaillons avec des clients au Burkina Faso, en Côte d'Ivoire, au Mali, au Sénégal, au Togo, au Bénin et au Niger. Tous nos projets sont menés à distance de façon asynchrone, ce qui nous permet d'intervenir dans toute l'Afrique francophone."
     },
     {
-      q: "Vos sites web se chargent-ils rapidement en Afrique avec une faible connexion ?",
-      a: "Oui. Nous concevons nos sites et applications web avec des technologies modernes (React, Vite, static site generation) et des médias optimisés en temps réel. Nos sites chargent en moins de 3 secondes, ce qui est parfait pour la connectivité 3G/4G en Afrique subsaharienne."
+      q: "Qu'est-ce qui différencie BinkoO Digital Lab des autres agences digitales ?",
+      a: "Nous combinons IA et développement web avec une connaissance concrète des réalités africaines (connexion 3G/4G, Mobile Money, WhatsApp). Nos sites chargent en moins de 3 secondes même en faible connexion. Nous ne sous-traitons rien : chaque projet est conçu et livré en interne."
     },
     {
-      q: "Proposez-vous un service de maintenance après le lancement ?",
-      a: "Oui, nous proposons des forfaits de maintenance mensuels ou annuels sur mesure pour assurer le suivi technique, les mises à jour de sécurité, la sauvegarde de vos données et le support utilisateur."
+      q: "Comment fonctionne un agent IA ou un chatbot pour une PME africaine ?",
+      a: "L'agent IA est connecté à votre WhatsApp ou Facebook Messenger via l'API officielle de Meta. Il répond aux questions de vos clients, qualifie les prospects et peut prendre des commandes automatiquement 24h/24, 7j/7, sans intervention humaine."
+    },
+    {
+      q: "Intégrez-vous le paiement Mobile Money sur les sites e-commerce ?",
+      a: "Oui. Nous connectons vos boutiques en ligne aux solutions de paiement locales d'Afrique de l'Ouest : Orange Money, Moov Money et Wave. Vos clients peuvent commander et payer directement depuis leur téléphone, sans carte bancaire."
+    },
+    {
+      q: "Pourquoi mon site web doit-il être optimisé pour la connexion 3G en Afrique ?",
+      a: "En Afrique subsaharienne, plus de 70% des internautes naviguent sur mobile en 3G ou 4G. Un site lent perd des clients. Nos sites chargent en moins de 3 secondes en 3G grâce à des architectures modernes (React, Vite) et des images compressées automatiquement."
+    },
+    {
+      q: "Quels sont les délais pour créer un logo ou une identité visuelle complète ?",
+      a: "Un logo professionnel est livré sous 3 à 5 jours ouvrés. Une identité visuelle complète — logo, charte graphique et templates réseaux sociaux — prend entre 7 et 10 jours. Des révisions sont incluses jusqu'à votre entière satisfaction."
+    },
+    {
+      q: "Proposez-vous un accompagnement après la livraison du projet ?",
+      a: "Oui. Nous proposons des forfaits de maintenance mensuels ou annuels sur mesure : mises à jour de sécurité, sauvegardes automatiques, optimisations de performance et support technique réactif. Vous n'êtes jamais seul après le lancement."
     }
   ];
 
@@ -610,6 +626,54 @@ export default function Home() {
                 </AnimatedParagraph>
               </div>
             </motion.div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* FAQ Section */}
+      <AnimatedSection animation="fade-up">
+        <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8" itemScope itemType="https://schema.org/FAQPage">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
+                Questions fréquentes
+              </h2>
+              <p className="text-muted-foreground text-base md:text-lg">
+                Réponses directes aux questions que nos clients posent le plus souvent.
+              </p>
+            </div>
+            <div className="space-y-4">
+              {faqItems.map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="border border-border rounded-xl overflow-hidden"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  itemScope
+                  itemProp="mainEntity"
+                  itemType="https://schema.org/Question"
+                >
+                  <details className="group">
+                    <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none hover:bg-muted/40 transition-colors">
+                      <h3 className="font-semibold text-sm md:text-base text-left" itemProp="name">{item.q}</h3>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full border border-border flex items-center justify-center text-muted-foreground group-open:rotate-45 transition-transform duration-200 text-lg leading-none">
+                        +
+                      </span>
+                    </summary>
+                    <div
+                      className="px-6 pb-5 text-sm md:text-base text-muted-foreground leading-relaxed border-t border-border pt-4"
+                      itemScope
+                      itemProp="acceptedAnswer"
+                      itemType="https://schema.org/Answer"
+                    >
+                      <p itemProp="text">{item.a}</p>
+                    </div>
+                  </details>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
       </AnimatedSection>
