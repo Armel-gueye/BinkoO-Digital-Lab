@@ -18,18 +18,30 @@ interface SEOProps {
  */
 export default function SEO({
   title,
-  description,
+  description = description || '',
   canonical,
-  keywords = "BinkoO, BinkoO Digital Lab, agence digitale Burkina Faso, automatisation IA, développement web, chatbot IA, Bobo-Dioulasso",
+  keywords = "BinkoO, BinkoO Digital Lab, agence digitale Burkina Faso, automatisation de processus, d'Intelligence Artificielle, développement web, Burkina Faso",
   ogImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/BinkoO-Digital-Lab-PNG-1760749121547.png",
   ogType = "website",
   robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
   localCity,
   faq
 }: SEOProps) {
+  // Truncate description for SEO meta tags (max 155 characters)
+  const truncatedDescription = description.length > 155 ? description.slice(0, 152) + "..." : description;
+  // Compute canonical URL: use provided prop or current location without query params or hash
+  const computeCanonical = () => {
+    if (canonical) return canonical;
+    if (typeof window !== 'undefined' && window.location) {
+      const { origin, pathname } = window.location;
+      return `${origin}${pathname}`;
+    }
+    return siteUrl;
+  };
   const siteUrl = "https://binkoo.digital";
   const fullTitle = `${title} | BinkoO Digital Lab`;
-  const canonicalUrl = canonical || siteUrl;
+  const canonicalUrl = computeCanonical();
+
 
   // Données structurées JSON-LD pour Google
   const graph: any[] = [
@@ -337,6 +349,38 @@ export default function SEO({
     });
   }
 
+  // Add Article schema when on a blog article page
+  if (canonicalUrl.includes('/blog/') && title && description) {
+    graph.unshift({
+      "@type": "Article",
+      "@id": `${canonicalUrl}#article`,
+      "headline": title,
+      "description": description,
+      "image": [{ "@type": "ImageObject", "url": ogImage }],
+      "author": { "@type": "Organization", "name": "BinkoO Digital Lab" },
+      "publisher": { "@type": "Organization", "name": "BinkoO Digital Lab", "logo": { "@type": "ImageObject", "url": ogImage } },
+      "url": canonicalUrl,
+      "datePublished": new Date().toISOString()
+    });
+  }
+  // BreadcrumbList JSON-LD (only on pages with a path)
+  if (typeof window !== 'undefined') {
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    if (pathSegments.length > 0) {
+      const items = pathSegments.map((seg, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        name: seg.replace(/-/g, ' '),
+        item: `${siteUrl}/${pathSegments.slice(0, idx + 1).join('/')}`
+      }));
+      graph.unshift({
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        itemListElement: items
+      });
+    }
+  }
+
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": graph
@@ -346,14 +390,14 @@ export default function SEO({
     <Helmet>
       <html lang="fr" />
       <title>{fullTitle}</title>
-      <meta name="description" content={description} />
+      <meta name="description" content={truncatedDescription} />
       <meta name="keywords" content={keywords} />
       <link rel="canonical" href={canonicalUrl} />
 
       <meta property="og:site_name" content="BinkoO Digital Lab" />
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
+      <meta property="og:description" content={truncatedDescription} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:width" content="1200" />
@@ -362,7 +406,7 @@ export default function SEO({
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:description" content={truncatedDescription} />
       <meta name="twitter:image" content={ogImage} />
 
       <meta name="robots" content={robots} />

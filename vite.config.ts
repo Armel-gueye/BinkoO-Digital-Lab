@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import nodemailer from "nodemailer";
 import Sitemap from "vite-plugin-sitemap";
+import Imagemin from "vite-plugin-imagemin";
 
 // In-memory rate limiter
 const requestsMap = new Map<string, number[]>();
@@ -218,7 +219,15 @@ export default defineConfig(async (): Promise<UserConfig> => {
         ...localHubRoutes,
         ...blogRoutes
       ],
+      exclude: ['/blog/tag/**'],
       generateRobotsTxt: false
+    }),
+    Imagemin({
+      gifsicle: { optimizationLevel: 7 },
+      optipng: { optimizationLevel: 7 },
+      mozjpeg: { quality: 80 },
+      pngquant: { quality: [0.8, 0.9] },
+      svgo: { plugins: [{ name: 'removeViewBox', active: false }] }
     }),
   ],
   resolve: {
