@@ -176,26 +176,14 @@ import type { UserConfig } from 'vite';
 
 export default defineConfig(async (): Promise<UserConfig> => {
   let blogRoutes: string[] = [];
-  let tagRoutes: string[] = [];
   try {
-    const [postsRes, tagsRes] = await Promise.all([
-      fetch('https://blog.binkoo.digital/wp-json/wp/v2/posts?per_page=100', {
-        headers: { 'Accept': 'application/json' }
-      }),
-      fetch('https://blog.binkoo.digital/wp-json/wp/v2/tags?per_page=100', {
-        headers: { 'Accept': 'application/json' }
-      })
-    ]);
+    const postsRes = await fetch('https://blog.binkoo.digital/wp-json/wp/v2/posts?per_page=100', {
+      headers: { 'Accept': 'application/json' }
+    });
     if (postsRes.ok) {
       const posts = (await postsRes.json()) as any[];
       if (Array.isArray(posts)) {
         blogRoutes = posts.map((post) => `/blog/${post.slug}`);
-      }
-    }
-    if (tagsRes.ok) {
-      const tags = (await tagsRes.json()) as any[];
-      if (Array.isArray(tags)) {
-        tagRoutes = tags.map((tag) => `/blog/tag/${tag.slug}`);
       }
     }
   } catch (error) {
@@ -228,8 +216,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
         '/contact',
         '/politique-confidentialite',
         ...localHubRoutes,
-        ...blogRoutes,
-        ...tagRoutes
+        ...blogRoutes
       ],
       generateRobotsTxt: false
     }),
