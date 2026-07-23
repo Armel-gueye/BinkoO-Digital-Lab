@@ -33,7 +33,7 @@ Allow: /
 Sitemap: https://binkoo.digital/sitemap.xml
 
 # IndexNow
-IndexNow: https://binkoo.digital/e9df6f64fdf94a10a77c4a68eb2a46f3.txt
+# IndexNow: https://binkoo.digital/e9df6f64fdf94a10a77c4a68eb2a46f3.txt
 
 # Crawl-delay pour éviter la surcharge
 Crawl-delay: 1
