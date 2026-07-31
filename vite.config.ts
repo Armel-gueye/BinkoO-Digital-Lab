@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import nodemailer from "nodemailer";
-import Sitemap from "vite-plugin-sitemap";
+
 import Imagemin from "vite-plugin-imagemin";
 
 // In-memory rate limiter
@@ -175,26 +175,7 @@ const contactApiPlugin = () => ({
 
 import type { UserConfig } from 'vite';
 
-export default defineConfig(async (): Promise<UserConfig> => {
-  let blogRoutes: string[] = [];
-  try {
-    const postsRes = await fetch('https://blog.binkoo.digital/wp-json/wp/v2/posts?per_page=100', {
-      headers: { 'Accept': 'application/json' }
-    });
-    if (postsRes.ok) {
-      const posts = (await postsRes.json()) as any[];
-      if (Array.isArray(posts)) {
-        blogRoutes = posts.map((post) => `/blog/${post.slug}`);
-      }
-    }
-  } catch (error) {
-    console.error("Error fetching blog data for sitemap generation:", error);
-  }
-
-  const localHubCities = ['ouagadougou', 'bobo-dioulasso', 'abidjan', 'bamako', 'dakar', 'lome', 'cotonou'];
-  const localHubRoutes = localHubCities.map(city => `/agence-ia-automatisation/${city}`);
-
-  return {
+export default defineConfig({
   server: {
     host: "::",
     port: 3000,
@@ -202,26 +183,6 @@ export default defineConfig(async (): Promise<UserConfig> => {
   plugins: [
     react(),
     contactApiPlugin(),
-    Sitemap({
-      hostname: 'https://binkoo.digital',
-      dynamicRoutes: [
-        '/services',
-        '/a-propos',
-        '/services/ia-automatisation',
-        '/services/sites-app-web',
-        '/services/branding',
-        '/realisations',
-        '/realisations/amisi-sarl',
-        '/realisations/automatisation-blog-seo',
-        '/blog',
-        '/contact',
-        '/politique-confidentialite',
-        ...localHubRoutes,
-        ...blogRoutes
-      ],
-      exclude: ['/blog/tag/**'],
-      generateRobotsTxt: false
-    }),
     Imagemin({
       gifsicle: { optimizationLevel: 7 },
       optipng: { optimizationLevel: 7 },
@@ -266,5 +227,4 @@ export default defineConfig(async (): Promise<UserConfig> => {
     ],
     exclude: [],
   },
-  };
 });

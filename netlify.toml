@@ -2,11 +2,20 @@
   publish = "dist"
   command = "npm run build"
 
-# Removed Netlify sitemap plugin to use vite-plugin-sitemap instead for correct SPA indexing
+[functions]
+  directory = "netlify/functions"
+
 # Configuration pour le rendu côté serveur (SSR-like behavior)
 [build.environment]
   NODE_VERSION = "20"
   NODE_OPTIONS = "--max-old-space-size=4096"
+
+# Redirection dynamique du sitemap vers la fonction Netlify
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/.netlify/functions/sitemap"
+  status = 200
+  force = true
 
 # Redirection SPA
 [[redirects]]

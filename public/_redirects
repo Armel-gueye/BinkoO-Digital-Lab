@@ -1,5 +1,8 @@
 # Redirection du trafic de l'ancien domaine vers le nouveau
 https://binkoodigitallab.netlify.app/* https://binkoo.digital/:splat 301!
 
+# Sitemap dynamique via Netlify function
+/sitemap.xml    /.netlify/functions/sitemap   200!
+
 # Règles SPA
 /*    /index.html   200
