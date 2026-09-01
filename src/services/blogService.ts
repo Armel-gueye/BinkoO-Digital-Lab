@@ -222,55 +222,90 @@ const extractRealTitle = (post: BlogPost): string => {
   return renderedTitle;
 };
 
+import { staticArticles } from '@/data/staticArticles';
+
 // ============================================
-// SERVICE PRINCIPAL - WordPress API
+// SERVICE PRINCIPAL - WordPress API & Static Posts
 // ============================================
 
 /**
- * Récupère tous les articles publiés depuis WordPress
+ * Récupère tous les articles publiés (WordPress API + Articles locaux)
  * 
  * @param perPage - Nombre d'articles par page (défaut: 100)
  * @returns Promise<BlogPost[]>
  */
 export const getPosts = async (perPage: number = 100): Promise<BlogPost[]> => {
-  const url = `${WP_API_BASE}/posts?_embed&per_page=${perPage}&orderby=date&order=desc`;
+  let wpPosts: BlogPost[] = [];
+  
+  try {
+    const url = `${WP_API_BASE}/posts?_embed&per_page=${perPage}&orderby=date&order=desc`;
 
-  const response = await fetch(url, {
-    headers: {
-      'Accept': 'application/json',
-    },
-  });
+    const response = await fetch(url, {
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error(`Erreur API WordPress: ${response.status} ${response.statusText}`);
+    if (response.ok) {
+      const posts: BlogPost[] = await response.json();
+      wpPosts = posts.map(post => {
+        const realTitle = extractRealTitle(post);
+        return {
+          ...post,
+          title: {
+            ...post.title,
+            rendered: realTitle
+          },
+          readTime: calculateReadTime(post.content.rendered),
+          month: getMonthFromDate(post.date),
+        };
+      });
+    }
+  } catch (err) {
+    console.warn('Impossible de joindre l\'API WordPress, chargement des articles locaux :', err);
   }
 
-  const posts: BlogPost[] = await response.json();
-
-  // Enrichir chaque post avec readTime, mois calculés et correction du titre
-  return posts.map(post => {
-    const realTitle = extractRealTitle(post);
-    return {
+  // Fusionner les articles locaux avec les articles WordPress (sans doublon de slug)
+  const existingSlugs = new Set(wpPosts.map(p => p.slug.toLowerCase()));
+  const localFormatted = staticArticles
+    .filter(p => !existingSlugs.has(p.slug.toLowerCase()))
+    .map(post => ({
       ...post,
-      title: {
-        ...post.title,
-        rendered: realTitle
-      },
-      readTime: calculateReadTime(post.content.rendered),
-      month: getMonthFromDate(post.date),
-    };
-  });
+      readTime: post.readTime || calculateReadTime(post.content.rendered),
+      month: post.month || getMonthFromDate(post.date),
+    }));
+
+  const allPosts = [...localFormatted, ...wpPosts];
+
+  // Trier par date décroissante
+  allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  return allPosts.slice(0, perPage);
 };
 
 /**
- * Récupère un article par son slug depuis WordPress
+ * Récupère un article par son slug depuis les articles locaux ou WordPress
  * 
- * @param slug - Slug de l'article WordPress
+ * @param slug - Slug de l'article
  * @returns Promise<BlogPost | null>
  */
 export const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
+  if (!slug) return null;
+  const cleanSlug = slug.toLowerCase().trim();
+
+  // 1. Vérifier d'abord les articles locaux statiques
+  const localPost = staticArticles.find(p => p.slug.toLowerCase() === cleanSlug);
+  if (localPost) {
+    return {
+      ...localPost,
+      readTime: localPost.readTime || calculateReadTime(localPost.content.rendered),
+      month: localPost.month || getMonthFromDate(localPost.date),
+    };
+  }
+
+  // 2. Si non trouvé en local, interroger l'API WordPress
   try {
-    const url = `${WP_API_BASE}/posts?slug=${slug}&_embed`;
+    const url = `${WP_API_BASE}/posts?slug=${encodeURIComponent(slug)}&_embed`;
 
     const response = await fetch(url, {
       headers: {
@@ -311,52 +346,78 @@ export const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
  * @returns Promise<{ posts: BlogPost[], tagName: string }>
  */
 export const getPostsByTagSlug = async (slug: string): Promise<{ posts: BlogPost[], tagName: string }> => {
+  const cleanSlug = slug.toLowerCase().trim();
+
+  // Trouver les articles locaux correspondant au tag
+  const matchingLocalPosts = staticArticles.filter(article => {
+    const tags = getTags(article);
+    return tags.some(t => t.slug.toLowerCase() === cleanSlug);
+  });
+
+  let foundTagName = matchingLocalPosts.length > 0
+    ? getTags(matchingLocalPosts[0]).find(t => t.slug.toLowerCase() === cleanSlug)?.name || slug
+    : slug;
+
+  let wpPosts: BlogPost[] = [];
+
   try {
-    // 1. D'abord, on doit récupérer l'ID et le vrai nom du tag correspondant au slug
-    const tagUrl = `${WP_API_BASE}/tags?slug=${slug}`;
+    const tagUrl = `${WP_API_BASE}/tags?slug=${encodeURIComponent(slug)}`;
     const tagResponse = await fetch(tagUrl, {
       headers: { 'Accept': 'application/json' },
     });
 
-    if (!tagResponse.ok) throw new Error("Erreur při récupération du tag");
+    if (tagResponse.ok) {
+      const tags = await tagResponse.json();
+      if (tags && tags.length > 0) {
+        const tagId = tags[0].id;
+        foundTagName = tags[0].name;
 
-    const tags = await tagResponse.json();
-    if (!tags || tags.length === 0) {
-      throw new Error(`Aucun tag trouvé pour le slug: ${slug}`);
+        const postsUrl = `${WP_API_BASE}/posts?_embed&tags=${tagId}&orderby=date&order=desc`;
+        const postsResponse = await fetch(postsUrl, {
+          headers: { 'Accept': 'application/json' },
+        });
+
+        if (postsResponse.ok) {
+          const rawWpPosts: BlogPost[] = await postsResponse.json();
+          wpPosts = rawWpPosts.map(post => {
+            const realTitle = extractRealTitle(post);
+            return {
+              ...post,
+              title: {
+                ...post.title,
+                rendered: realTitle
+              },
+              readTime: calculateReadTime(post.content.rendered),
+              month: getMonthFromDate(post.date),
+            };
+          });
+        }
+      }
     }
-
-    const tagId = tags[0].id;
-    const tagName = tags[0].name;
-
-    // 2. Ensuite, on récupère les articles associés à cet ID de tag
-    const postsUrl = `${WP_API_BASE}/posts?_embed&tags=${tagId}&orderby=date&order=desc`;
-    const postsResponse = await fetch(postsUrl, {
-      headers: { 'Accept': 'application/json' },
-    });
-
-    if (!postsResponse.ok) throw new Error("Erreur récupération des articles du tag");
-
-    const posts: BlogPost[] = await postsResponse.json();
-
-    return {
-      tagName,
-      posts: posts.map(post => {
-        const realTitle = extractRealTitle(post);
-        return {
-          ...post,
-          title: {
-            ...post.title,
-            rendered: realTitle
-          },
-          readTime: calculateReadTime(post.content.rendered),
-          month: getMonthFromDate(post.date),
-        };
-      })
-    };
   } catch (error) {
-    console.error(`Erreur pour le tag ${slug}:`, error);
-    throw error;
+    console.warn(`Erreur lors de la récupération WordPress pour le tag ${slug}:`, error);
   }
+
+  const existingSlugs = new Set(wpPosts.map(p => p.slug.toLowerCase()));
+  const localFormatted = matchingLocalPosts
+    .filter(p => !existingSlugs.has(p.slug.toLowerCase()))
+    .map(post => ({
+      ...post,
+      readTime: post.readTime || calculateReadTime(post.content.rendered),
+      month: post.month || getMonthFromDate(post.date),
+    }));
+
+  const allPosts = [...localFormatted, ...wpPosts];
+  allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  if (allPosts.length === 0) {
+    throw new Error(`Aucun article trouvé pour le tag: ${slug}`);
+  }
+
+  return {
+    tagName: foundTagName,
+    posts: allPosts
+  };
 };
 
 /**
