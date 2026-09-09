@@ -4,5 +4,12 @@ https://binkoodigitallab.netlify.app/* https://binkoo.digital/:splat 301!
 # Sitemap dynamique via Netlify function
 /sitemap.xml    /.netlify/functions/sitemap   200!
 
+# Redirections 301 — Fusion articles Formation IA Burkina Faso
+/blog/formation-ia-au-burkina-faso-developpez-des-solutions-locales-avec-lia    /blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises    301!
+/blog/formation-ia-au-burkina-faso-boostez-vos-competences-avec-binkoo-digital-lab    /blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises    301!
+/blog/formation-ia-au-burkina-faso-automatiser-les-processus-dentreprise-avec-des-outils-no-code    /blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises    301!
+/blog/formation-ia-au-burkina-faso-maitrisez-chatgpt-et-boostez-votre-carriere    /blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises    301!
+/blog/formation-ia-au-burkina-faso-transformez-votre-entreprise-avec-des-outils-locaux    /blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises    301!
+
 # Règles SPA
 /*    /index.html   200
