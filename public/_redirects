@@ -11,5 +11,16 @@ https://binkoodigitallab.netlify.app/* https://binkoo.digital/:splat 301!
 /blog/formation-ia-au-burkina-faso-maitrisez-chatgpt-et-boostez-votre-carriere    /blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises    301!
 /blog/formation-ia-au-burkina-faso-transformez-votre-entreprise-avec-des-outils-locaux    /blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises    301!
 
+# Redirections 301 — Articles Automatisation
+/blog/automatisation-no-code-au-burkina-faso-synchroniser-vos-outils-metier-sans-code    /blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest    301!
+/blog/automatisation-no-code-en-afrique-de-louest-optimiser-les-workflows-whatsapp-business-avec-n8n    /blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest    301!
+/blog/automatisation-no-code-a-ouagadougou-booster-la-productivite-des-pme-avec-n8n    /blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest    301!
+/blog/automatisation-intelligente-no-code-comment-les-pme-de-ouagadougou-transforment-leurs-processus-metier-avec-lia    /blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest    301!
+/blog/automatisation-no-code-b2b-au-burkina-faso-booster-les-pme-locales-en-2026    /blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest    301!
+/blog/automatisation-no-code-pour-les-pme-en-afrique-de-louest-booster-votre-workflow-local    /blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest    301!
+/blog/automatisation-au-burkina-faso-limpact-sur-les-pme-locales    /blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest    301!
+/blog/automatisation-en-afrique-de-louest-les-defis-des-infrastructures-locales    /blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest    301!
+/blog/agents-ia-en-afrique-de-louest-automatisation-des-processus-metier-sans-code    /blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest    301!
+
 # Règles SPA
 /*    /index.html   200
