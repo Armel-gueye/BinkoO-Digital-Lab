@@ -222,14 +222,12 @@ const extractRealTitle = (post: BlogPost): string => {
   return renderedTitle;
 };
 
-import { staticArticles } from '@/data/staticArticles';
-
 // ============================================
-// SERVICE PRINCIPAL - WordPress API & Static Posts
+// SERVICE PRINCIPAL - WordPress API
 // ============================================
 
 /**
- * Récupère tous les articles publiés (WordPress API + Articles locaux)
+ * Récupère tous les articles publiés depuis l'API WordPress
  * 
  * @param perPage - Nombre d'articles par page (défaut: 100)
  * @returns Promise<BlogPost[]>
@@ -262,48 +260,24 @@ export const getPosts = async (perPage: number = 100): Promise<BlogPost[]> => {
       });
     }
   } catch (err) {
-    console.warn('Impossible de joindre l\'API WordPress, chargement des articles locaux :', err);
+    console.warn('Impossible de joindre l\'API WordPress :', err);
   }
 
-  // Fusionner les articles locaux avec les articles WordPress (sans doublon de slug)
-  const existingSlugs = new Set(wpPosts.map(p => p.slug.toLowerCase()));
-  const localFormatted = staticArticles
-    .filter(p => !existingSlugs.has(p.slug.toLowerCase()))
-    .map(post => ({
-      ...post,
-      readTime: post.readTime || calculateReadTime(post.content.rendered),
-      month: post.month || getMonthFromDate(post.date),
-    }));
-
-  const allPosts = [...localFormatted, ...wpPosts];
-
   // Trier par date décroissante
-  allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  wpPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  return allPosts.slice(0, perPage);
+  return wpPosts.slice(0, perPage);
 };
 
 /**
- * Récupère un article par son slug depuis les articles locaux ou WordPress
+ * Récupère un article par son slug depuis l'API WordPress
  * 
  * @param slug - Slug de l'article
  * @returns Promise<BlogPost | null>
  */
 export const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
   if (!slug) return null;
-  const cleanSlug = slug.toLowerCase().trim();
 
-  // 1. Vérifier d'abord les articles locaux statiques
-  const localPost = staticArticles.find(p => p.slug.toLowerCase() === cleanSlug);
-  if (localPost) {
-    return {
-      ...localPost,
-      readTime: localPost.readTime || calculateReadTime(localPost.content.rendered),
-      month: localPost.month || getMonthFromDate(localPost.date),
-    };
-  }
-
-  // 2. Si non trouvé en local, interroger l'API WordPress
   try {
     const url = `${WP_API_BASE}/posts?slug=${encodeURIComponent(slug)}&_embed`;
 
@@ -346,18 +320,7 @@ export const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
  * @returns Promise<{ posts: BlogPost[], tagName: string }>
  */
 export const getPostsByTagSlug = async (slug: string): Promise<{ posts: BlogPost[], tagName: string }> => {
-  const cleanSlug = slug.toLowerCase().trim();
-
-  // Trouver les articles locaux correspondant au tag
-  const matchingLocalPosts = staticArticles.filter(article => {
-    const tags = getTags(article);
-    return tags.some(t => t.slug.toLowerCase() === cleanSlug);
-  });
-
-  let foundTagName = matchingLocalPosts.length > 0
-    ? getTags(matchingLocalPosts[0]).find(t => t.slug.toLowerCase() === cleanSlug)?.name || slug
-    : slug;
-
+  let foundTagName = slug;
   let wpPosts: BlogPost[] = [];
 
   try {
@@ -398,25 +361,15 @@ export const getPostsByTagSlug = async (slug: string): Promise<{ posts: BlogPost
     console.warn(`Erreur lors de la récupération WordPress pour le tag ${slug}:`, error);
   }
 
-  const existingSlugs = new Set(wpPosts.map(p => p.slug.toLowerCase()));
-  const localFormatted = matchingLocalPosts
-    .filter(p => !existingSlugs.has(p.slug.toLowerCase()))
-    .map(post => ({
-      ...post,
-      readTime: post.readTime || calculateReadTime(post.content.rendered),
-      month: post.month || getMonthFromDate(post.date),
-    }));
+  wpPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  const allPosts = [...localFormatted, ...wpPosts];
-  allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  if (allPosts.length === 0) {
+  if (wpPosts.length === 0) {
     throw new Error(`Aucun article trouvé pour le tag: ${slug}`);
   }
 
   return {
     tagName: foundTagName,
-    posts: allPosts
+    posts: wpPosts
   };
 };
 
