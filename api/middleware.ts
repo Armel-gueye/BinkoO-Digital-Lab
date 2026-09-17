@@ -169,8 +169,9 @@ export default async function middleware(request: Request): Promise<Response> {
   const isBot = BOT_USER_AGENTS.some((bot) => userAgent.includes(bot));
 
   // Récupérer le chemin depuis le paramètre `path` (transmis par vercel.json) ou depuis l'URL
-  const pathParam = url.searchParams.get('path') || url.pathname;
-  const pathname = pathParam.startsWith('/') ? pathParam : `/${pathParam}`;
+  const rawPath = url.searchParams.get('path') ?? '';
+  // rawPath est vide pour la route racine "/" (Vercel passe path= quand source est /:path(.*) et URL est /)
+  const pathname = rawPath === '' ? '/' : rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
 
   // 2. Si ce n'est pas un bot — servir index.html directement
   if (!isBot) {
