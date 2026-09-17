@@ -1,7 +1,7 @@
 export const config = {
-  matcher: ['(.*)'],
-  runtime: 'edge',
+  matcher: ['/(.*)'],
 };
+
 
 const BOT_USER_AGENTS = [
   'googlebot',
