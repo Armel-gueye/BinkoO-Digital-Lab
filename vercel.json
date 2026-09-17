@@ -1,0 +1,108 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/blog/formation-ia-au-burkina-faso-developpez-des-solutions-locales-avec-lia",
+      "destination": "/blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises",
+      "permanent": true
+    },
+    {
+      "source": "/blog/formation-ia-au-burkina-faso-boostez-vos-competences-avec-binkoo-digital-lab",
+      "destination": "/blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises",
+      "permanent": true
+    },
+    {
+      "source": "/blog/formation-ia-au-burkina-faso-automatiser-les-processus-dentreprise-avec-des-outils-no-code",
+      "destination": "/blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises",
+      "permanent": true
+    },
+    {
+      "source": "/blog/formation-ia-au-burkina-faso-maitrisez-chatgpt-et-boostez-votre-carriere",
+      "destination": "/blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises",
+      "permanent": true
+    },
+    {
+      "source": "/blog/formation-ia-au-burkina-faso-transformez-votre-entreprise-avec-des-outils-locaux",
+      "destination": "/blog/formation-ia-au-burkina-faso-en-2026-le-guide-complet-pour-particuliers-entrepreneurs-et-entreprises",
+      "permanent": true
+    },
+    {
+      "source": "/blog/automatisation-no-code-au-burkina-faso-synchroniser-vos-outils-metier-sans-code",
+      "destination": "/blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest",
+      "permanent": true
+    },
+    {
+      "source": "/blog/automatisation-no-code-en-afrique-de-louest-optimiser-les-workflows-whatsapp-business-avec-n8n",
+      "destination": "/blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest",
+      "permanent": true
+    },
+    {
+      "source": "/blog/automatisation-no-code-a-ouagadougou-booster-la-productivite-des-pme-avec-n8n",
+      "destination": "/blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest",
+      "permanent": true
+    },
+    {
+      "source": "/blog/automatisation-intelligente-no-code-comment-les-pme-de-ouagadougou-transforment-leurs-processus-metier-avec-lia",
+      "destination": "/blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest",
+      "permanent": true
+    },
+    {
+      "source": "/blog/automatisation-no-code-b2b-au-burkina-faso-booster-les-pme-locales-en-2026",
+      "destination": "/blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest",
+      "permanent": true
+    },
+    {
+      "source": "/blog/automatisation-no-code-pour-les-pme-en-afrique-de-louest-booster-votre-workflow-local",
+      "destination": "/blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest",
+      "permanent": true
+    },
+    {
+      "source": "/blog/automatisation-au-burkina-faso-limpact-sur-les-pme-locales",
+      "destination": "/blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest",
+      "permanent": true
+    },
+    {
+      "source": "/blog/automatisation-en-afrique-de-louest-les-defis-des-infrastructures-locales",
+      "destination": "/blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest",
+      "permanent": true
+    },
+    {
+      "source": "/blog/agents-ia-en-afrique-de-louest-automatisation-des-processus-metier-sans-code",
+      "destination": "/blog/automatisation-no-code-pour-les-entreprises-en-afrique-de-louest",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/blog/:slug*",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i).*(googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|discordbot|applebot|perplexitybot|claudebot|gptbot|rogerbot|embedly|quora|pinterest|ia_archiver|archive\\.org_bot).*"
+        }
+      ],
+      "destination": "/api/middleware?slug=:slug*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Robots-Tag", "value": "index, follow" }
+      ]
+    }
+  ]
+}
