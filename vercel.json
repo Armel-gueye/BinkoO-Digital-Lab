@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true,
   "redirects": [
     {
       "source": "/blog/formation-ia-au-burkina-faso-developpez-des-solutions-locales-avec-lia",
@@ -79,15 +78,15 @@
       "destination": "/api/sitemap"
     },
     {
-      "source": "/blog/:slug*",
+      "source": "/(.*)",
       "has": [
         {
           "type": "header",
           "key": "user-agent",
-          "value": "(?i).*(googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|discordbot|applebot|perplexitybot|claudebot|gptbot|rogerbot|embedly|quora|pinterest|ia_archiver|archive\\.org_bot).*"
+          "value": ".*([bB]ot|[cC]rawler|[sS]pider|[fF]acebook|[tT]witter|[wW]hats[aA]pp|[lL]inked[iI]n|[tT]elegram|[dD]iscord|[sS]lack|[sS]lurp|[eE]mbedly|[qQ]uora|[pP]interest|[aA]rchiv|[pP]erplexity|[cC]laude|[gG]pt|[sS]ogou|[bB]aidu).*"
         }
       ],
-      "destination": "/api/middleware?slug=:slug*"
+      "destination": "/api/middleware?path=:0"
     },
     {
       "source": "/(.*)",
