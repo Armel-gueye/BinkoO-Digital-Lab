@@ -1,7 +1,6 @@
 export const config = {
-  matcher: ['/(.*)'],
+  runtime: 'edge',
 };
-
 
 const BOT_USER_AGENTS = [
   'googlebot',
@@ -29,7 +28,7 @@ const BOT_USER_AGENTS = [
   'archive.org_bot',
 ];
 
-// Metas statiques pour les pages fixes du site
+// Metas statiques pour l'ensemble des pages du site
 const STATIC_PAGE_METAS: Record<string, { title: string; description: string; canonical: string }> = {
   '/': {
     title: "BinkoO Digital Lab - Agence Digitale et d'Intelligence Artificielle",
@@ -42,6 +41,24 @@ const STATIC_PAGE_METAS: Record<string, { title: string; description: string; ca
     description:
       "Découvrez nos services : IA & automatisation, création de sites web, design & branding. BinkoO Digital Lab, l'agence digitale au Burkina Faso.",
     canonical: 'https://binkoo.digital/services',
+  },
+  '/services/ia-automatisation': {
+    title: 'IA & Automatisation des Processus Métier - BinkoO Digital Lab',
+    description:
+      "Automatisez vos processus d'entreprise avec l'IA et le No-Code au Burkina Faso et en Afrique. Gains de temps et réduction des coûts garantis.",
+    canonical: 'https://binkoo.digital/services/ia-automatisation',
+  },
+  '/services/sites-app-web': {
+    title: 'Création de Sites Web & Applications - BinkoO Digital Lab',
+    description:
+      "Développement de sites vitrines, e-commerce et applications web sur-mesure, performants et optimisés pour le référencement SEO.",
+    canonical: 'https://binkoo.digital/services/sites-app-web',
+  },
+  '/services/branding': {
+    title: 'Design & Branding - BinkoO Digital Lab',
+    description:
+      "Création d'identités visuelles percutantes, chartes graphiques, logos et UI/UX design pour valoriser votre marque.",
+    canonical: 'https://binkoo.digital/services/branding',
   },
   '/a-propos': {
     title: 'À Propos - BinkoO Digital Lab',
@@ -61,11 +78,29 @@ const STATIC_PAGE_METAS: Record<string, { title: string; description: string; ca
       'Découvrez nos projets : sites web, applications, automatisations et solutions IA réalisés pour nos clients au Burkina Faso et en Afrique.',
     canonical: 'https://binkoo.digital/realisations',
   },
+  '/realisations/amisi-sarl': {
+    title: 'Étude de cas : AMISI SARL - BinkoO Digital Lab',
+    description:
+      "Comment nous avons conçu la plateforme web et l'image de marque d'AMISI SARL, leader des services professionnels.",
+    canonical: 'https://binkoo.digital/realisations/amisi-sarl',
+  },
+  '/realisations/automatisation-blog-seo': {
+    title: 'Étude de cas : Automatisation Blog & SEO - BinkoO Digital Lab',
+    description:
+      "Mise en place d'un pipeline automatisé de production et d'optimisation SEO de contenu avec IA et Make/n8n.",
+    canonical: 'https://binkoo.digital/realisations/automatisation-blog-seo',
+  },
   '/contact': {
     title: 'Contact - BinkoO Digital Lab',
     description:
       "Contactez BinkoO Digital Lab pour vos projets digitaux au Burkina Faso. IA, automatisation, développement web et design. Réponse rapide garantie.",
     canonical: 'https://binkoo.digital/contact',
+  },
+  '/politique-confidentialite': {
+    title: 'Politique de Confidentialité - BinkoO Digital Lab',
+    description:
+      "Politique de confidentialité et protection des données personnelles de BinkoO Digital Lab.",
+    canonical: 'https://binkoo.digital/politique-confidentialite',
   },
 };
 
@@ -125,7 +160,7 @@ function buildMetaTags(opts: {
   const safeCanonical = escapeHtml(canonical);
 
   return `
-    <!-- Balises injectées par Vercel Edge pour bots -->
+    <!-- Balises injectées par BinkoO Edge pour robots / crawlers SEO -->
     <title>${safeTitle}</title>
     <meta name="description" content="${safeDesc}">
     <link rel="canonical" href="${safeCanonical}">
@@ -148,7 +183,7 @@ function buildMetaTags(opts: {
  */
 function injectMeta(baseHtml: string, metaTags: string): string {
   let html = baseHtml;
-  // Supprimer le <title> et la <meta description> par défaut existants
+  // Supprimer les balises par défaut
   html = html.replace(/<title>[\s\S]*?<\/title>/i, '');
   html = html.replace(/<meta\s+name="description"[\s\S]*?>/i, '');
   html = html.replace(/<link\s+rel="canonical"[\s\S]*?>/i, '');
@@ -161,7 +196,7 @@ function injectMeta(baseHtml: string, metaTags: string): string {
   return html;
 }
 
-export default async function middleware(request: Request): Promise<Response> {
+export default async function handler(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const userAgent = (request.headers.get('user-agent') || '').toLowerCase();
 
@@ -170,10 +205,10 @@ export default async function middleware(request: Request): Promise<Response> {
 
   // Récupérer le chemin depuis le paramètre `path` (transmis par vercel.json) ou depuis l'URL
   const rawPath = url.searchParams.get('path') ?? '';
-  // rawPath est vide pour la route racine "/" (Vercel passe path= quand source est /:path(.*) et URL est /)
+  // rawPath est vide pour la route racine "/"
   const pathname = rawPath === '' ? '/' : rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
 
-  // 2. Si ce n'est pas un bot — servir index.html directement
+  // 2. Si ce n'est pas un bot (accès direct involontaire) — servir index.html
   if (!isBot) {
     try {
       const indexRes = await fetch(new URL('/index.html', url.origin), { redirect: 'follow' });
@@ -212,7 +247,7 @@ export default async function middleware(request: Request): Promise<Response> {
 
   // 4. Cas 1 : Page d'article de blog /blog/[slug]
   const blogMatch = pathname.match(/^\/blog\/([^/?#]+)/);
-  if (blogMatch) {
+  if (blogMatch && blogMatch[1] !== 'tag') {
     const slug = blogMatch[1];
     const canonicalUrl = `https://binkoo.digital/blog/${slug}`;
 
@@ -269,8 +304,32 @@ export default async function middleware(request: Request): Promise<Response> {
     });
   }
 
-  // 5. Cas 2 : Page statique connue (/services, /contact, etc.)
-  const staticMeta = STATIC_PAGE_METAS[pathname] || STATIC_PAGE_METAS['/'];
+  // 5. Cas 2 : Hub local /agence-ia-automatisation/:city
+  const hubMatch = pathname.match(/^\/agence-ia-automatisation\/([^/?#]+)/);
+  if (hubMatch) {
+    const rawCity = hubMatch[1];
+    const formattedCity = rawCity.charAt(0).toUpperCase() + rawCity.slice(1).replace('-', ' ');
+    const canonicalUrl = `https://binkoo.digital/agence-ia-automatisation/${rawCity}`;
+    const metaTags = buildMetaTags({
+      title: `Agence IA & Automatisation à ${formattedCity} - BinkoO Digital Lab`,
+      description: `Découvrez nos solutions d'intelligence artificielle et d'automatisation des processus métier à ${formattedCity}. Accompagnement sur-mesure pour entreprises.`,
+      canonical: canonicalUrl,
+      image: DEFAULT_IMAGE,
+    });
+
+    return new Response(injectMeta(baseHtml, metaTags), {
+      status: 200,
+      headers: {
+        'content-type': 'text/html; charset=utf-8',
+        'cache-control': 'public, max-age=86400, s-maxage=86400',
+      },
+    });
+  }
+
+  // 6. Cas 3 : Page statique connue (/services, /contact, etc.) ou accueil
+  // Nettoyer les trailing slashes éventuels pour la correspondance
+  const cleanPath = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+  const staticMeta = STATIC_PAGE_METAS[cleanPath] || STATIC_PAGE_METAS['/'];
   const metaTags = buildMetaTags({
     title: staticMeta.title,
     description: staticMeta.description,

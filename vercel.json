@@ -86,7 +86,7 @@
           "value": ".*([bB]ot|[cC]rawler|[sS]pider|[fF]acebook|[tT]witter|[wW]hats[aA]pp|[lL]inked[iI]n|[tT]elegram|[dD]iscord|[sS]lack|[sS]lurp|[eE]mbedly|[qQ]uora|[pP]interest|[aA]rchiv|[pP]erplexity|[cC]laude|[gG]pt|[sS]ogou|[bB]aidu).*"
         }
       ],
-      "destination": "/api/middleware?path=:path"
+      "destination": "/api/bot-prerender?path=:path"
     },
     {
       "source": "/(.*)",
